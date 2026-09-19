@@ -3,751 +3,1047 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GHOST LAG | Access Denied</title>
+<title>Key Generated | GHOST LAG</title>
 
 <style>
+:root{
+    --bg:#010505;
+    --panel:rgba(8,17,17,.88);
+    --accent:#00ff91;
+    --accent2:#00d9ff;
+    --white:#fff;
+    --muted:#7d8c87;
+    --red:#ff4055;
+}
+
 *{
-    margin:0;
-    padding:0;
     box-sizing:border-box;
-    -webkit-tap-highlight-color:transparent;
 }
 
 html,body{
-    width:100%;
+    margin:0;
     min-height:100%;
-    background:#020607;
-    color:#fff;
-    font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
+    min-height:100vh;
+    padding:22px 16px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
     overflow-x:hidden;
-}
-
-/* ================= BACKGROUND ================= */
-
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:0;
+    color:var(--white);
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
 
     background:
-        radial-gradient(circle at 50% 35%, rgba(0,255,145,.08), transparent 25%),
-        radial-gradient(circle at 15% 45%, rgba(0,255,145,.04), transparent 25%),
-        radial-gradient(circle at 85% 65%, rgba(0,255,145,.04), transparent 25%);
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(0,255,145,.14),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 0% 55%,
+            rgba(0,255,145,.06),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 100% 90%,
+            rgba(0,217,255,.07),
+            transparent 30%
+        ),
+        #010505;
 }
 
-body::after{
+/* =========================
+   BACKGROUND GRID
+========================= */
+
+body:before{
     content:"";
     position:fixed;
     inset:0;
     pointer-events:none;
-    z-index:0;
-    opacity:.12;
+    opacity:.45;
 
-    background-image:
-        linear-gradient(rgba(0,255,145,.08) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(0,255,145,.08) 1px,transparent 1px);
+    background:
+        linear-gradient(
+            rgba(255,255,255,.018) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.018) 1px,
+            transparent 1px
+        );
 
-    background-size:45px 45px;
+    background-size:46px 46px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black 0%,
+            black 45%,
+            transparent 100%
+        );
+
+    z-index:-10;
 }
 
-/* ================= SNOW / PARTICLES ================= */
+/* =========================
+   TOP GLOW
+========================= */
 
-.particles{
+.glow{
+    position:fixed;
+    width:340px;
+    height:340px;
+    border-radius:50%;
+    filter:blur(110px);
+    pointer-events:none;
+    z-index:-8;
+    opacity:.13;
+}
+
+.glow.one{
+    background:#00ff91;
+    top:-180px;
+    left:-140px;
+    animation:glowMove 9s ease-in-out infinite alternate;
+}
+
+.glow.two{
+    background:#00d9ff;
+    right:-180px;
+    bottom:-180px;
+    animation:glowMove 11s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes glowMove{
+    from{
+        transform:translate(0,0) scale(1);
+    }
+    to{
+        transform:translate(70px,45px) scale(1.25);
+    }
+}
+
+/* =========================
+   PREMIUM SNOW
+========================= */
+
+.snow{
     position:fixed;
     inset:0;
     overflow:hidden;
     pointer-events:none;
-    z-index:1;
+    z-index:-5;
 }
 
-.particle{
+.snow i{
     position:absolute;
-    width:5px;
-    height:5px;
-    border-radius:50%;
-    background:#fff;
-    opacity:.7;
-    box-shadow:0 0 10px rgba(255,255,255,.8);
-    animation:float 7s linear infinite;
-}
+    top:-30px;
+    left:var(--left);
 
-.p1{left:15%;top:25%;animation-delay:-1s;}
-.p2{left:49%;top:33%;animation-delay:-4s;}
-.p3{left:70%;top:29%;animation-delay:-2s;}
-.p4{left:11%;top:61%;animation-delay:-5s;}
-.p5{left:82%;top:57%;animation-delay:-3s;}
-.p6{left:50%;top:78%;animation-delay:-6s;}
-.p7{left:18%;top:88%;animation-delay:-2.5s;}
+    width:var(--size);
+    height:var(--size);
 
-@keyframes float{
-    0%{
-        transform:translateY(0);
-        opacity:.15;
-    }
-    30%{
-        opacity:.8;
-    }
-    100%{
-        transform:translateY(100px);
-        opacity:.05;
-    }
-}
-
-/* ================= MAIN ================= */
-
-.page{
-    position:relative;
-    z-index:2;
-
-    width:100%;
-    min-height:100vh;
-
-    display:flex;
-    justify-content:center;
-    align-items:flex-start;
-
-    /* IMPORTANT:
-       content ko upar rakha gaya hai */
-    padding:8px 15px 35px;
-}
-
-.wrapper{
-    width:100%;
-    max-width:540px;
-    margin:0 auto;
-}
-
-/* ================= HEADER ================= */
-
-.header{
-    width:100%;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    margin-top:8px;
-    margin-bottom:28px;
-}
-
-.brand{
-    display:flex;
-    align-items:center;
-    gap:14px;
-}
-
-.brandLogo{
-    width:62px;
-    height:62px;
-
-    object-fit:cover;
     border-radius:50%;
 
-    border:1px solid rgba(0,255,145,.55);
-
-    background:#050909;
-
-    padding:4px;
-
-    filter:
-        brightness(1.35)
-        contrast(1.15);
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.95) 0%,
+            rgba(210,255,242,.75) 45%,
+            rgba(0,255,145,.15) 100%
+        );
 
     box-shadow:
-        0 0 20px rgba(0,255,145,.18),
-        inset 0 0 12px rgba(0,255,145,.08);
+        0 0 5px rgba(255,255,255,.55),
+        0 0 12px rgba(0,255,145,.25);
+
+    opacity:0;
+
+    animation:
+        snowfall var(--time) linear infinite,
+        snowPulse 2.4s ease-in-out infinite alternate;
+
+    animation-delay:var(--delay);
 }
 
-.brandName{
-    font-size:21px;
-    font-weight:800;
-    letter-spacing:3px;
+@keyframes snowfall{
+    0%{
+        transform:
+            translate3d(0,-40px,0)
+            rotate(0deg);
+        opacity:0;
+    }
+
+    8%{
+        opacity:var(--opacity);
+    }
+
+    25%{
+        transform:
+            translate3d(
+                var(--drift1),
+                25vh,
+                0
+            )
+            rotate(90deg);
+    }
+
+    50%{
+        transform:
+            translate3d(
+                var(--drift2),
+                52vh,
+                0
+            )
+            rotate(180deg);
+    }
+
+    75%{
+        transform:
+            translate3d(
+                var(--drift3),
+                78vh,
+                0
+            )
+            rotate(270deg);
+    }
+
+    92%{
+        opacity:var(--opacity);
+    }
+
+    100%{
+        transform:
+            translate3d(
+                var(--drift4),
+                112vh,
+                0
+            )
+            rotate(360deg);
+        opacity:0;
+    }
+}
+
+@keyframes snowPulse{
+    from{
+        filter:blur(0);
+    }
+
+    to{
+        filter:blur(.8px);
+    }
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+    width:100%;
+    max-width:440px;
+    position:relative;
+    z-index:2;
+    text-align:center;
+}
+
+#mainContainer{
+    display:none;
+}
+
+#bypassContainer{
+    display:none;
+}
+
+/* =========================
+   BRAND / LOGO
+========================= */
+
+.logo-wrap{
+    width:96px;
+    height:96px;
+    margin:0 auto 18px;
+
+    padding:3px;
+
+    border-radius:50%;
+
+    background:
+        conic-gradient(
+            from 0deg,
+            transparent,
+            var(--accent),
+            transparent,
+            var(--accent2),
+            transparent
+        );
+
+    box-shadow:
+        0 0 30px rgba(0,255,145,.15),
+        0 0 70px rgba(0,255,145,.06);
+
+    animation:
+        logoSpin 8s linear infinite;
+}
+
+.logo-inner{
+    width:100%;
+    height:100%;
+
+    border-radius:50%;
+
+    overflow:hidden;
+
+    background:#020706;
+
+    border:3px solid #020706;
+}
+
+.logo-inner img{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
+}
+
+@keyframes logoSpin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* =========================
+   HEADING
+========================= */
+
+h1{
+    margin:0;
+
+    font-size:31px;
     line-height:1.1;
+
+    font-weight:900;
+
+    letter-spacing:-1px;
+
+    text-shadow:
+        0 0 25px rgba(255,255,255,.08);
 }
 
-.brandSub{
-    margin-top:6px;
+.subtitle{
+    margin:10px 0 27px;
 
-    font-size:11px;
-    letter-spacing:3px;
+    color:#7e8c88;
 
-    color:#737d7a;
+    font-size:13px;
+
+    line-height:1.5;
 }
 
-/* ================= STATUS ================= */
+/* =========================
+   MAIN CARD
+========================= */
 
-.status{
-    display:flex;
-    align-items:center;
-    gap:9px;
+.card{
+    position:relative;
 
-    padding:12px 17px;
+    padding:36px 28px 28px;
 
     border-radius:30px;
 
-    border:1px solid rgba(0,255,145,.2);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(14,27,27,.94),
+            rgba(4,10,10,.94)
+        );
 
-    background:rgba(0,255,145,.07);
+    border:1px solid rgba(255,255,255,.075);
 
     box-shadow:
-        0 0 20px rgba(0,255,145,.06),
-        inset 0 0 15px rgba(0,255,145,.03);
+        0 30px 90px rgba(0,0,0,.72),
+        inset 0 1px rgba(255,255,255,.045);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    overflow:hidden;
 }
 
-.statusDot{
-    width:11px;
-    height:11px;
+/* animated card border */
+
+.card:before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    padding:1px;
+
+    border-radius:30px;
+
+    background:
+        linear-gradient(
+            120deg,
+            transparent 15%,
+            rgba(0,255,145,.5),
+            transparent 42%,
+            transparent 65%,
+            rgba(0,217,255,.25),
+            transparent 85%
+        );
+
+    mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+
+    mask-composite:exclude;
+
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+
+    -webkit-mask-composite:xor;
+
+    animation:borderFlow 5s linear infinite;
+
+    pointer-events:none;
+}
+
+@keyframes borderFlow{
+    from{
+        transform:translateX(-15%);
+    }
+
+    to{
+        transform:translateX(15%);
+    }
+}
+
+/* internal glow */
+
+.card:after{
+    content:"";
+
+    position:absolute;
+
+    width:220px;
+    height:220px;
+
+    right:-120px;
+    top:-120px;
+
     border-radius:50%;
 
-    background:#00ff91;
+    background:var(--accent);
+
+    filter:blur(90px);
+
+    opacity:.07;
+
+    pointer-events:none;
+}
+
+/* =========================
+   SUCCESS TITLE
+========================= */
+
+h2{
+    margin:0 0 12px;
+
+    color:var(--accent);
+
+    font-size:22px;
+
+    font-weight:850;
+
+    letter-spacing:-.3px;
+
+    text-shadow:
+        0 0 22px rgba(0,255,145,.12);
+}
+
+.card-p{
+    margin:0 auto 13px;
+
+    max-width:350px;
+
+    color:#8c9995;
+
+    font-size:13px;
+
+    line-height:1.7;
+}
+
+/* =========================
+   IP BADGE
+========================= */
+
+.ip-status{
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:8px;
+
+    padding:8px 13px;
+
+    margin-bottom:24px;
+
+    border-radius:999px;
+
+    background:
+        rgba(0,255,145,.045);
+
+    border:
+        1px solid
+        rgba(0,255,145,.16);
 
     box-shadow:
-        0 0 8px #00ff91,
-        0 0 18px rgba(0,255,145,.65);
+        inset 0 0 15px rgba(0,255,145,.025);
 
-    animation:pulse 1.7s infinite;
-}
+    color:#75827e;
 
-.statusText{
-    color:#7affbd;
+    font-size:9px;
 
-    font-size:12px;
     font-weight:800;
 
-    letter-spacing:2px;
+    letter-spacing:1.2px;
+
+    position:relative;
+    z-index:3;
 }
 
-@keyframes pulse{
+.ip-dot{
+    width:6px;
+    height:6px;
+
+    border-radius:50%;
+
+    background:var(--accent);
+
+    box-shadow:
+        0 0 8px var(--accent),
+        0 0 16px rgba(0,255,145,.45);
+
+    animation:ipPulse 1.5s infinite;
+}
+
+#userIP{
+    color:#e4eeea;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size:11px;
+
+    letter-spacing:.7px;
+}
+
+.ip-separator{
+    color:#30443d;
+}
+
+@keyframes ipPulse{
     0%,100%{
         opacity:1;
         transform:scale(1);
     }
 
     50%{
-        opacity:.5;
-        transform:scale(.82);
+        opacity:.35;
+        transform:scale(.7);
     }
 }
 
-/* ================= HERO ================= */
+/* =========================
+   KEY BOX
+========================= */
 
-.hero{
-    text-align:center;
-
-    margin-top:0;
-    margin-bottom:34px;
-}
-
-.heroIcon{
-    width:122px;
-    height:122px;
-
-    display:block;
-
-    margin:0 auto 25px;
-
-    object-fit:cover;
-
-    border-radius:50%;
-
-    border:3px solid #00ff91;
-
-    background:#020404;
-
-    padding:5px;
-
-    filter:
-        brightness(1.3)
-        contrast(1.15);
-
-    box-shadow:
-        0 0 0 1px rgba(0,255,145,.12),
-        0 0 25px rgba(0,255,145,.24),
-        0 0 65px rgba(0,255,145,.13);
-}
-
-.heroTitle{
-    font-size:48px;
-    font-weight:900;
-
-    letter-spacing:8px;
-    line-height:1;
-
-    text-transform:uppercase;
-
-    text-shadow:
-        0 0 25px rgba(0,255,145,.08);
-}
-
-.heroTitle span{
-    color:#00ff91;
-
-    text-shadow:
-        0 0 18px rgba(0,255,145,.35),
-        0 0 40px rgba(0,255,145,.12);
-}
-
-.heroSub{
-    margin-top:19px;
-
-    color:#7b8783;
-
-    font-size:12px;
-    font-weight:700;
-
-    letter-spacing:4px;
-}
-
-/* ================= DENIED PANEL ================= */
-
-.panel{
+.key-box{
     position:relative;
 
+    padding:22px 14px;
+
+    margin-bottom:16px;
+
+    border-radius:19px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,255,145,.045),
+            rgba(0,0,0,.5)
+        );
+
+    border:
+        1px dashed
+        rgba(0,255,145,.48);
+
+    overflow:hidden;
+
+    box-shadow:
+        inset 0 0 30px rgba(0,255,145,.018);
+}
+
+.key-box:before{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    bottom:0;
+
+    left:-50%;
+
+    width:25%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.09),
+            transparent
+        );
+
+    transform:skewX(-20deg);
+
+    animation:keyScan 3.2s ease-in-out infinite;
+}
+
+.key-box:after{
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--accent),
+            transparent
+        );
+
+    opacity:.55;
+
+    animation:keyLine 2.5s ease-in-out infinite;
+}
+
+@keyframes keyScan{
+    0%{
+        left:-50%;
+    }
+
+    55%,100%{
+        left:130%;
+    }
+}
+
+@keyframes keyLine{
+    0%,100%{
+        opacity:.2;
+        transform:scaleX(.3);
+    }
+
+    50%{
+        opacity:.8;
+        transform:scaleX(1);
+    }
+}
+
+#finalKey{
+    position:relative;
+    z-index:2;
+
+    color:var(--accent);
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size:18px;
+
+    font-weight:800;
+
+    letter-spacing:1.2px;
+
+    word-break:break-word;
+
+    text-shadow:
+        0 0 15px rgba(0,255,145,.18);
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.btn{
     width:100%;
 
-    padding:52px 42px 48px;
+    min-height:55px;
+
+    border:0;
+
+    border-radius:17px;
+
+    padding:16px;
+
+    font-size:14px;
+
+    font-weight:900;
+
+    letter-spacing:.4px;
+
+    cursor:pointer;
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
+}
+
+.btn:before{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    bottom:0;
+
+    left:-110%;
+
+    width:60%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.45),
+            transparent
+        );
+
+    transform:skewX(-22deg);
+
+    transition:.6s;
+}
+
+.btn:hover:before{
+    left:150%;
+}
+
+.btn:active{
+    transform:scale(.98);
+}
+
+/* copy */
+
+#copyBtn{
+    color:#00140b;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #edf4f1
+        );
+
+    box-shadow:
+        0 10px 28px rgba(0,0,0,.22);
+}
+
+#copyBtn:hover{
+    transform:translateY(-2px);
+
+    background:
+        linear-gradient(
+            135deg,
+            #00ff91,
+            #00e47e
+        );
+
+    box-shadow:
+        0 15px 35px
+        rgba(0,255,145,.2);
+}
+
+/* =========================
+   TELEGRAM
+========================= */
+
+.telegram-btn{
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:11px;
+
+    margin-top:12px;
+
+    text-decoration:none;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #08a7e5,
+            #007bb8
+        );
+
+    box-shadow:
+        0 12px 30px
+        rgba(0,137,204,.16);
+}
+
+.telegram-btn:hover{
+    transform:translateY(-2px);
+
+    background:
+        linear-gradient(
+            135deg,
+            #14b8f2,
+            #0088cc
+        );
+
+    box-shadow:
+        0 17px 38px
+        rgba(0,137,204,.27);
+}
+
+.telegram-icon{
+    width:23px;
+    height:23px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:18px;
+}
+
+/* =========================
+   SECURITY LINE
+========================= */
+
+.secure-line{
+    margin-top:16px;
+
+    color:#34423e;
+
+    font-size:8px;
+
+    font-weight:800;
+
+    letter-spacing:1.5px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+    margin-top:25px;
+
+    color:#35403d;
+
+    font-size:8px;
+
+    font-weight:800;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+}
+
+/* =========================
+   BYPASS CARD
+========================= */
+
+.error-card{
+    padding:40px 28px;
 
     border-radius:28px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(7,13,13,.96),
-            rgba(2,7,7,.98)
+            rgba(34,9,12,.95),
+            rgba(13,7,8,.95)
         );
 
-    border:1px solid rgba(255,76,76,.28);
+    border:
+        1px solid
+        rgba(255,64,85,.25);
 
     box-shadow:
-        0 20px 60px rgba(0,0,0,.45),
-        0 0 35px rgba(0,255,145,.035);
-
-    overflow:hidden;
+        0 25px 75px rgba(0,0,0,.65),
+        0 0 45px rgba(255,40,70,.06);
 }
 
-.panel::before{
-    content:"";
-
-    position:absolute;
-
-    width:230px;
-    height:230px;
-
-    top:-120px;
-    right:-80px;
-
-    border-radius:50%;
-
-    background:rgba(0,255,145,.08);
-
-    filter:blur(45px);
-
-    pointer-events:none;
-}
-
-.panel::after{
-    content:"";
-
-    position:absolute;
-    left:12%;
-    right:12%;
-    bottom:-80px;
-
-    height:130px;
-
-    background:rgba(0,255,145,.06);
-
-    filter:blur(50px);
-
-    pointer-events:none;
-}
-
-/* ================= WARNING ================= */
-
-.warning{
-    position:relative;
-    z-index:2;
-
-    text-align:center;
-}
-
-.warningIcon{
-    font-size:76px;
-
-    line-height:1;
-
-    margin-bottom:28px;
-
-    filter:
-        drop-shadow(0 0 12px rgba(255,174,0,.15));
-}
-
-.warningTitle{
-    font-size:31px;
-
-    font-weight:900;
-
-    letter-spacing:.5px;
-
+.error-icon{
+    font-size:50px;
     margin-bottom:18px;
 }
 
-.warningText{
-    max-width:450px;
+.error-title{
+    color:var(--red);
 
-    margin:0 auto;
+    font-size:24px;
 
-    color:#858d8b;
+    font-weight:900;
 
-    font-size:16px;
-
-    line-height:1.65;
+    margin-bottom:14px;
 }
 
-/* ================= BUTTON ================= */
+.btn-red{
+    margin-top:20px;
 
-.returnBtn{
-    position:relative;
-    z-index:2;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    width:100%;
-
-    min-height:76px;
-
-    margin-top:31px;
-
-    border:none;
-    outline:none;
-
-    border-radius:24px;
+    color:#fff;
 
     background:
         linear-gradient(
             135deg,
-            #00ff91,
-            #00df7b
+            #ff4055,
+            #d9273d
         );
-
-    color:#00140b;
-
-    font-size:17px;
-
-    font-weight:900;
-
-    letter-spacing:4px;
-
-    cursor:pointer;
-
-    box-shadow:
-        0 12px 35px rgba(0,255,145,.16);
-
-    transition:
-        transform .2s ease,
-        box-shadow .2s ease,
-        filter .2s ease;
-
-    overflow:hidden;
 }
 
-.returnBtn::before{
-    content:"";
-
-    position:absolute;
-
-    top:0;
-    left:-100%;
-
-    width:60%;
-    height:100%;
-
+.btn-red:hover{
     background:
         linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,.25),
-            transparent
+            135deg,
+            #ff5265,
+            #ed3047
         );
 
-    transform:skewX(-20deg);
-
-    animation:shine 3.5s infinite;
-}
-
-@keyframes shine{
-    0%{
-        left:-100%;
-    }
-
-    45%,100%{
-        left:150%;
-    }
-}
-
-.returnBtn:hover{
-    transform:translateY(-2px);
-
     box-shadow:
-        0 16px 45px rgba(0,255,145,.25);
-
-    filter:brightness(1.05);
+        0 15px 30px
+        rgba(255,50,70,.2);
 }
 
-.returnBtn:active{
-    transform:scale(.98);
-}
+/* =========================
+   MOBILE
+========================= */
 
-/* ================= FOOTER ================= */
+@media(max-width:480px){
 
-.footer{
-    text-align:center;
-
-    margin-top:25px;
-
-    color:#46504d;
-
-    font-size:10px;
-
-    letter-spacing:2px;
-}
-
-/* ================= MOBILE ================= */
-
-@media(max-width:600px){
-
-    .page{
-        padding:6px 15px 30px;
+    body{
+        padding:
+            22px 14px;
     }
 
-    .header{
-        margin-top:4px;
-        margin-bottom:25px;
+    .container{
+        max-width:430px;
+        margin-top:8px;
     }
 
-    .brand{
-        gap:10px;
+    .logo-wrap{
+        width:84px;
+        height:84px;
     }
 
-    .brandLogo{
-        width:58px;
-        height:58px;
-    }
-
-    .brandName{
-        font-size:18px;
-        letter-spacing:2.5px;
-    }
-
-    .brandSub{
-        font-size:9px;
-        letter-spacing:2.2px;
-    }
-
-    .status{
-        padding:10px 13px;
-    }
-
-    .statusText{
-        font-size:10px;
-        letter-spacing:1.5px;
-    }
-
-    .statusDot{
-        width:9px;
-        height:9px;
-    }
-
-    .hero{
-        margin-bottom:29px;
-    }
-
-    .heroIcon{
-        width:112px;
-        height:112px;
-
-        margin-bottom:22px;
-    }
-
-    .heroTitle{
-        font-size:40px;
-        letter-spacing:6px;
-    }
-
-    .heroSub{
-        font-size:10px;
-        letter-spacing:3px;
-        margin-top:16px;
-    }
-
-    .panel{
-        padding:45px 24px 40px;
-        border-radius:24px;
-    }
-
-    .warningIcon{
-        font-size:68px;
-        margin-bottom:23px;
-    }
-
-    .warningTitle{
+    h1{
         font-size:28px;
     }
 
-    .warningText{
-        font-size:15px;
-        line-height:1.6;
+    .subtitle{
+        font-size:12px;
+        margin-bottom:23px;
     }
 
-    .returnBtn{
-        min-height:68px;
+    .card{
+        padding:
+            31px 20px 23px;
 
-        border-radius:22px;
-
-        font-size:15px;
-        letter-spacing:3px;
-    }
-}
-
-/* ================= SMALL PHONES ================= */
-
-@media(max-width:380px){
-
-    .page{
-        padding:4px 12px 25px;
+        border-radius:25px;
     }
 
-    .header{
+    h2{
+        font-size:20px;
+    }
+
+    .card-p{
+        font-size:12.5px;
+    }
+
+    #finalKey{
+        font-size:16px;
+        letter-spacing:.9px;
+    }
+
+    .ip-status{
         margin-bottom:21px;
     }
 
-    .brandLogo{
-        width:51px;
-        height:51px;
-    }
-
-    .brandName{
-        font-size:16px;
-        letter-spacing:2px;
-    }
-
-    .brandSub{
-        font-size:8px;
-        letter-spacing:1.7px;
-    }
-
-    .status{
-        padding:8px 10px;
-    }
-
-    .statusText{
-        font-size:9px;
-    }
-
-    .heroIcon{
-        width:96px;
-        height:96px;
-
-        margin-bottom:19px;
-    }
-
-    .heroTitle{
-        font-size:33px;
-        letter-spacing:5px;
-    }
-
-    .heroSub{
-        font-size:9px;
-        letter-spacing:2.3px;
-    }
-
-    .panel{
-        padding:37px 19px 32px;
-        border-radius:21px;
-    }
-
-    .warningIcon{
-        font-size:60px;
-    }
-
-    .warningTitle{
-        font-size:25px;
-    }
-
-    .warningText{
-        font-size:14px;
-    }
-
-    .returnBtn{
-        min-height:63px;
-
-        border-radius:19px;
-
-        font-size:13px;
-        letter-spacing:2.5px;
+    .btn{
+        min-height:53px;
     }
 }
 
-/* ================= SHORT SCREEN ================= */
+@media(max-width:360px){
 
-@media(max-height:700px){
-
-    .page{
-        padding-top:3px;
+    body{
+        padding:16px 11px;
     }
 
-    .header{
-        margin-top:2px;
-        margin-bottom:18px;
-    }
-
-    .hero{
-        margin-bottom:20px;
-    }
-
-    .heroIcon{
-        width:85px;
-        height:85px;
+    .logo-wrap{
+        width:74px;
+        height:74px;
         margin-bottom:14px;
     }
 
-    .heroTitle{
-        font-size:29px;
+    h1{
+        font-size:25px;
     }
 
-    .heroSub{
-        margin-top:10px;
+    .card{
+        padding:
+            28px 16px 20px;
     }
 
-    .panel{
-        padding-top:30px;
-        padding-bottom:28px;
+    #finalKey{
+        font-size:14px;
     }
 
-    .warningIcon{
-        font-size:52px;
-        margin-bottom:15px;
+    .footer{
+        letter-spacing:1.4px;
     }
+}
 
-    .warningTitle{
-        margin-bottom:10px;
-        font-size:23px;
-    }
+/* =========================
+   REDUCED MOTION
+========================= */
 
-    .warningText{
-        font-size:13px;
-    }
+@media(prefers-reduced-motion:reduce){
 
-    .returnBtn{
-        margin-top:20px;
-        min-height:55px;
+    *,
+    *:before,
+    *:after{
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+        scroll-behavior:auto !important;
     }
 }
 </style>
@@ -755,116 +1051,537 @@ body::after{
 
 <body>
 
-<!-- PARTICLES -->
-<div class="particles">
-    <div class="particle p1"></div>
-    <div class="particle p2"></div>
-    <div class="particle p3"></div>
-    <div class="particle p4"></div>
-    <div class="particle p5"></div>
-    <div class="particle p6"></div>
-    <div class="particle p7"></div>
+<!-- BACKGROUND GLOW -->
+<div class="glow one"></div>
+<div class="glow two"></div>
+
+<!-- PREMIUM SNOW -->
+<div class="snow">
+
+    <i style="
+        --left:4%;
+        --size:3px;
+        --time:8s;
+        --delay:-2s;
+        --opacity:.72;
+        --drift1:35px;
+        --drift2:-20px;
+        --drift3:30px;
+        --drift4:-15px;
+    "></i>
+
+    <i style="
+        --left:11%;
+        --size:5px;
+        --time:12s;
+        --delay:-7s;
+        --opacity:.55;
+        --drift1:-30px;
+        --drift2:35px;
+        --drift3:-20px;
+        --drift4:30px;
+    "></i>
+
+    <i style="
+        --left:19%;
+        --size:2px;
+        --time:9s;
+        --delay:-4s;
+        --opacity:.8;
+        --drift1:25px;
+        --drift2:-30px;
+        --drift3:20px;
+        --drift4:-25px;
+    "></i>
+
+    <i style="
+        --left:29%;
+        --size:4px;
+        --time:14s;
+        --delay:-10s;
+        --opacity:.62;
+        --drift1:-35px;
+        --drift2:25px;
+        --drift3:-25px;
+        --drift4:35px;
+    "></i>
+
+    <i style="
+        --left:39%;
+        --size:2px;
+        --time:10s;
+        --delay:-3s;
+        --opacity:.75;
+        --drift1:30px;
+        --drift2:-20px;
+        --drift3:35px;
+        --drift4:-20px;
+    "></i>
+
+    <i style="
+        --left:48%;
+        --size:5px;
+        --time:13s;
+        --delay:-8s;
+        --opacity:.5;
+        --drift1:-25px;
+        --drift2:35px;
+        --drift3:-35px;
+        --drift4:20px;
+    "></i>
+
+    <i style="
+        --left:58%;
+        --size:3px;
+        --time:9s;
+        --delay:-5s;
+        --opacity:.72;
+        --drift1:20px;
+        --drift2:-35px;
+        --drift3:25px;
+        --drift4:-30px;
+    "></i>
+
+    <i style="
+        --left:67%;
+        --size:4px;
+        --time:15s;
+        --delay:-11s;
+        --opacity:.58;
+        --drift1:-30px;
+        --drift2:25px;
+        --drift3:-20px;
+        --drift4:35px;
+    "></i>
+
+    <i style="
+        --left:76%;
+        --size:2px;
+        --time:11s;
+        --delay:-6s;
+        --opacity:.8;
+        --drift1:30px;
+        --drift2:-25px;
+        --drift3:30px;
+        --drift4:-15px;
+    "></i>
+
+    <i style="
+        --left:85%;
+        --size:5px;
+        --time:13s;
+        --delay:-9s;
+        --opacity:.48;
+        --drift1:-25px;
+        --drift2:30px;
+        --drift3:-30px;
+        --drift4:25px;
+    "></i>
+
+    <i style="
+        --left:94%;
+        --size:3px;
+        --time:8s;
+        --delay:-1s;
+        --opacity:.7;
+        --drift1:25px;
+        --drift2:-20px;
+        --drift3:30px;
+        --drift4:-25px;
+    "></i>
+
 </div>
 
-<main class="page">
 
-    <div class="wrapper">
+<div class="container">
 
-        <!-- HEADER -->
-        <header class="header">
+    <!-- =========================
+         MAIN
+    ========================== -->
 
-            <div class="brand">
+    <div id="mainContainer">
 
+        <div class="logo-wrap">
+            <div class="logo-inner">
                 <img
                     src="./assets/logo.png"
-                    class="brandLogo"
-                    alt="GHOST LAG"
+                    alt="FARAZ"
                 >
+            </div>
+        </div>
 
-                <div>
-                    <div class="brandName">
-                        GHOST LAG
-                    </div>
+        <h1>Access Unlocked</h1>
 
-                    <div class="brandSub">
-                        KEY GENERATION SYSTEM
-                    </div>
-                </div>
+        <p class="subtitle">
+            Your device-locked license key is ready.
+        </p>
+
+
+        <div class="card">
+
+            <h2>
+                Generation Success!
+            </h2>
+
+            <p class="card-p">
+                This key is locked to your device.
+                Share it, and it won't work for others.
+            </p>
+
+
+            <!-- IP -->
+            <div class="ip-status">
+
+                <span class="ip-dot"></span>
+
+                <span>
+                    YOUR IP
+                </span>
+
+                <span class="ip-separator">
+                    •
+                </span>
+
+                <span id="userIP">
+                    FETCHING...
+                </span>
 
             </div>
 
-            <div class="status">
-                <span class="statusDot"></span>
-                <span class="statusText">ONLINE</span>
+
+            <!-- KEY -->
+            <div class="key-box">
+
+                <span id="finalKey">
+                    SECURE FETCHING...
+                </span>
+
             </div>
 
-        </header>
+
+            <!-- COPY -->
+            <button
+                class="btn"
+                id="copyBtn"
+                onclick="copyKey()"
+            >
+                COPY TO CLIPBOARD
+            </button>
 
 
-        <!-- HERO -->
-        <section class="hero">
-
-            <img
-                src="./assets/logo.png"
-                class="heroIcon"
-                alt="GHOST LAG"
+            <!-- TELEGRAM -->
+            <a
+                class="btn telegram-btn"
+                href="https://t.me/farazplayzzyt"
+                target="_blank"
+                rel="noopener noreferrer"
             >
 
-            <h1 class="heroTitle">
-                <span>GHOST</span> LAG
-            </h1>
+                <span class="telegram-icon">
+                    ✈
+                </span>
 
-            <div class="heroSub">
-                SECURE ACCESS • DEVICE KEY
-            </div>
+                JOIN TELEGRAM
 
-        </section>
+            </a>
 
-
-        <!-- ACCESS DENIED -->
-        <section class="panel">
-
-            <div class="warning">
-
-                <div class="warningIcon">
-                    ⚠️
-                </div>
-
-                <h2 class="warningTitle">
-                    ACCESS DENIED
-                </h2>
-
-                <p class="warningText">
-                    Please complete the required steps before accessing
-                    the key generation system.
-                </p>
-
-                <button
-                    class="returnBtn"
-                    onclick="returnToSteps()"
-                >
-                    RETURN TO STEPS
-                </button>
-
-            </div>
-
-        </section>
+        </div>
 
 
-        <!-- FOOTER -->
-        <div class="footer">
-            GHOST LAG • SECURE KEY SYSTEM
+        <div class="secure-line">
+            ● DEVICE LOCKED • SECURE KEY SYSTEM
         </div>
 
     </div>
 
-</main>
+
+    <!-- =========================
+         BYPASS
+    ========================== -->
+
+    <div id="bypassContainer">
+
+        <div class="error-card">
+
+            <div class="error-icon">
+                🚫
+            </div>
+
+            <div class="error-title">
+                Bypass Detected!
+            </div>
+
+            <p style="
+                color:#888;
+                font-size:14px;
+                line-height:1.6;
+                margin:0;
+            ">
+                Direct access is prohibited.
+                Please use the official link from the
+                script to generate your key.
+            </p>
+
+            <button
+                class="btn btn-red"
+                onclick="location.href='steps.html'"
+            >
+                RETURN TO STEPS
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer">
+        FARAZ PLAYZ YT SECURITY SYSTEM
+    </div>
+
+</div>
 
 
 <script>
-function returnToSteps(){
-    window.location.href = "steps.html";
+
+/* =========================
+   SECURITY CHECK
+========================= */
+
+async function checkSecurity(){
+
+    const urlParams =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    const source =
+        urlParams.get('source');
+
+    console.log('=== Security Check ===');
+    console.log('Source:',source);
+    console.log('Referrer:',document.referrer);
+    console.log('==================');
+
+    const isAllowed =
+        source === "official";
+
+
+    if(isAllowed){
+
+        const cleanUrl =
+            window.location.protocol +
+            "//" +
+            window.location.host +
+            window.location.pathname;
+
+        window.history.replaceState(
+            {},
+            document.title,
+            cleanUrl
+        );
+
+
+        document.getElementById(
+            'mainContainer'
+        ).style.display="block";
+
+
+        document.getElementById(
+            'bypassContainer'
+        ).style.display="none";
+
+
+        generateLockedKey();
+
+    }else{
+
+        document.getElementById(
+            'mainContainer'
+        ).style.display="none";
+
+
+        document.getElementById(
+            'bypassContainer'
+        ).style.display="block";
+
+    }
 }
+
+
+/* =========================
+   KEY GENERATION
+   ORIGINAL LOGIC
+========================= */
+
+async function generateLockedKey(){
+
+    try{
+
+        const response =
+            await fetch(
+                'https://api.ipify.org?format=json',
+                {
+                    cache:'no-store'
+                }
+            );
+
+        const data =
+            await response.json();
+
+        const ip =
+            data.ip;
+
+
+        document.getElementById(
+            'userIP'
+        ).innerText=ip;
+
+
+        // Aaj ki Date
+        const day =
+            Math.floor(
+                Date.now()/86400000
+            );
+
+
+        const ipSeed =
+            parseInt(
+                ip
+                .replace(/\./g,'')
+                .substring(0,6)
+            );
+
+
+        // Seed: IP + Date + Year
+        let seed =
+            ipSeed +
+            day +
+            2026;
+
+
+        function rnd(){
+
+            var x =
+                Math.sin(seed++) *
+                10000;
+
+            return Math.abs(
+                x -
+                Math.floor(x)
+            );
+        }
+
+
+        const chars =
+            "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+
+        let segments=[];
+
+
+        for(let i=0;i<4;i++){
+
+            let s="";
+
+            for(let j=0;j<4;j++){
+
+                let r =
+                    Math.floor(
+                        rnd()*chars.length
+                    );
+
+                s +=
+                    chars.charAt(r);
+            }
+
+            segments.push(s);
+        }
+
+
+        const finalKey =
+            "GHOST-" +
+            segments.join("-");
+
+
+        document.getElementById(
+            'finalKey'
+        ).innerText=finalKey;
+
+
+    }catch(err){
+
+        document.getElementById(
+            'userIP'
+        ).innerText="OFFLINE";
+
+
+        document.getElementById(
+            'finalKey'
+        ).innerText=
+            "CONNECT TO INTERNET";
+    }
+}
+
+
+/* =========================
+   COPY KEY
+========================= */
+
+function copyKey(){
+
+    const keyText =
+        document.getElementById(
+            'finalKey'
+        ).innerText;
+
+
+    if(
+        keyText.includes("SECURE") ||
+        keyText.includes("CONNECT")
+    ){
+        return;
+    }
+
+
+    navigator.clipboard
+        .writeText(keyText)
+        .then(()=>{
+
+            const btn =
+                document.getElementById(
+                    'copyBtn'
+                );
+
+
+            btn.innerText =
+                "COPIED SUCCESSFULLY! ✅";
+
+
+            btn.style.background =
+                "#00ff91";
+
+
+            setTimeout(()=>{
+
+                btn.innerText =
+                    "COPY TO CLIPBOARD";
+
+                btn.style.background =
+                    "#ffffff";
+
+            },2000);
+
+        });
+}
+
+
+/* =========================
+   START
+========================= */
+
+window.onload =
+    checkSecurity;
+
 </script>
 
 </body>
