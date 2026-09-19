@@ -7,12 +7,10 @@
 
 <style>
 :root{
-    --bg:#010505;
-    --panel:rgba(8,17,17,.88);
     --accent:#00ff91;
     --accent2:#00d9ff;
     --white:#fff;
-    --muted:#7d8c87;
+    --muted:#81908b;
     --red:#ff4055;
 }
 
@@ -28,11 +26,15 @@ html,body{
 body{
     min-height:100vh;
     padding:22px 16px;
+
     display:flex;
     justify-content:center;
     align-items:center;
+
     overflow-x:hidden;
+
     color:var(--white);
+
     font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -41,113 +43,212 @@ body{
         Arial,
         sans-serif;
 
-    background:
-        radial-gradient(
-            circle at 50% -10%,
-            rgba(0,255,145,.14),
-            transparent 35%
-        ),
-        radial-gradient(
-            circle at 0% 55%,
-            rgba(0,255,145,.06),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 100% 90%,
-            rgba(0,217,255,.07),
-            transparent 30%
-        ),
-        #010505;
+    background:#010505;
 }
 
-/* =========================
-   BACKGROUND GRID
-========================= */
 
-body:before{
-    content:"";
+/* ==================================================
+   FULL SCREEN BACKGROUND VIDEO
+================================================== */
+
+#bgVideo{
     position:fixed;
-    inset:0;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
     pointer-events:none;
-    opacity:.45;
+
+    z-index:-20;
+
+    filter:
+        brightness(.42)
+        saturate(1.15)
+        contrast(1.08);
+}
+
+
+/* ==================================================
+   VIDEO OVERLAY
+================================================== */
+
+.video-overlay{
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:-19;
 
     background:
         linear-gradient(
-            rgba(255,255,255,.018) 1px,
+            180deg,
+            rgba(0,5,5,.72) 0%,
+            rgba(0,8,7,.48) 45%,
+            rgba(0,3,3,.82) 100%
+        );
+}
+
+
+/* ==================================================
+   GREEN ATMOSPHERE
+================================================== */
+
+.video-overlay:after{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:
+        radial-gradient(
+            circle at 50% 40%,
+            rgba(0,255,145,.10),
+            transparent 42%
+        ),
+        radial-gradient(
+            circle at 90% 90%,
+            rgba(0,217,255,.07),
+            transparent 35%
+        );
+}
+
+
+/* ==================================================
+   GRID
+================================================== */
+
+body:before{
+    content:"";
+
+    position:fixed;
+    inset:0;
+
+    pointer-events:none;
+
+    background:
+        linear-gradient(
+            rgba(255,255,255,.016) 1px,
             transparent 1px
         ),
         linear-gradient(
             90deg,
-            rgba(255,255,255,.018) 1px,
+            rgba(255,255,255,.016) 1px,
             transparent 1px
         );
 
-    background-size:46px 46px;
+    background-size:45px 45px;
 
     mask-image:
         linear-gradient(
             to bottom,
-            black 0%,
-            black 45%,
-            transparent 100%
+            black,
+            transparent
         );
+
+    z-index:-17;
+}
+
+
+/* ==================================================
+   MOVING LIGHT
+================================================== */
+
+.light{
+    position:fixed;
+
+    width:330px;
+    height:330px;
+
+    border-radius:50%;
+
+    filter:blur(110px);
+
+    pointer-events:none;
+
+    z-index:-15;
+
+    opacity:.12;
+}
+
+.light.one{
+    background:var(--accent);
+
+    top:-180px;
+    left:-150px;
+
+    animation:
+        lightMove1
+        9s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+.light.two{
+    background:var(--accent2);
+
+    right:-170px;
+    bottom:-180px;
+
+    animation:
+        lightMove2
+        12s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+@keyframes lightMove1{
+
+    from{
+        transform:translate(0,0) scale(1);
+    }
+
+    to{
+        transform:translate(90px,60px) scale(1.2);
+    }
+}
+
+@keyframes lightMove2{
+
+    from{
+        transform:translate(0,0) scale(1);
+    }
+
+    to{
+        transform:translate(-80px,-60px) scale(1.25);
+    }
+}
+
+
+/* ==================================================
+   PREMIUM SNOW
+================================================== */
+
+.snow{
+    position:fixed;
+
+    inset:0;
+
+    overflow:hidden;
+
+    pointer-events:none;
 
     z-index:-10;
 }
 
-/* =========================
-   TOP GLOW
-========================= */
-
-.glow{
-    position:fixed;
-    width:340px;
-    height:340px;
-    border-radius:50%;
-    filter:blur(110px);
-    pointer-events:none;
-    z-index:-8;
-    opacity:.13;
-}
-
-.glow.one{
-    background:#00ff91;
-    top:-180px;
-    left:-140px;
-    animation:glowMove 9s ease-in-out infinite alternate;
-}
-
-.glow.two{
-    background:#00d9ff;
-    right:-180px;
-    bottom:-180px;
-    animation:glowMove 11s ease-in-out infinite alternate-reverse;
-}
-
-@keyframes glowMove{
-    from{
-        transform:translate(0,0) scale(1);
-    }
-    to{
-        transform:translate(70px,45px) scale(1.25);
-    }
-}
-
-/* =========================
-   PREMIUM SNOW
-========================= */
-
-.snow{
-    position:fixed;
-    inset:0;
-    overflow:hidden;
-    pointer-events:none;
-    z-index:-5;
-}
-
 .snow i{
     position:absolute;
+
     top:-30px;
+
     left:var(--left);
 
     width:var(--size);
@@ -158,29 +259,30 @@ body:before{
     background:
         radial-gradient(
             circle,
-            rgba(255,255,255,.95) 0%,
-            rgba(210,255,242,.75) 45%,
-            rgba(0,255,145,.15) 100%
+            rgba(255,255,255,.95),
+            rgba(205,255,240,.55)
         );
 
     box-shadow:
-        0 0 5px rgba(255,255,255,.55),
-        0 0 12px rgba(0,255,145,.25);
+        0 0 5px rgba(255,255,255,.6),
+        0 0 14px rgba(0,255,145,.3);
 
     opacity:0;
 
     animation:
         snowfall var(--time) linear infinite,
-        snowPulse 2.4s ease-in-out infinite alternate;
+        snowGlow 2.5s ease-in-out infinite alternate;
 
     animation-delay:var(--delay);
 }
 
 @keyframes snowfall{
+
     0%{
         transform:
             translate3d(0,-40px,0)
             rotate(0deg);
+
         opacity:0;
     }
 
@@ -188,53 +290,45 @@ body:before{
         opacity:var(--opacity);
     }
 
-    25%{
+    30%{
         transform:
             translate3d(
-                var(--drift1),
-                25vh,
+                var(--d1),
+                30vh,
                 0
             )
-            rotate(90deg);
+            rotate(120deg);
     }
 
-    50%{
+    60%{
         transform:
             translate3d(
-                var(--drift2),
-                52vh,
+                var(--d2),
+                62vh,
                 0
             )
-            rotate(180deg);
+            rotate(240deg);
     }
 
-    75%{
-        transform:
-            translate3d(
-                var(--drift3),
-                78vh,
-                0
-            )
-            rotate(270deg);
-    }
-
-    92%{
+    90%{
         opacity:var(--opacity);
     }
 
     100%{
         transform:
             translate3d(
-                var(--drift4),
+                var(--d3),
                 112vh,
                 0
             )
             rotate(360deg);
+
         opacity:0;
     }
 }
 
-@keyframes snowPulse{
+@keyframes snowGlow{
+
     from{
         filter:blur(0);
     }
@@ -244,15 +338,19 @@ body:before{
     }
 }
 
-/* =========================
-   CONTAINER
-========================= */
+
+/* ==================================================
+   MAIN
+================================================== */
 
 .container{
     width:100%;
     max-width:440px;
+
     position:relative;
-    z-index:2;
+
+    z-index:5;
+
     text-align:center;
 }
 
@@ -264,13 +362,15 @@ body:before{
     display:none;
 }
 
-/* =========================
-   BRAND / LOGO
-========================= */
+
+/* ==================================================
+   LOGO
+================================================== */
 
 .logo-wrap{
     width:96px;
     height:96px;
+
     margin:0 auto 18px;
 
     padding:3px;
@@ -288,11 +388,13 @@ body:before{
         );
 
     box-shadow:
-        0 0 30px rgba(0,255,145,.15),
-        0 0 70px rgba(0,255,145,.06);
+        0 0 35px rgba(0,255,145,.18);
 
     animation:
-        logoSpin 8s linear infinite;
+        logoRotate
+        8s
+        linear
+        infinite;
 }
 
 .logo-inner{
@@ -311,24 +413,29 @@ body:before{
 .logo-inner img{
     width:100%;
     height:100%;
-    display:block;
+
     object-fit:cover;
+
+    display:block;
 }
 
-@keyframes logoSpin{
+@keyframes logoRotate{
+
     to{
         transform:rotate(360deg);
     }
 }
 
-/* =========================
-   HEADING
-========================= */
+
+/* ==================================================
+   TITLE
+================================================== */
 
 h1{
     margin:0;
 
     font-size:31px;
+
     line-height:1.1;
 
     font-weight:900;
@@ -340,96 +447,54 @@ h1{
 }
 
 .subtitle{
-    margin:10px 0 27px;
+    margin:
+        10px 0 27px;
 
-    color:#7e8c88;
+    color:#84918d;
 
     font-size:13px;
 
     line-height:1.5;
 }
 
-/* =========================
-   MAIN CARD
-========================= */
+
+/* ==================================================
+   CARD
+================================================== */
 
 .card{
     position:relative;
 
-    padding:36px 28px 28px;
+    padding:
+        36px 28px 28px;
 
     border-radius:30px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(14,27,27,.94),
-            rgba(4,10,10,.94)
+            rgba(8,20,19,.88),
+            rgba(3,9,9,.92)
         );
 
-    border:1px solid rgba(255,255,255,.075);
+    border:
+        1px solid
+        rgba(255,255,255,.085);
 
     box-shadow:
-        0 30px 90px rgba(0,0,0,.72),
-        inset 0 1px rgba(255,255,255,.045);
+        0 30px 90px rgba(0,0,0,.75),
+        inset 0 1px rgba(255,255,255,.05);
 
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
 
     overflow:hidden;
 }
 
-/* animated card border */
 
-.card:before{
-    content:"";
-
-    position:absolute;
-    inset:0;
-
-    padding:1px;
-
-    border-radius:30px;
-
-    background:
-        linear-gradient(
-            120deg,
-            transparent 15%,
-            rgba(0,255,145,.5),
-            transparent 42%,
-            transparent 65%,
-            rgba(0,217,255,.25),
-            transparent 85%
-        );
-
-    mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-
-    mask-composite:exclude;
-
-    -webkit-mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-
-    -webkit-mask-composite:xor;
-
-    animation:borderFlow 5s linear infinite;
-
-    pointer-events:none;
-}
-
-@keyframes borderFlow{
-    from{
-        transform:translateX(-15%);
-    }
-
-    to{
-        transform:translateX(15%);
-    }
-}
-
-/* internal glow */
+/* ==================================================
+   CARD LIGHT
+================================================== */
 
 .card:after{
     content:"";
@@ -439,8 +504,8 @@ h1{
     width:220px;
     height:220px;
 
-    right:-120px;
-    top:-120px;
+    right:-130px;
+    top:-130px;
 
     border-radius:50%;
 
@@ -453,12 +518,14 @@ h1{
     pointer-events:none;
 }
 
-/* =========================
-   SUCCESS TITLE
-========================= */
+
+/* ==================================================
+   SUCCESS
+================================================== */
 
 h2{
-    margin:0 0 12px;
+    margin:
+        0 0 12px;
 
     color:var(--accent);
 
@@ -466,14 +533,13 @@ h2{
 
     font-weight:850;
 
-    letter-spacing:-.3px;
-
     text-shadow:
-        0 0 22px rgba(0,255,145,.12);
+        0 0 20px rgba(0,255,145,.15);
 }
 
 .card-p{
-    margin:0 auto 13px;
+    margin:
+        0 auto 13px;
 
     max-width:350px;
 
@@ -484,9 +550,10 @@ h2{
     line-height:1.7;
 }
 
-/* =========================
-   IP BADGE
-========================= */
+
+/* ==================================================
+   IP
+================================================== */
 
 .ip-status{
     display:inline-flex;
@@ -496,7 +563,8 @@ h2{
 
     gap:8px;
 
-    padding:8px 13px;
+    padding:
+        8px 13px;
 
     margin-bottom:24px;
 
@@ -507,21 +575,15 @@ h2{
 
     border:
         1px solid
-        rgba(0,255,145,.16);
+        rgba(0,255,145,.17);
 
-    box-shadow:
-        inset 0 0 15px rgba(0,255,145,.025);
-
-    color:#75827e;
+    color:#75837e;
 
     font-size:9px;
 
     font-weight:800;
 
     letter-spacing:1.2px;
-
-    position:relative;
-    z-index:3;
 }
 
 .ip-dot{
@@ -534,13 +596,14 @@ h2{
 
     box-shadow:
         0 0 8px var(--accent),
-        0 0 16px rgba(0,255,145,.45);
+        0 0 16px rgba(0,255,145,.4);
 
-    animation:ipPulse 1.5s infinite;
+    animation:
+        ipPulse 1.5s infinite;
 }
 
 #userIP{
-    color:#e4eeea;
+    color:#e5eeea;
 
     font-family:
         "Courier New",
@@ -556,6 +619,7 @@ h2{
 }
 
 @keyframes ipPulse{
+
     0%,100%{
         opacity:1;
         transform:scale(1);
@@ -567,14 +631,16 @@ h2{
     }
 }
 
-/* =========================
-   KEY BOX
-========================= */
+
+/* ==================================================
+   KEY
+================================================== */
 
 .key-box{
     position:relative;
 
-    padding:22px 14px;
+    padding:
+        22px 14px;
 
     margin-bottom:16px;
 
@@ -584,17 +650,14 @@ h2{
         linear-gradient(
             135deg,
             rgba(0,255,145,.045),
-            rgba(0,0,0,.5)
+            rgba(0,0,0,.55)
         );
 
     border:
         1px dashed
-        rgba(0,255,145,.48);
+        rgba(0,255,145,.5);
 
     overflow:hidden;
-
-    box-shadow:
-        inset 0 0 30px rgba(0,255,145,.018);
 }
 
 .key-box:before{
@@ -605,66 +668,32 @@ h2{
     top:0;
     bottom:0;
 
-    left:-50%;
+    left:-60%;
 
-    width:25%;
+    width:35%;
 
     background:
         linear-gradient(
             90deg,
             transparent,
-            rgba(255,255,255,.09),
+            rgba(255,255,255,.10),
             transparent
         );
 
     transform:skewX(-20deg);
 
-    animation:keyScan 3.2s ease-in-out infinite;
-}
-
-.key-box:after{
-    content:"";
-
-    position:absolute;
-
-    left:0;
-    right:0;
-    bottom:0;
-
-    height:1px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            var(--accent),
-            transparent
-        );
-
-    opacity:.55;
-
-    animation:keyLine 2.5s ease-in-out infinite;
+    animation:
+        keyScan 3s ease-in-out infinite;
 }
 
 @keyframes keyScan{
+
     0%{
-        left:-50%;
+        left:-60%;
     }
 
-    55%,100%{
-        left:130%;
-    }
-}
-
-@keyframes keyLine{
-    0%,100%{
-        opacity:.2;
-        transform:scaleX(.3);
-    }
-
-    50%{
-        opacity:.8;
-        transform:scaleX(1);
+    60%,100%{
+        left:140%;
     }
 }
 
@@ -687,12 +716,13 @@ h2{
     word-break:break-word;
 
     text-shadow:
-        0 0 15px rgba(0,255,145,.18);
+        0 0 15px rgba(0,255,145,.2);
 }
 
-/* =========================
+
+/* ==================================================
    BUTTON
-========================= */
+================================================== */
 
 .btn{
     width:100%;
@@ -718,9 +748,7 @@ h2{
     overflow:hidden;
 
     transition:
-        transform .25s ease,
-        box-shadow .25s ease,
-        background .25s ease;
+        .25s ease;
 }
 
 .btn:before{
@@ -731,7 +759,7 @@ h2{
     top:0;
     bottom:0;
 
-    left:-110%;
+    left:-120%;
 
     width:60%;
 
@@ -743,7 +771,7 @@ h2{
             transparent
         );
 
-    transform:skewX(-22deg);
+    transform:skewX(-20deg);
 
     transition:.6s;
 }
@@ -756,7 +784,8 @@ h2{
     transform:scale(.98);
 }
 
-/* copy */
+
+/* COPY */
 
 #copyBtn{
     color:#00140b;
@@ -765,7 +794,7 @@ h2{
         linear-gradient(
             135deg,
             #ffffff,
-            #edf4f1
+            #e9f1ee
         );
 
     box-shadow:
@@ -787,9 +816,10 @@ h2{
         rgba(0,255,145,.2);
 }
 
-/* =========================
+
+/* ==================================================
    TELEGRAM
-========================= */
+================================================== */
 
 .telegram-btn{
     display:flex;
@@ -797,7 +827,7 @@ h2{
     align-items:center;
     justify-content:center;
 
-    gap:11px;
+    gap:10px;
 
     margin-top:12px;
 
@@ -823,7 +853,7 @@ h2{
     background:
         linear-gradient(
             135deg,
-            #14b8f2,
+            #15b9f2,
             #0088cc
         );
 
@@ -833,24 +863,18 @@ h2{
 }
 
 .telegram-icon{
-    width:23px;
-    height:23px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
     font-size:18px;
 }
 
-/* =========================
-   SECURITY LINE
-========================= */
+
+/* ==================================================
+   SECURITY
+================================================== */
 
 .secure-line{
     margin-top:16px;
 
-    color:#34423e;
+    color:#34433e;
 
     font-size:8px;
 
@@ -859,9 +883,10 @@ h2{
     letter-spacing:1.5px;
 }
 
-/* =========================
+
+/* ==================================================
    FOOTER
-========================= */
+================================================== */
 
 .footer{
     margin-top:25px;
@@ -877,12 +902,14 @@ h2{
     text-transform:uppercase;
 }
 
-/* =========================
-   BYPASS CARD
-========================= */
+
+/* ==================================================
+   BYPASS
+================================================== */
 
 .error-card{
-    padding:40px 28px;
+    padding:
+        40px 28px;
 
     border-radius:28px;
 
@@ -898,12 +925,13 @@ h2{
         rgba(255,64,85,.25);
 
     box-shadow:
-        0 25px 75px rgba(0,0,0,.65),
-        0 0 45px rgba(255,40,70,.06);
+        0 25px 75px
+        rgba(0,0,0,.7);
 }
 
 .error-icon{
     font-size:50px;
+
     margin-bottom:18px;
 }
 
@@ -920,7 +948,7 @@ h2{
 .btn-red{
     margin-top:20px;
 
-    color:#fff;
+    color:white;
 
     background:
         linear-gradient(
@@ -930,33 +958,15 @@ h2{
         );
 }
 
-.btn-red:hover{
-    background:
-        linear-gradient(
-            135deg,
-            #ff5265,
-            #ed3047
-        );
 
-    box-shadow:
-        0 15px 30px
-        rgba(255,50,70,.2);
-}
-
-/* =========================
+/* ==================================================
    MOBILE
-========================= */
+================================================== */
 
 @media(max-width:480px){
 
     body{
-        padding:
-            22px 14px;
-    }
-
-    .container{
-        max-width:430px;
-        margin-top:8px;
+        padding:20px 14px;
     }
 
     .logo-wrap{
@@ -984,17 +994,8 @@ h2{
         font-size:20px;
     }
 
-    .card-p{
-        font-size:12.5px;
-    }
-
     #finalKey{
         font-size:16px;
-        letter-spacing:.9px;
-    }
-
-    .ip-status{
-        margin-bottom:21px;
     }
 
     .btn{
@@ -1004,14 +1005,9 @@ h2{
 
 @media(max-width:360px){
 
-    body{
-        padding:16px 11px;
-    }
-
     .logo-wrap{
         width:74px;
         height:74px;
-        margin-bottom:14px;
     }
 
     h1{
@@ -1026,36 +1022,49 @@ h2{
     #finalKey{
         font-size:14px;
     }
-
-    .footer{
-        letter-spacing:1.4px;
-    }
-}
-
-/* =========================
-   REDUCED MOTION
-========================= */
-
-@media(prefers-reduced-motion:reduce){
-
-    *,
-    *:before,
-    *:after{
-        animation-duration:.01ms !important;
-        animation-iteration-count:1 !important;
-        scroll-behavior:auto !important;
-    }
 }
 </style>
 </head>
 
+
 <body>
 
-<!-- BACKGROUND GLOW -->
-<div class="glow one"></div>
-<div class="glow two"></div>
 
-<!-- PREMIUM SNOW -->
+<!-- ==================================================
+     BACKGROUND VIDEO
+
+     Put your video here:
+     ./assets/bg.mp4
+================================================== -->
+
+<video
+    id="bgVideo"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto"
+>
+    <source
+        src="./assets/bg.mp4"
+        type="video/mp4"
+    >
+</video>
+
+
+<!-- VIDEO DARK OVERLAY -->
+<div class="video-overlay"></div>
+
+
+<!-- LIGHT -->
+<div class="light one"></div>
+<div class="light two"></div>
+
+
+<!-- ==================================================
+     SNOW
+================================================== -->
+
 <div class="snow">
 
     <i style="
@@ -1063,165 +1072,161 @@ h2{
         --size:3px;
         --time:8s;
         --delay:-2s;
-        --opacity:.72;
-        --drift1:35px;
-        --drift2:-20px;
-        --drift3:30px;
-        --drift4:-15px;
+        --opacity:.7;
+        --d1:35px;
+        --d2:-20px;
+        --d3:25px;
     "></i>
 
     <i style="
-        --left:11%;
+        --left:12%;
         --size:5px;
         --time:12s;
         --delay:-7s;
         --opacity:.55;
-        --drift1:-30px;
-        --drift2:35px;
-        --drift3:-20px;
-        --drift4:30px;
+        --d1:-30px;
+        --d2:35px;
+        --d3:-20px;
     "></i>
 
     <i style="
-        --left:19%;
+        --left:21%;
         --size:2px;
         --time:9s;
         --delay:-4s;
         --opacity:.8;
-        --drift1:25px;
-        --drift2:-30px;
-        --drift3:20px;
-        --drift4:-25px;
+        --d1:25px;
+        --d2:-30px;
+        --d3:20px;
     "></i>
 
     <i style="
-        --left:29%;
+        --left:31%;
         --size:4px;
         --time:14s;
         --delay:-10s;
-        --opacity:.62;
-        --drift1:-35px;
-        --drift2:25px;
-        --drift3:-25px;
-        --drift4:35px;
+        --opacity:.6;
+        --d1:-35px;
+        --d2:25px;
+        --d3:-25px;
     "></i>
 
     <i style="
-        --left:39%;
+        --left:42%;
         --size:2px;
         --time:10s;
         --delay:-3s;
         --opacity:.75;
-        --drift1:30px;
-        --drift2:-20px;
-        --drift3:35px;
-        --drift4:-20px;
+        --d1:30px;
+        --d2:-20px;
+        --d3:30px;
     "></i>
 
     <i style="
-        --left:48%;
+        --left:52%;
         --size:5px;
         --time:13s;
         --delay:-8s;
         --opacity:.5;
-        --drift1:-25px;
-        --drift2:35px;
-        --drift3:-35px;
-        --drift4:20px;
+        --d1:-25px;
+        --d2:35px;
+        --d3:-30px;
     "></i>
 
     <i style="
-        --left:58%;
+        --left:63%;
         --size:3px;
         --time:9s;
         --delay:-5s;
-        --opacity:.72;
-        --drift1:20px;
-        --drift2:-35px;
-        --drift3:25px;
-        --drift4:-30px;
+        --opacity:.7;
+        --d1:20px;
+        --d2:-35px;
+        --d3:25px;
     "></i>
 
     <i style="
-        --left:67%;
+        --left:74%;
         --size:4px;
         --time:15s;
         --delay:-11s;
         --opacity:.58;
-        --drift1:-30px;
-        --drift2:25px;
-        --drift3:-20px;
-        --drift4:35px;
+        --d1:-30px;
+        --d2:25px;
+        --d3:-20px;
     "></i>
 
     <i style="
-        --left:76%;
+        --left:84%;
         --size:2px;
         --time:11s;
         --delay:-6s;
         --opacity:.8;
-        --drift1:30px;
-        --drift2:-25px;
-        --drift3:30px;
-        --drift4:-15px;
-    "></i>
-
-    <i style="
-        --left:85%;
-        --size:5px;
-        --time:13s;
-        --delay:-9s;
-        --opacity:.48;
-        --drift1:-25px;
-        --drift2:30px;
-        --drift3:-30px;
-        --drift4:25px;
+        --d1:30px;
+        --d2:-25px;
+        --d3:25px;
     "></i>
 
     <i style="
         --left:94%;
-        --size:3px;
-        --time:8s;
-        --delay:-1s;
-        --opacity:.7;
-        --drift1:25px;
-        --drift2:-20px;
-        --drift3:30px;
-        --drift4:-25px;
+        --size:4px;
+        --time:13s;
+        --delay:-9s;
+        --opacity:.55;
+        --d1:-25px;
+        --d2:30px;
+        --d3:-25px;
     "></i>
 
 </div>
 
 
+<!-- ==================================================
+     MAIN CONTAINER
+================================================== -->
+
 <div class="container">
 
-    <!-- =========================
-         MAIN
-    ========================== -->
+
+    <!-- MAIN -->
 
     <div id="mainContainer">
 
+
+        <!-- LOGO -->
+
         <div class="logo-wrap">
+
             <div class="logo-inner">
+
                 <img
                     src="./assets/logo.png"
                     alt="FARAZ"
                 >
+
             </div>
+
         </div>
 
-        <h1>Access Unlocked</h1>
+
+        <h1>
+            Access Unlocked
+        </h1>
+
 
         <p class="subtitle">
             Your device-locked license key is ready.
         </p>
 
 
+        <!-- CARD -->
+
         <div class="card">
+
 
             <h2>
                 Generation Success!
             </h2>
+
 
             <p class="card-p">
                 This key is locked to your device.
@@ -1230,6 +1235,7 @@ h2{
 
 
             <!-- IP -->
+
             <div class="ip-status">
 
                 <span class="ip-dot"></span>
@@ -1250,6 +1256,7 @@ h2{
 
 
             <!-- KEY -->
+
             <div class="key-box">
 
                 <span id="finalKey">
@@ -1260,6 +1267,7 @@ h2{
 
 
             <!-- COPY -->
+
             <button
                 class="btn"
                 id="copyBtn"
@@ -1270,6 +1278,7 @@ h2{
 
 
             <!-- TELEGRAM -->
+
             <a
                 class="btn telegram-btn"
                 href="https://t.me/farazplayzzyt"
@@ -1285,6 +1294,7 @@ h2{
 
             </a>
 
+
         </div>
 
 
@@ -1295,9 +1305,9 @@ h2{
     </div>
 
 
-    <!-- =========================
+    <!-- ==================================================
          BYPASS
-    ========================== -->
+    ================================================== -->
 
     <div id="bypassContainer">
 
@@ -1343,9 +1353,9 @@ h2{
 
 <script>
 
-/* =========================
+/* ==================================================
    SECURITY CHECK
-========================= */
+================================================== */
 
 async function checkSecurity(){
 
@@ -1357,10 +1367,25 @@ async function checkSecurity(){
     const source =
         urlParams.get('source');
 
-    console.log('=== Security Check ===');
-    console.log('Source:',source);
-    console.log('Referrer:',document.referrer);
-    console.log('==================');
+
+    console.log(
+        '=== Security Check ==='
+    );
+
+    console.log(
+        'Source:',
+        source
+    );
+
+    console.log(
+        'Referrer:',
+        document.referrer
+    );
+
+    console.log(
+        '=================='
+    );
+
 
     const isAllowed =
         source === "official";
@@ -1373,6 +1398,7 @@ async function checkSecurity(){
             "//" +
             window.location.host +
             window.location.pathname;
+
 
         window.history.replaceState(
             {},
@@ -1393,7 +1419,9 @@ async function checkSecurity(){
 
         generateLockedKey();
 
-    }else{
+    }
+
+    else{
 
         document.getElementById(
             'mainContainer'
@@ -1408,10 +1436,10 @@ async function checkSecurity(){
 }
 
 
-/* =========================
+/* ==================================================
    KEY GENERATION
    ORIGINAL LOGIC
-========================= */
+================================================== */
 
 async function generateLockedKey(){
 
@@ -1425,22 +1453,29 @@ async function generateLockedKey(){
                 }
             );
 
+
         const data =
             await response.json();
+
 
         const ip =
             data.ip;
 
 
+        /* Show IP */
+
         document.getElementById(
             'userIP'
-        ).innerText=ip;
+        ).innerText =
+            ip;
 
 
-        // Aaj ki Date
+        /* Daily seed */
+
         const day =
             Math.floor(
-                Date.now()/86400000
+                Date.now() /
+                86400000
             );
 
 
@@ -1452,7 +1487,8 @@ async function generateLockedKey(){
             );
 
 
-        // Seed: IP + Date + Year
+        /* Seed */
+
         let seed =
             ipSeed +
             day +
@@ -1465,10 +1501,12 @@ async function generateLockedKey(){
                 Math.sin(seed++) *
                 10000;
 
+
             return Math.abs(
                 x -
                 Math.floor(x)
             );
+
         }
 
 
@@ -1479,22 +1517,36 @@ async function generateLockedKey(){
         let segments=[];
 
 
-        for(let i=0;i<4;i++){
+        for(
+            let i=0;
+            i<4;
+            i++
+        ){
 
             let s="";
 
-            for(let j=0;j<4;j++){
+
+            for(
+                let j=0;
+                j<4;
+                j++
+            ){
 
                 let r =
                     Math.floor(
-                        rnd()*chars.length
+                        rnd() *
+                        chars.length
                     );
+
 
                 s +=
                     chars.charAt(r);
+
             }
 
+
             segments.push(s);
+
         }
 
 
@@ -1505,27 +1557,32 @@ async function generateLockedKey(){
 
         document.getElementById(
             'finalKey'
-        ).innerText=finalKey;
+        ).innerText =
+            finalKey;
 
 
-    }catch(err){
+    }
+
+    catch(err){
 
         document.getElementById(
             'userIP'
-        ).innerText="OFFLINE";
+        ).innerText =
+            "OFFLINE";
 
 
         document.getElementById(
             'finalKey'
-        ).innerText=
+        ).innerText =
             "CONNECT TO INTERNET";
+
     }
 }
 
 
-/* =========================
-   COPY KEY
-========================= */
+/* ==================================================
+   COPY
+================================================== */
 
 function copyKey(){
 
@@ -1539,7 +1596,9 @@ function copyKey(){
         keyText.includes("SECURE") ||
         keyText.includes("CONNECT")
     ){
+
         return;
+
     }
 
 
@@ -1566,6 +1625,7 @@ function copyKey(){
                 btn.innerText =
                     "COPY TO CLIPBOARD";
 
+
                 btn.style.background =
                     "#ffffff";
 
@@ -1575,9 +1635,30 @@ function copyKey(){
 }
 
 
-/* =========================
+/* ==================================================
+   VIDEO FALLBACK
+================================================== */
+
+const video =
+    document.getElementById(
+        'bgVideo'
+    );
+
+
+video.addEventListener(
+    'error',
+    function(){
+
+        document.body.style.background =
+            "#010505";
+
+    }
+);
+
+
+/* ==================================================
    START
-========================= */
+================================================== */
 
 window.onload =
     checkSecurity;
