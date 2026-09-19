@@ -8,19 +8,20 @@
 <style>
 :root{
     --bg:#010505;
-    --panel:rgba(7,15,15,.92);
+    --panel:rgba(7,15,15,.94);
     --accent:#00ff91;
     --accent2:#00d9ff;
     --white:#fff;
     --muted:#7d8c87;
     --red:#ff4055;
-    --red2:#ff7a45;
+    --green:#00ff91;
 }
 
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
+    -webkit-tap-highlight-color:transparent;
 }
 
 html,body{
@@ -30,10 +31,13 @@ html,body{
 body{
     min-height:100vh;
     padding:18px 15px;
+
     display:flex;
     justify-content:center;
     align-items:center;
+
     overflow-x:hidden;
+
     color:var(--white);
 
     font-family:
@@ -47,31 +51,34 @@ body{
     background:
         radial-gradient(
             circle at 50% -10%,
-            rgba(0,255,145,.13),
+            rgba(0,255,145,.14),
             transparent 35%
         ),
         radial-gradient(
             circle at 0% 55%,
-            rgba(0,255,145,.055),
+            rgba(0,255,145,.06),
             transparent 30%
         ),
         radial-gradient(
             circle at 100% 90%,
-            rgba(0,217,255,.06),
+            rgba(0,217,255,.07),
             transparent 32%
         ),
         #010505;
 }
 
-/* =================================
+/* =========================================
    BACKGROUND GRID
-================================= */
+========================================= */
 
 body:before{
     content:"";
+
     position:fixed;
     inset:0;
+
     pointer-events:none;
+
     opacity:.38;
 
     background:
@@ -95,72 +102,98 @@ body:before{
             transparent 100%
         );
 
-    z-index:-10;
+    z-index:-20;
 }
 
-/* =================================
-   MOVING BACKGROUND GLOW
-================================= */
+/* =========================================
+   MOVING GLOW
+========================================= */
 
 .glow{
     position:fixed;
+
     width:330px;
     height:330px;
+
     border-radius:50%;
+
     filter:blur(110px);
+
     pointer-events:none;
-    z-index:-8;
+
+    z-index:-18;
+
     opacity:.13;
 }
 
 .glow.one{
     background:#00ff91;
+
     top:-180px;
     left:-150px;
-    animation:glowMove 9s ease-in-out infinite alternate;
+
+    animation:
+        glowMove 9s ease-in-out infinite alternate;
 }
 
 .glow.two{
     background:#00d9ff;
+
     right:-180px;
     bottom:-180px;
-    animation:glowMove2 11s ease-in-out infinite alternate;
+
+    animation:
+        glowMove2 11s ease-in-out infinite alternate;
 }
 
 @keyframes glowMove{
+
     from{
-        transform:translate(0,0) scale(1);
+        transform:
+            translate(0,0)
+            scale(1);
     }
 
     to{
-        transform:translate(80px,55px) scale(1.25);
+        transform:
+            translate(80px,55px)
+            scale(1.25);
     }
 }
 
 @keyframes glowMove2{
+
     from{
-        transform:translate(0,0) scale(1);
+        transform:
+            translate(0,0)
+            scale(1);
     }
 
     to{
-        transform:translate(-70px,-45px) scale(1.22);
+        transform:
+            translate(-70px,-45px)
+            scale(1.22);
     }
 }
 
-/* =================================
-   PREMIUM PARTICLES
-================================= */
+/* =========================================
+   PARTICLES
+========================================= */
 
 .snow{
     position:fixed;
     inset:0;
+
     overflow:hidden;
+
     pointer-events:none;
-    z-index:-5;
+
+    z-index:-10;
 }
 
 .snow i{
     position:absolute;
+
     top:-30px;
     left:var(--left);
 
@@ -196,6 +229,7 @@ body:before{
         transform:
             translate3d(0,-40px,0)
             rotate(0deg);
+
         opacity:0;
     }
 
@@ -205,19 +239,31 @@ body:before{
 
     25%{
         transform:
-            translate3d(var(--drift1),25vh,0)
+            translate3d(
+                var(--drift1),
+                25vh,
+                0
+            )
             rotate(90deg);
     }
 
     50%{
         transform:
-            translate3d(var(--drift2),52vh,0)
+            translate3d(
+                var(--drift2),
+                52vh,
+                0
+            )
             rotate(180deg);
     }
 
     75%{
         transform:
-            translate3d(var(--drift3),78vh,0)
+            translate3d(
+                var(--drift3),
+                78vh,
+                0
+            )
             rotate(270deg);
     }
 
@@ -227,13 +273,19 @@ body:before{
 
     100%{
         transform:
-            translate3d(var(--drift4),112vh,0)
+            translate3d(
+                var(--drift4),
+                112vh,
+                0
+            )
             rotate(360deg);
+
         opacity:0;
     }
 }
 
 @keyframes snowPulse{
+
     from{
         filter:blur(0);
     }
@@ -243,15 +295,18 @@ body:before{
     }
 }
 
-/* =================================
+/* =========================================
    CONTAINER
-================================= */
+========================================= */
 
 .container{
     width:100%;
     max-width:440px;
+
     position:relative;
+
     z-index:2;
+
     text-align:center;
 }
 
@@ -260,14 +315,15 @@ body:before{
     display:none;
 }
 
-/* =================================
+/* =========================================
    LOGO
-================================= */
+========================================= */
 
 .logo-wrap{
-    width:96px;
-    height:96px;
-    margin:0 auto 18px;
+    width:94px;
+    height:94px;
+
+    margin:0 auto 16px;
 
     padding:3px;
 
@@ -280,14 +336,16 @@ body:before{
             var(--accent),
             transparent,
             var(--accent2),
-            transparent
+            transparent,
+            var(--accent)
         );
 
     box-shadow:
-        0 0 30px rgba(0,255,145,.15),
-        0 0 70px rgba(0,255,145,.06);
+        0 0 30px rgba(0,255,145,.17),
+        0 0 70px rgba(0,255,145,.07);
 
-    animation:logoSpin 8s linear infinite;
+    animation:
+        logoSpin 8s linear infinite;
 }
 
 .logo-inner{
@@ -295,6 +353,7 @@ body:before{
     height:100%;
 
     border-radius:50%;
+
     overflow:hidden;
 
     background:#020706;
@@ -305,73 +364,191 @@ body:before{
 .logo-inner img{
     width:100%;
     height:100%;
+
     display:block;
+
     object-fit:cover;
+
+    filter:
+        brightness(1.25)
+        contrast(1.12);
 }
 
 @keyframes logoSpin{
+
     to{
         transform:rotate(360deg);
     }
 }
 
-/* =================================
-   HEADING
-================================= */
+/* =========================================
+   SUCCESS HEADER
+========================================= */
+
+.success-status{
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:8px;
+
+    padding:7px 13px;
+
+    margin-bottom:13px;
+
+    border-radius:999px;
+
+    background:
+        rgba(0,255,145,.055);
+
+    border:
+        1px solid
+        rgba(0,255,145,.2);
+
+    color:#6dffb8;
+
+    font-size:9px;
+
+    font-weight:900;
+
+    letter-spacing:1.8px;
+
+    box-shadow:
+        0 0 20px rgba(0,255,145,.04);
+
+    animation:
+        statusFloat 3s ease-in-out infinite;
+}
+
+.success-status-dot{
+    width:6px;
+    height:6px;
+
+    border-radius:50%;
+
+    background:var(--accent);
+
+    box-shadow:
+        0 0 8px var(--accent),
+        0 0 16px rgba(0,255,145,.5);
+
+    animation:
+        successPulse 1.4s infinite;
+}
+
+@keyframes successPulse{
+
+    0%,100%{
+        opacity:1;
+        transform:scale(1);
+    }
+
+    50%{
+        opacity:.4;
+        transform:scale(.72);
+    }
+}
+
+@keyframes statusFloat{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-2px);
+    }
+}
 
 h1{
     margin:0;
 
     font-size:31px;
-    line-height:1.1;
 
-    font-weight:900;
+    line-height:1.08;
+
+    font-weight:950;
+
     letter-spacing:-1px;
 
     text-shadow:
         0 0 25px rgba(255,255,255,.08);
 }
 
+h1 span{
+    color:var(--accent);
+
+    text-shadow:
+        0 0 18px rgba(0,255,145,.25);
+}
+
 .subtitle{
-    margin:10px 0 27px;
+    margin:9px 0 23px;
 
     color:#7e8c88;
 
-    font-size:13px;
+    font-size:12px;
+
     line-height:1.5;
 }
 
-/* =================================
-   MAIN CARD
-================================= */
+/* =========================================
+   SUCCESS CARD
+========================================= */
 
-.card{
+.success-card{
     position:relative;
 
-    padding:36px 28px 28px;
+    padding:27px 23px 23px;
 
     border-radius:30px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(14,27,27,.94),
-            rgba(4,10,10,.94)
+            rgba(10,24,21,.97),
+            rgba(3,10,9,.97)
         );
 
-    border:1px solid rgba(255,255,255,.075);
+    border:
+        1px solid
+        rgba(0,255,145,.17);
 
     box-shadow:
-        0 30px 90px rgba(0,0,0,.72),
+        0 30px 90px rgba(0,0,0,.75),
+        0 0 55px rgba(0,255,145,.055),
         inset 0 1px rgba(255,255,255,.045);
 
     backdrop-filter:blur(18px);
     -webkit-backdrop-filter:blur(18px);
 
     overflow:hidden;
+
+    animation:
+        cardAppear .7s ease both;
 }
 
-.card:before{
+@keyframes cardAppear{
+
+    from{
+        opacity:0;
+        transform:
+            translateY(18px)
+            scale(.97);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+/* animated border */
+
+.success-card:before{
     content:"";
 
     position:absolute;
@@ -382,14 +559,16 @@ h1{
     border-radius:30px;
 
     background:
-        linear-gradient(
-            120deg,
-            transparent 15%,
-            rgba(0,255,145,.5),
-            transparent 42%,
-            transparent 65%,
-            rgba(0,217,255,.25),
-            transparent 85%
+        conic-gradient(
+            from 0deg,
+            transparent,
+            rgba(0,255,145,.55),
+            transparent 25%,
+            transparent 50%,
+            rgba(0,217,255,.3),
+            transparent 75%,
+            rgba(0,255,145,.45),
+            transparent
         );
 
     mask:
@@ -404,92 +583,340 @@ h1{
 
     -webkit-mask-composite:xor;
 
-    animation:borderFlow 5s linear infinite;
+    animation:
+        cardBorder 7s linear infinite;
 
     pointer-events:none;
 }
 
-@keyframes borderFlow{
-    from{
-        transform:translateX(-15%);
-    }
+@keyframes cardBorder{
 
     to{
-        transform:translateX(15%);
+        transform:rotate(360deg);
     }
 }
 
-.card:after{
+/* green glow */
+
+.success-card:after{
     content:"";
 
     position:absolute;
 
-    width:220px;
-    height:220px;
+    width:270px;
+    height:190px;
 
-    right:-120px;
-    top:-120px;
+    left:50%;
+    top:-130px;
+
+    transform:translateX(-50%);
 
     border-radius:50%;
 
     background:var(--accent);
 
-    filter:blur(90px);
+    filter:blur(85px);
 
-    opacity:.07;
+    opacity:.075;
 
     pointer-events:none;
 }
 
-h2{
-    margin:0 0 12px;
+/* =========================================
+   SUCCESS ICON
+========================================= */
 
-    color:var(--accent);
+.success-icon-wrap{
+    position:relative;
 
-    font-size:22px;
-    font-weight:850;
+    width:88px;
+    height:88px;
 
-    letter-spacing:-.3px;
-}
+    margin:0 auto 18px;
 
-.card-p{
-    margin:0 auto 13px;
+    display:flex;
 
-    max-width:350px;
-
-    color:#8c9995;
-
-    font-size:13px;
-    line-height:1.7;
-}
-
-/* =================================
-   IP
-================================= */
-
-.ip-status{
-    display:inline-flex;
     align-items:center;
     justify-content:center;
-    gap:8px;
+}
 
-    padding:8px 13px;
-    margin-bottom:24px;
+/* outer ring */
 
-    border-radius:999px;
+.success-icon-wrap:before{
+    content:"";
 
-    background:rgba(0,255,145,.045);
+    position:absolute;
+
+    inset:0;
+
+    border-radius:50%;
 
     border:
         1px solid
-        rgba(0,255,145,.16);
+        rgba(0,255,145,.35);
 
-    color:#75827e;
+    box-shadow:
+        0 0 20px rgba(0,255,145,.09),
+        inset 0 0 20px rgba(0,255,145,.045);
+
+    animation:
+        successRingPulse 2s ease-in-out infinite;
+}
+
+/* rotating ring */
+
+.success-icon-wrap:after{
+    content:"";
+
+    position:absolute;
+
+    inset:-6px;
+
+    border-radius:50%;
+
+    border:
+        2px solid transparent;
+
+    border-top-color:#00ff91;
+    border-right-color:#00d9ff;
+
+    filter:
+        drop-shadow(
+            0 0 8px
+            rgba(0,255,145,.5)
+        );
+
+    animation:
+        successSpin 3s linear infinite;
+}
+
+@keyframes successSpin{
+
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+@keyframes successRingPulse{
+
+    0%,100%{
+        transform:scale(.95);
+        opacity:.5;
+    }
+
+    50%{
+        transform:scale(1.06);
+        opacity:1;
+    }
+}
+
+/* check circle */
+
+.success-icon{
+    position:relative;
+
+    z-index:2;
+
+    width:58px;
+    height:58px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #00ff91,
+            #00d97c
+        );
+
+    color:#00170d;
+
+    font-size:29px;
+
+    font-weight:1000;
+
+    box-shadow:
+        0 0 25px rgba(0,255,145,.25),
+        0 0 50px rgba(0,255,145,.08);
+
+    animation:
+        successIconFloat 2.8s ease-in-out infinite;
+}
+
+@keyframes successIconFloat{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-4px);
+    }
+}
+
+/* =========================================
+   SUCCESS TEXT
+========================================= */
+
+.success-title{
+    position:relative;
+    z-index:2;
+
+    color:#fff;
+
+    font-size:23px;
+
+    font-weight:950;
+
+    letter-spacing:-.4px;
+
+    margin-bottom:8px;
+}
+
+.success-title span{
+    color:var(--accent);
+}
+
+.success-description{
+    position:relative;
+    z-index:2;
+
+    max-width:350px;
+
+    margin:0 auto;
+
+    color:#84918d;
+
+    font-size:12.5px;
+
+    line-height:1.65;
+}
+
+/* =========================================
+   DEVICE VERIFIED BAR
+========================================= */
+
+.device-bar{
+    position:relative;
+
+    z-index:2;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    gap:10px;
+
+    margin-top:20px;
+
+    padding:11px 13px;
+
+    border-radius:15px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,255,145,.045),
+            rgba(255,255,255,.018),
+            rgba(0,217,255,.035)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.06);
+}
+
+.device-left{
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    color:#697671;
+
+    font-size:8px;
+
+    font-weight:900;
+
+    letter-spacing:1px;
+}
+
+.device-check{
+    width:17px;
+    height:17px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:
+        rgba(0,255,145,.1);
+
+    border:
+        1px solid
+        rgba(0,255,145,.25);
+
+    color:var(--accent);
 
     font-size:9px;
-    font-weight:800;
+}
 
-    letter-spacing:1.2px;
+.device-verified{
+    color:#72ffba;
+
+    font-size:8px;
+
+    font-weight:900;
+
+    letter-spacing:1px;
+}
+
+/* =========================================
+   IP STATUS
+========================================= */
+
+.ip-status{
+    position:relative;
+
+    z-index:2;
+
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:8px;
+
+    padding:8px 13px;
+
+    margin-top:13px;
+
+    border-radius:999px;
+
+    background:
+        rgba(0,255,145,.04);
+
+    border:
+        1px solid
+        rgba(0,255,145,.15);
+
+    color:#66736f;
+
+    font-size:8px;
+
+    font-weight:900;
+
+    letter-spacing:1.1px;
 }
 
 .ip-dot{
@@ -504,15 +931,20 @@ h2{
         0 0 8px var(--accent),
         0 0 16px rgba(0,255,145,.45);
 
-    animation:ipPulse 1.5s infinite;
+    animation:
+        ipPulse 1.5s infinite;
 }
 
 #userIP{
-    color:#e4eeea;
+    color:#dfe9e5;
 
-    font-family:"Courier New",monospace;
+    font-family:
+        "Courier New",
+        monospace;
 
-    font-size:11px;
+    font-size:10px;
+
+    letter-spacing:.5px;
 }
 
 .ip-separator{
@@ -520,6 +952,7 @@ h2{
 }
 
 @keyframes ipPulse{
+
     0%,100%{
         opacity:1;
         transform:scale(1);
@@ -531,31 +964,73 @@ h2{
     }
 }
 
-/* =================================
-   KEY BOX
-================================= */
+/* =========================================
+   KEY AREA
+========================================= */
+
+.key-section{
+    position:relative;
+
+    z-index:2;
+
+    margin-top:20px;
+}
+
+/* key label */
+
+.key-label{
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    margin-bottom:8px;
+
+    padding:0 3px;
+
+    color:#52605b;
+
+    font-size:8px;
+
+    font-weight:900;
+
+    letter-spacing:1.7px;
+
+    text-transform:uppercase;
+}
+
+.key-label span:last-child{
+    color:#5affaa;
+}
+
+/* key box */
 
 .key-box{
     position:relative;
 
-    padding:22px 14px;
-    margin-bottom:16px;
+    padding:20px 13px;
 
     border-radius:19px;
 
     background:
         linear-gradient(
             135deg,
-            rgba(0,255,145,.045),
-            rgba(0,0,0,.5)
+            rgba(0,255,145,.055),
+            rgba(0,0,0,.58)
         );
 
     border:
-        1px dashed
-        rgba(0,255,145,.48);
+        1px solid
+        rgba(0,255,145,.32);
 
     overflow:hidden;
+
+    box-shadow:
+        inset 0 0 30px rgba(0,255,145,.02),
+        0 0 25px rgba(0,255,145,.035);
 }
+
+/* scan light */
 
 .key-box:before{
     content:"";
@@ -564,30 +1039,35 @@ h2{
 
     top:0;
     bottom:0;
-    left:-50%;
 
-    width:25%;
+    left:-60%;
+
+    width:35%;
 
     background:
         linear-gradient(
             90deg,
             transparent,
-            rgba(255,255,255,.09),
+            rgba(255,255,255,.12),
             transparent
         );
 
     transform:skewX(-20deg);
 
-    animation:keyScan 3.2s ease-in-out infinite;
+    animation:
+        keyScan 3s ease-in-out infinite;
 }
+
+/* bottom line */
 
 .key-box:after{
     content:"";
 
     position:absolute;
 
-    left:0;
-    right:0;
+    left:7%;
+    right:7%;
+
     bottom:0;
 
     height:1px;
@@ -597,77 +1077,98 @@ h2{
             90deg,
             transparent,
             var(--accent),
+            var(--accent2),
             transparent
         );
 
-    animation:keyLine 2.5s ease-in-out infinite;
+    box-shadow:
+        0 0 8px rgba(0,255,145,.35);
+
+    animation:
+        keyLine 2.5s ease-in-out infinite;
 }
 
 @keyframes keyScan{
+
     0%{
-        left:-50%;
+        left:-60%;
     }
 
     55%,100%{
-        left:130%;
+        left:135%;
     }
 }
 
 @keyframes keyLine{
+
     0%,100%{
-        opacity:.2;
-        transform:scaleX(.3);
+        opacity:.25;
+        transform:scaleX(.45);
     }
 
     50%{
-        opacity:.8;
+        opacity:.9;
         transform:scaleX(1);
     }
 }
 
 #finalKey{
     position:relative;
+
     z-index:2;
+
+    display:block;
 
     color:var(--accent);
 
-    font-family:"Courier New",monospace;
+    font-family:
+        "Courier New",
+        monospace;
 
-    font-size:18px;
-    font-weight:800;
+    font-size:17px;
 
-    letter-spacing:1.2px;
+    font-weight:900;
+
+    letter-spacing:1.1px;
+
     word-break:break-word;
 
     text-shadow:
-        0 0 15px rgba(0,255,145,.18);
+        0 0 15px rgba(0,255,145,.2),
+        0 0 35px rgba(0,255,145,.06);
 }
 
-/* =================================
-   BUTTONS
-================================= */
+/* =========================================
+   COPY BUTTON
+========================================= */
 
 .btn{
     width:100%;
-    min-height:55px;
+
+    min-height:54px;
 
     border:0;
-    border-radius:17px;
 
-    padding:16px;
+    border-radius:16px;
 
-    font-size:14px;
-    font-weight:900;
-    letter-spacing:.4px;
+    padding:15px;
+
+    font-size:13px;
+
+    font-weight:950;
+
+    letter-spacing:.7px;
 
     cursor:pointer;
 
     position:relative;
+
     overflow:hidden;
 
     transition:
         transform .25s ease,
-        box-shadow .25s ease;
+        box-shadow .25s ease,
+        filter .25s ease;
 }
 
 .btn:before{
@@ -677,6 +1178,7 @@ h2{
 
     top:0;
     bottom:0;
+
     left:-110%;
 
     width:60%;
@@ -685,13 +1187,13 @@ h2{
         linear-gradient(
             90deg,
             transparent,
-            rgba(255,255,255,.4),
+            rgba(255,255,255,.45),
             transparent
         );
 
     transform:skewX(-22deg);
 
-    transition:.6s;
+    transition:.7s;
 }
 
 .btn:hover:before{
@@ -703,94 +1205,162 @@ h2{
 }
 
 #copyBtn{
+    margin-top:12px;
+
     color:#00140b;
 
     background:
         linear-gradient(
             135deg,
-            #ffffff,
-            #edf4f1
+            #00ff91,
+            #00e17e
         );
 
     box-shadow:
-        0 10px 28px rgba(0,0,0,.22);
+        0 12px 30px
+        rgba(0,255,145,.13);
 }
 
 #copyBtn:hover{
     transform:translateY(-2px);
 
-    background:
-        linear-gradient(
-            135deg,
-            #00ff91,
-            #00e47e
-        );
+    filter:brightness(1.06);
+
+    box-shadow:
+        0 17px 40px
+        rgba(0,255,145,.23);
 }
 
-.telegram-btn{
+/* =========================================
+   SOCIAL BUTTONS
+========================================= */
+
+.social-grid{
+    position:relative;
+
+    z-index:2;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:10px;
+
+    margin-top:10px;
+}
+
+.social-btn{
+    min-height:51px;
+
     display:flex;
+
     align-items:center;
     justify-content:center;
-    gap:11px;
 
-    margin-top:12px;
+    gap:8px;
 
     text-decoration:none;
 
     color:#fff;
 
+    border-radius:15px;
+
+    font-size:10px;
+
+    font-weight:950;
+
+    letter-spacing:1px;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.social-btn:hover{
+    transform:translateY(-2px);
+}
+
+.telegram-btn{
     background:
         linear-gradient(
             135deg,
             #08a7e5,
             #007bb8
         );
+
+    box-shadow:
+        0 10px 25px
+        rgba(0,137,204,.12);
 }
 
 .telegram-btn:hover{
-    transform:translateY(-2px);
-
     box-shadow:
-        0 17px 38px
-        rgba(0,137,204,.27);
+        0 16px 34px
+        rgba(0,137,204,.25);
 }
 
-.telegram-icon{
-    width:23px;
-    height:23px;
+.youtube-btn{
+    background:
+        linear-gradient(
+            135deg,
+            #ff3348,
+            #c9142a
+        );
+
+    box-shadow:
+        0 10px 25px
+        rgba(255,30,55,.11);
+}
+
+.youtube-btn:hover{
+    box-shadow:
+        0 16px 34px
+        rgba(255,30,55,.23);
+}
+
+.social-icon{
+    font-size:17px;
+
+    line-height:1;
+}
+
+/* =========================================
+   SECURITY FOOT
+========================================= */
+
+.secure-line{
+    position:relative;
+
+    z-index:2;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
-    font-size:18px;
+    gap:7px;
+
+    margin-top:15px;
+
+    color:#394742;
+
+    font-size:7.5px;
+
+    font-weight:900;
+
+    letter-spacing:1.4px;
 }
 
-.secure-line{
-    margin-top:16px;
+.secure-line span{
+    color:var(--accent);
 
-    color:#34423e;
-
-    font-size:8px;
-    font-weight:800;
-    letter-spacing:1.5px;
+    text-shadow:
+        0 0 8px rgba(0,255,145,.4);
 }
 
-.footer{
-    margin-top:25px;
-
-    color:#35403d;
-
-    font-size:8px;
-    font-weight:800;
-
-    letter-spacing:2px;
-    text-transform:uppercase;
-}
-
-/* =========================================================
-   PREMIUM BYPASS SECTION
-========================================================= */
+/* =========================================
+   BYPASS
+========================================= */
 
 .bypass-box{
     position:relative;
@@ -806,7 +1376,9 @@ h2{
             rgba(7,8,9,.97)
         );
 
-    border:1px solid rgba(255,64,85,.23);
+    border:
+        1px solid
+        rgba(255,64,85,.23);
 
     box-shadow:
         0 30px 90px rgba(0,0,0,.75),
@@ -815,27 +1387,32 @@ h2{
 
     overflow:hidden;
 
-    animation:bypassAppear .7s ease both;
+    animation:
+        bypassAppear .7s ease both;
 }
 
 @keyframes bypassAppear{
+
     from{
         opacity:0;
-        transform:translateY(18px) scale(.97);
+        transform:
+            translateY(18px)
+            scale(.97);
     }
 
     to{
         opacity:1;
-        transform:translateY(0) scale(1);
+        transform:
+            translateY(0)
+            scale(1);
     }
 }
-
-/* moving red border */
 
 .bypass-box:before{
     content:"";
 
     position:absolute;
+
     inset:0;
 
     padding:1px;
@@ -845,13 +1422,12 @@ h2{
     background:
         conic-gradient(
             from 0deg,
-            transparent 0deg,
-            rgba(255,64,85,.05) 45deg,
-            rgba(255,64,85,.8) 90deg,
-            transparent 145deg,
-            transparent 220deg,
-            rgba(255,122,69,.45) 275deg,
-            transparent 330deg
+            transparent,
+            rgba(255,64,85,.8),
+            transparent 30%,
+            transparent 55%,
+            rgba(255,122,69,.45),
+            transparent 80%
         );
 
     mask:
@@ -866,18 +1442,18 @@ h2{
 
     -webkit-mask-composite:xor;
 
-    animation:bypassBorder 4s linear infinite;
+    animation:
+        bypassBorder 4s linear infinite;
 
     pointer-events:none;
 }
 
 @keyframes bypassBorder{
+
     to{
         transform:rotate(360deg);
     }
 }
-
-/* inner red glow */
 
 .bypass-box:after{
     content:"";
@@ -903,10 +1479,6 @@ h2{
     pointer-events:none;
 }
 
-/* =================================
-   WARNING ICON
-================================= */
-
 .bypass-icon-wrap{
     position:relative;
 
@@ -916,16 +1488,16 @@ h2{
     margin:0 auto 22px;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 }
-
-/* outer ring */
 
 .bypass-icon-wrap:before{
     content:"";
 
     position:absolute;
+
     inset:0;
 
     border-radius:50%;
@@ -938,32 +1510,36 @@ h2{
         0 0 20px rgba(255,64,85,.1),
         inset 0 0 20px rgba(255,64,85,.05);
 
-    animation:ringPulse 2s ease-in-out infinite;
+    animation:
+        ringPulse 2s ease-in-out infinite;
 }
-
-/* rotating ring */
 
 .bypass-icon-wrap:after{
     content:"";
 
     position:absolute;
+
     inset:-6px;
 
     border-radius:50%;
 
-    border:
-        2px solid transparent;
+    border:2px solid transparent;
 
     border-top-color:#ff4055;
     border-right-color:#ff7a45;
 
     filter:
-        drop-shadow(0 0 8px rgba(255,64,85,.5));
+        drop-shadow(
+            0 0 8px
+            rgba(255,64,85,.5)
+        );
 
-    animation:warningSpin 3s linear infinite;
+    animation:
+        warningSpin 3s linear infinite;
 }
 
 @keyframes warningSpin{
+
     to{
         transform:rotate(360deg);
     }
@@ -982,23 +1558,18 @@ h2{
     }
 }
 
-/* warning triangle */
-
 .bypass-icon{
     position:relative;
+
     z-index:2;
 
     width:68px;
     height:60px;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
-
-    color:#151010;
-
-    font-size:38px;
-    font-weight:900;
 
     clip-path:
         polygon(
@@ -1020,7 +1591,8 @@ h2{
             rgba(255,174,0,.32)
         );
 
-    animation:warningFloat 2.8s ease-in-out infinite;
+    animation:
+        warningFloat 2.8s ease-in-out infinite;
 }
 
 .bypass-icon span{
@@ -1028,11 +1600,11 @@ h2{
 
     top:20px;
 
+    color:#27160b;
+
     font-size:27px;
 
     font-weight:1000;
-
-    color:#27160b;
 }
 
 @keyframes warningFloat{
@@ -1046,14 +1618,11 @@ h2{
     }
 }
 
-/* =================================
-   BYPASS TEXT
-================================= */
-
 .bypass-status{
     display:inline-flex;
 
     align-items:center;
+
     gap:8px;
 
     padding:7px 13px;
@@ -1072,6 +1641,7 @@ h2{
         rgba(255,64,85,.18);
 
     font-size:9px;
+
     font-weight:900;
 
     letter-spacing:1.5px;
@@ -1088,7 +1658,8 @@ h2{
     box-shadow:
         0 0 8px #ff4055;
 
-    animation:redPulse 1.2s infinite;
+    animation:
+        redPulse 1.2s infinite;
 }
 
 @keyframes redPulse{
@@ -1106,6 +1677,7 @@ h2{
 
 .bypass-title{
     position:relative;
+
     z-index:2;
 
     margin-bottom:12px;
@@ -1113,12 +1685,10 @@ h2{
     color:#fff;
 
     font-size:28px;
+
     font-weight:950;
 
     letter-spacing:-.6px;
-
-    text-shadow:
-        0 0 20px rgba(255,64,85,.12);
 }
 
 .bypass-title span{
@@ -1127,6 +1697,7 @@ h2{
 
 .bypass-text{
     position:relative;
+
     z-index:2;
 
     max-width:340px;
@@ -1136,18 +1707,17 @@ h2{
     color:#858c8b;
 
     font-size:13px;
+
     line-height:1.7;
 }
 
-/* =================================
-   SECURITY STEPS
-================================= */
-
 .security-info{
     position:relative;
+
     z-index:2;
 
     display:grid;
+
     grid-template-columns:1fr 1fr;
 
     gap:9px;
@@ -1170,11 +1740,10 @@ h2{
     color:#66716e;
 
     font-size:8px;
+
     font-weight:800;
 
     letter-spacing:.8px;
-
-    text-transform:uppercase;
 }
 
 .security-item strong{
@@ -1194,10 +1763,6 @@ h2{
 .security-item:last-child strong{
     color:#00ff91;
 }
-
-/* =================================
-   SCAN LINE
-================================= */
 
 .scan-line{
     position:absolute;
@@ -1222,12 +1787,14 @@ h2{
 
     opacity:.45;
 
-    animation:scanDown 4s linear infinite;
+    animation:
+        scanDown 4s linear infinite;
 
     pointer-events:none;
 }
 
 @keyframes scanDown{
+
     0%{
         top:0;
         opacity:0;
@@ -1247,12 +1814,9 @@ h2{
     }
 }
 
-/* =================================
-   RETURN BUTTON
-================================= */
-
 .btn-red{
     position:relative;
+
     z-index:2;
 
     margin-top:22px;
@@ -1290,14 +1854,32 @@ h2{
         rgba(255,40,65,.25);
 }
 
-/* =================================
+/* =========================================
+   FOOTER
+========================================= */
+
+.footer{
+    margin-top:21px;
+
+    color:#35403d;
+
+    font-size:8px;
+
+    font-weight:800;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+}
+
+/* =========================================
    MOBILE
-================================= */
+========================================= */
 
 @media(max-width:480px){
 
     body{
-        padding:18px 13px;
+        padding:16px 12px;
     }
 
     .container{
@@ -1305,26 +1887,56 @@ h2{
     }
 
     .logo-wrap{
-        width:84px;
-        height:84px;
+        width:82px;
+        height:82px;
     }
 
     h1{
-        font-size:28px;
+        font-size:27px;
     }
 
     .subtitle{
-        font-size:12px;
-        margin-bottom:23px;
+        font-size:11.5px;
+        margin-bottom:20px;
     }
 
-    .card{
-        padding:31px 20px 23px;
+    .success-card{
+        padding:24px 17px 20px;
         border-radius:25px;
     }
 
+    .success-icon-wrap{
+        width:80px;
+        height:80px;
+        margin-bottom:16px;
+    }
+
+    .success-icon{
+        width:53px;
+        height:53px;
+        font-size:26px;
+    }
+
+    .success-title{
+        font-size:21px;
+    }
+
+    .success-description{
+        font-size:12px;
+    }
+
     #finalKey{
-        font-size:16px;
+        font-size:15px;
+        letter-spacing:.8px;
+    }
+
+    .device-bar{
+        padding:10px;
+    }
+
+    .social-btn{
+        min-height:49px;
+        font-size:9px;
     }
 
     .bypass-box{
@@ -1354,57 +1966,59 @@ h2{
     .bypass-text{
         font-size:12.5px;
     }
-
-    .security-info{
-        gap:7px;
-    }
-
-    .security-item{
-        padding:11px 7px;
-        font-size:7px;
-    }
-
-    .security-item strong{
-        font-size:9px;
-    }
 }
 
 @media(max-width:360px){
 
     body{
-        padding:14px 10px;
+        padding:13px 9px;
     }
 
     .logo-wrap{
-        width:74px;
-        height:74px;
-        margin-bottom:14px;
+        width:72px;
+        height:72px;
+        margin-bottom:13px;
     }
 
     h1{
-        font-size:25px;
+        font-size:24px;
+    }
+
+    .success-card{
+        padding:21px 13px 18px;
+    }
+
+    .success-title{
+        font-size:19px;
+    }
+
+    #finalKey{
+        font-size:13px;
+    }
+
+    .device-left{
+        font-size:7px;
+    }
+
+    .device-verified{
+        font-size:7px;
+    }
+
+    .social-grid{
+        gap:7px;
+    }
+
+    .social-btn{
+        font-size:8px;
+        gap:5px;
     }
 
     .bypass-box{
-        padding:24px 14px 19px;
-    }
-
-    .bypass-icon-wrap{
-        width:86px;
-        height:86px;
-    }
-
-    .bypass-icon{
-        width:57px;
-        height:50px;
+        padding:24px 13px 19px;
     }
 
     .bypass-title{
         font-size:22px;
-    }
-
-    .bypass-text{
-        font-size:12px;
     }
 
     .security-item{
@@ -1412,9 +2026,9 @@ h2{
     }
 }
 
-/* =================================
+/* =========================================
    REDUCED MOTION
-================================= */
+========================================= */
 
 @media(prefers-reduced-motion:reduce){
 
@@ -1430,12 +2044,13 @@ h2{
 
 <body>
 
-<!-- BACKGROUND GLOW -->
+<!-- =========================================
+     BACKGROUND
+========================================= -->
+
 <div class="glow one"></div>
 <div class="glow two"></div>
 
-
-<!-- PREMIUM PARTICLES -->
 <div class="snow">
 
     <i style="--left:4%;--size:3px;--time:8s;--delay:-2s;--opacity:.72;--drift1:35px;--drift2:-20px;--drift3:30px;--drift4:-15px;"></i>
@@ -1465,9 +2080,9 @@ h2{
 
 <div class="container">
 
-    <!-- =================================
-         MAIN CONTAINER
-    ================================= -->
+    <!-- =====================================
+         GENERATED KEY
+    ====================================== -->
 
     <div id="mainContainer">
 
@@ -1475,31 +2090,81 @@ h2{
             <div class="logo-inner">
                 <img
                     src="./assets/logo.png"
-                    alt="FARAZ"
+                    alt="GHOST LAG"
                 >
             </div>
         </div>
 
+
+        <div class="success-status">
+
+            <span class="success-status-dot"></span>
+
+            SYSTEM VERIFIED
+
+        </div>
+
+
         <h1>
-            Access Unlocked
+            <span>ACCESS</span> UNLOCKED
         </h1>
+
 
         <p class="subtitle">
             Your device-locked license key is ready.
         </p>
 
 
-        <div class="card">
+        <!-- SUCCESS CARD -->
 
-            <h2>
-                Generation Success!
-            </h2>
+        <div class="success-card">
 
-            <p class="card-p">
-                This key is locked to your device.
-                Share it, and it won't work for others.
+            <!-- SUCCESS ICON -->
+
+            <div class="success-icon-wrap">
+
+                <div class="success-icon">
+                    ✓
+                </div>
+
+            </div>
+
+
+            <!-- SUCCESS TEXT -->
+
+            <div class="success-title">
+                Generation <span>Success!</span>
+            </div>
+
+
+            <p class="success-description">
+                Your secure access key has been generated
+                and locked to this device.
             </p>
 
+
+            <!-- DEVICE -->
+
+            <div class="device-bar">
+
+                <div class="device-left">
+
+                    <div class="device-check">
+                        ✓
+                    </div>
+
+                    DEVICE VERIFIED
+
+                </div>
+
+                <div class="device-verified">
+                    PROTECTED
+                </div>
+
+            </div>
+
+
+            <!-- IP -->
 
             <div class="ip-status">
 
@@ -1520,52 +2185,103 @@ h2{
             </div>
 
 
-            <div class="key-box">
+            <!-- KEY -->
 
-                <span id="finalKey">
-                    SECURE FETCHING...
-                </span>
+            <div class="key-section">
+
+                <div class="key-label">
+
+                    <span>
+                        ACCESS KEY
+                    </span>
+
+                    <span>
+                        ● ACTIVE
+                    </span>
+
+                </div>
+
+
+                <div class="key-box">
+
+                    <span id="finalKey">
+                        SECURE FETCHING...
+                    </span>
+
+                </div>
 
             </div>
 
+
+            <!-- COPY -->
 
             <button
                 class="btn"
                 id="copyBtn"
                 onclick="copyKey()"
             >
-                COPY TO CLIPBOARD
+                COPY ACCESS KEY
             </button>
 
 
-            <a
-                class="btn telegram-btn"
-                href="https://t.me/farazplayzzyt"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
+            <!-- SOCIAL -->
 
-                <span class="telegram-icon">
-                    ✈
-                </span>
+            <div class="social-grid">
 
-                JOIN TELEGRAM
+                <a
+                    class="social-btn telegram-btn"
+                    href="https://t.me/farazplayzzyt"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
 
-            </a>
+                    <span class="social-icon">
+                        ✈
+                    </span>
 
-        </div>
+                    TELEGRAM
+
+                </a>
 
 
-        <div class="secure-line">
-            ● DEVICE LOCKED • SECURE KEY SYSTEM
+                <a
+                    class="social-btn youtube-btn"
+                    href="https://www.youtube.com/@FaraZPlayz-Z"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+
+                    <span class="social-icon">
+                        ▶
+                    </span>
+
+                    YOUTUBE
+
+                </a>
+
+            </div>
+
+
+            <div class="secure-line">
+
+                <span>●</span>
+
+                DEVICE LOCKED
+
+                •
+
+                SECURE KEY SYSTEM
+
+            </div>
+
         </div>
 
     </div>
 
 
-    <!-- =================================
-         PREMIUM BYPASS
-    ================================= -->
+    <!-- =====================================
+         BYPASS
+    ====================================== -->
 
     <div id="bypassContainer">
 
@@ -1574,7 +2290,6 @@ h2{
             <div class="scan-line"></div>
 
 
-            <!-- WARNING ICON -->
             <div class="bypass-icon-wrap">
 
                 <div class="bypass-icon">
@@ -1584,7 +2299,6 @@ h2{
             </div>
 
 
-            <!-- STATUS -->
             <div class="bypass-status">
 
                 <span class="bypass-status-dot"></span>
@@ -1594,7 +2308,6 @@ h2{
             </div>
 
 
-            <!-- TITLE -->
             <div class="bypass-title">
 
                 ACCESS <span>DENIED</span>
@@ -1602,7 +2315,6 @@ h2{
             </div>
 
 
-            <!-- DESCRIPTION -->
             <p class="bypass-text">
 
                 Direct access to the key generation
@@ -1613,7 +2325,6 @@ h2{
             </p>
 
 
-            <!-- SECURITY INFO -->
             <div class="security-info">
 
                 <div class="security-item">
@@ -1625,6 +2336,7 @@ h2{
                     DEVICE VERIFICATION
 
                 </div>
+
 
                 <div class="security-item">
 
@@ -1639,7 +2351,6 @@ h2{
             </div>
 
 
-            <!-- RETURN -->
             <button
                 class="btn btn-red"
                 onclick="location.href='steps.html'"
@@ -1661,9 +2372,9 @@ h2{
 
 <script>
 
-/* =================================
+/* =========================================
    SECURITY CHECK
-================================= */
+========================================= */
 
 async function checkSecurity(){
 
@@ -1675,10 +2386,12 @@ async function checkSecurity(){
     const source =
         urlParams.get('source');
 
+
     console.log('=== Security Check ===');
     console.log('Source:',source);
     console.log('Referrer:',document.referrer);
     console.log('==================');
+
 
     const isAllowed =
         source === "official";
@@ -1691,6 +2404,7 @@ async function checkSecurity(){
             "//" +
             window.location.host +
             window.location.pathname;
+
 
         window.history.replaceState(
             {},
@@ -1726,10 +2440,10 @@ async function checkSecurity(){
 }
 
 
-/* =================================
+/* =========================================
    KEY GENERATION
    ORIGINAL LOGIC
-================================= */
+========================================= */
 
 async function generateLockedKey(){
 
@@ -1743,8 +2457,10 @@ async function generateLockedKey(){
                 }
             );
 
+
         const data =
             await response.json();
+
 
         const ip =
             data.ip;
@@ -1781,6 +2497,7 @@ async function generateLockedKey(){
                 Math.sin(seed++) *
                 10000;
 
+
             return Math.abs(
                 x -
                 Math.floor(x)
@@ -1799,6 +2516,7 @@ async function generateLockedKey(){
 
             let s="";
 
+
             for(let j=0;j<4;j++){
 
                 let r =
@@ -1806,9 +2524,11 @@ async function generateLockedKey(){
                         rnd()*chars.length
                     );
 
+
                 s +=
                     chars.charAt(r);
             }
+
 
             segments.push(s);
         }
@@ -1835,13 +2555,14 @@ async function generateLockedKey(){
             'finalKey'
         ).innerText=
             "CONNECT TO INTERNET";
+
     }
 }
 
 
-/* =================================
+/* =========================================
    COPY KEY
-================================= */
+========================================= */
 
 function copyKey(){
 
@@ -1855,7 +2576,9 @@ function copyKey(){
         keyText.includes("SECURE") ||
         keyText.includes("CONNECT")
     ){
+
         return;
+
     }
 
 
@@ -1870,30 +2593,32 @@ function copyKey(){
 
 
             btn.innerText =
-                "COPIED SUCCESSFULLY! ✅";
+                "✓ KEY COPIED SUCCESSFULLY";
 
 
             btn.style.background =
-                "#00ff91";
+                "linear-gradient(135deg,#ffffff,#dfffee)";
 
 
             setTimeout(()=>{
 
                 btn.innerText =
-                    "COPY TO CLIPBOARD";
+                    "COPY ACCESS KEY";
+
 
                 btn.style.background =
-                    "#ffffff";
+                    "linear-gradient(135deg,#00ff91,#00e17e)";
 
             },2000);
 
         });
+
 }
 
 
-/* =================================
+/* =========================================
    START
-================================= */
+========================================= */
 
 window.onload =
     checkSecurity;
