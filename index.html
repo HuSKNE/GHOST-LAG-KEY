@@ -6,47 +6,33 @@
 <title>Key Generated | GHOST LAG</title>
 
 <style>
-
 :root{
-    --bg:#020807;
-    --panel:#071311;
-    --panel2:#0a1815;
-
-    --green:#00ff91;
-    --green2:#00d979;
-    --cyan:#00d9ff;
-
-    --white:#f7fffc;
-    --muted:#83938e;
-    --dim:#40504b;
-
-    --blue:#08a9ed;
-    --blue2:#007ec1;
-
+    --bg:#010505;
+    --panel:#061311;
+    --panel2:#081b17;
+    --accent:#00ff91;
+    --accent2:#00d9ff;
+    --white:#ffffff;
+    --muted:#81908b;
     --red:#ff4055;
 }
 
 *{
     box-sizing:border-box;
-    -webkit-tap-highlight-color:transparent;
 }
 
-html,
-body{
+html,body{
     margin:0;
     min-height:100%;
 }
 
 body{
     min-height:100vh;
-    padding:20px 14px 35px;
-
+    padding:18px 14px 30px;
     display:flex;
     justify-content:center;
-    align-items:center;
-
+    align-items:flex-start;
     overflow-x:hidden;
-
     color:var(--white);
 
     font-family:
@@ -59,44 +45,41 @@ body{
 
     background:
         radial-gradient(
-            circle at 50% 0%,
-            rgba(0,255,145,.14),
-            transparent 34%
+            circle at 50% 5%,
+            rgba(0,255,145,.16),
+            transparent 30%
         ),
         radial-gradient(
-            circle at -10% 55%,
-            rgba(0,255,145,.09),
-            transparent 32%
+            circle at 0% 45%,
+            rgba(0,217,255,.08),
+            transparent 30%
         ),
         radial-gradient(
-            circle at 110% 80%,
-            rgba(0,217,255,.09),
+            circle at 100% 75%,
+            rgba(0,255,145,.07),
             transparent 32%
         ),
-        #020807;
+        #010505;
 }
 
-
 /* =====================================================
-   ANIMATED GRID
+   BACKGROUND GRID
 ===================================================== */
 
 body:before{
     content:"";
-
     position:fixed;
     inset:0;
-
     pointer-events:none;
 
     background:
         linear-gradient(
-            rgba(0,255,145,.025) 1px,
+            rgba(0,255,145,.035) 1px,
             transparent 1px
         ),
         linear-gradient(
             90deg,
-            rgba(0,255,145,.025) 1px,
+            rgba(0,255,145,.035) 1px,
             transparent 1px
         );
 
@@ -110,251 +93,167 @@ body:before{
             transparent
         );
 
-    animation:gridMove 18s linear infinite;
-
     z-index:-20;
+
+    animation:gridMove 18s linear infinite;
 }
 
 @keyframes gridMove{
     from{
-        background-position:0 0;
+        transform:translateY(0);
     }
 
     to{
-        background-position:42px 42px;
+        transform:translateY(42px);
     }
 }
-
 
 /* =====================================================
-   FLOATING LIGHTS
-===================================================== */
-
-.light{
-    position:fixed;
-
-    width:4px;
-    height:4px;
-
-    border-radius:50%;
-
-    background:#fff;
-
-    box-shadow:
-        0 0 7px #fff,
-        0 0 18px rgba(0,255,145,.7);
-
-    opacity:.45;
-
-    pointer-events:none;
-
-    z-index:-5;
-}
-
-.light.l1{
-    left:9%;
-    top:24%;
-
-    animation:
-        float1 7s ease-in-out infinite;
-}
-
-.light.l2{
-    right:8%;
-    top:38%;
-
-    animation:
-        float2 9s ease-in-out infinite;
-}
-
-.light.l3{
-    left:18%;
-    bottom:16%;
-
-    animation:
-        float1 10s ease-in-out infinite reverse;
-}
-
-.light.l4{
-    right:25%;
-    bottom:28%;
-
-    animation:
-        float2 8s ease-in-out infinite reverse;
-}
-
-@keyframes float1{
-    0%,100%{
-        transform:translate(0,0);
-        opacity:.25;
-    }
-
-    50%{
-        transform:translate(25px,-35px);
-        opacity:.8;
-    }
-}
-
-@keyframes float2{
-    0%,100%{
-        transform:translate(0,0);
-        opacity:.2;
-    }
-
-    50%{
-        transform:translate(-30px,30px);
-        opacity:.75;
-    }
-}
-
-
-/* =====================================================
-   GLOW ORBS
+   MOVING GLOW
 ===================================================== */
 
 .glow{
     position:fixed;
-
-    width:320px;
-    height:320px;
+    width:280px;
+    height:280px;
 
     border-radius:50%;
-
-    filter:blur(100px);
+    filter:blur(110px);
 
     pointer-events:none;
-
-    opacity:.12;
-
     z-index:-10;
 }
 
 .glow.one{
-    left:-170px;
-    top:-150px;
-
-    background:var(--green);
+    background:#00ff91;
+    top:-160px;
+    left:-130px;
+    opacity:.13;
 
     animation:
-        glowMove1 10s ease-in-out infinite alternate;
+        glowOne 9s ease-in-out infinite alternate;
 }
 
 .glow.two{
-    right:-180px;
-    bottom:-170px;
-
-    background:var(--cyan);
+    background:#00d9ff;
+    right:-160px;
+    bottom:-150px;
+    opacity:.10;
 
     animation:
-        glowMove2 12s ease-in-out infinite alternate;
+        glowTwo 11s ease-in-out infinite alternate;
 }
 
-@keyframes glowMove1{
+@keyframes glowOne{
     to{
         transform:
-            translate(80px,70px)
+            translate(90px,100px)
+            scale(1.3);
+    }
+}
+
+@keyframes glowTwo{
+    to{
+        transform:
+            translate(-80px,-70px)
             scale(1.25);
     }
 }
-
-@keyframes glowMove2{
-    to{
-        transform:
-            translate(-70px,-60px)
-            scale(1.2);
-    }
-}
-
 
 /* =====================================================
    PARTICLES
 ===================================================== */
 
-.particles{
+.snow{
     position:fixed;
     inset:0;
-
     overflow:hidden;
-
     pointer-events:none;
-
-    z-index:-4;
+    z-index:-5;
 }
 
-.particles span{
+.snow i{
     position:absolute;
+    top:-20px;
+    left:var(--left);
 
-    bottom:-20px;
-
-    left:var(--x);
-
-    width:var(--s);
-    height:var(--s);
+    width:var(--size);
+    height:var(--size);
 
     border-radius:50%;
 
-    background:var(--green);
+    background:
+        radial-gradient(
+            circle,
+            #ffffff,
+            rgba(200,255,238,.55),
+            transparent
+        );
 
     box-shadow:
-        0 0 8px rgba(0,255,145,.8);
+        0 0 7px rgba(255,255,255,.55),
+        0 0 15px rgba(0,255,145,.35);
 
     opacity:0;
 
     animation:
-        particleUp var(--t) linear infinite;
+        snowfall var(--time) linear infinite,
+        particlePulse 2s ease-in-out infinite alternate;
 
-    animation-delay:var(--d);
+    animation-delay:var(--delay);
 }
 
-@keyframes particleUp{
+@keyframes snowfall{
 
     0%{
         transform:
-            translate3d(0,20px,0)
-            scale(.6);
-
+            translate3d(0,-30px,0);
         opacity:0;
     }
 
-    12%{
-        opacity:.65;
+    10%{
+        opacity:var(--opacity);
     }
 
     50%{
         transform:
-            translate3d(var(--drift),-50vh,0)
-            scale(1);
-    }
-
-    90%{
-        opacity:.25;
+            translate3d(
+                var(--drift2),
+                55vh,
+                0
+            );
     }
 
     100%{
         transform:
             translate3d(
-                calc(var(--drift) * -1),
-                -115vh,
+                var(--drift4),
+                110vh,
                 0
-            )
-            scale(.4);
-
+            );
         opacity:0;
     }
 }
 
+@keyframes particlePulse{
+    from{
+        filter:blur(0);
+    }
+
+    to{
+        filter:blur(1px);
+    }
+}
 
 /* =====================================================
-   MAIN CONTAINER
+   CONTAINER
 ===================================================== */
 
 .container{
     width:100%;
-    max-width:455px;
-
+    max-width:450px;
     position:relative;
     z-index:2;
-
     text-align:center;
 }
 
@@ -363,161 +262,201 @@ body:before{
     display:none;
 }
 
-
 /* =====================================================
-   LOGO
+   MAIN BRAND ICON
 ===================================================== */
 
-.logo-wrap{
+.logo-area{
     position:relative;
 
-    width:94px;
-    height:94px;
+    width:108px;
+    height:108px;
 
-    margin:0 auto 19px;
+    margin:10px auto 17px;
 
-    padding:2px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+/* rotating outer ring */
+
+.logo-ring{
+    position:absolute;
+    inset:0;
 
     border-radius:50%;
 
     background:
         conic-gradient(
             from 0deg,
-            var(--green),
-            transparent 25%,
-            var(--cyan),
-            transparent 52%,
-            var(--green),
-            transparent 78%,
-            var(--green)
+            transparent 0deg,
+            var(--accent) 80deg,
+            transparent 145deg,
+            var(--accent2) 220deg,
+            transparent 300deg,
+            var(--accent) 360deg
         );
 
-    box-shadow:
-        0 0 22px rgba(0,255,145,.22),
-        0 0 55px rgba(0,255,145,.09);
-
     animation:
-        logoRotate 7s linear infinite;
+        ringRotate 7s linear infinite;
+
+    box-shadow:
+        0 0 25px rgba(0,255,145,.22),
+        0 0 60px rgba(0,255,145,.08);
 }
 
-.logo-wrap:after{
+.logo-ring:after{
     content:"";
 
     position:absolute;
-
-    inset:-9px;
+    inset:4px;
 
     border-radius:50%;
 
-    border:1px solid rgba(0,255,145,.10);
-
-    animation:
-        logoPulse 2.5s ease-in-out infinite;
+    background:#010706;
 }
 
-.logo-inner{
-    width:100%;
-    height:100%;
+.logo-core{
+    position:relative;
+
+    width:88px;
+    height:88px;
 
     border-radius:50%;
 
     overflow:hidden;
 
-    background:#010504;
+    border:1px solid rgba(0,255,145,.45);
 
-    border:3px solid #020806;
+    background:#020606;
+
+    box-shadow:
+        inset 0 0 25px rgba(0,255,145,.12),
+        0 0 30px rgba(0,255,145,.16);
+
+    z-index:2;
 }
 
-.logo-inner img{
+.logo-core img{
     width:100%;
     height:100%;
 
-    display:block;
-
     object-fit:cover;
+
+    display:block;
 
     filter:
         brightness(1.3)
         contrast(1.15);
 }
 
-@keyframes logoRotate{
+@keyframes ringRotate{
     to{
         transform:rotate(360deg);
     }
 }
 
-@keyframes logoPulse{
+/* =====================================================
+   STATUS
+===================================================== */
+
+.live-status{
+    width:max-content;
+
+    margin:0 auto 13px;
+
+    padding:6px 12px;
+
+    display:flex;
+    align-items:center;
+    gap:7px;
+
+    border-radius:999px;
+
+    color:#76a99a;
+
+    font-size:8px;
+    font-weight:900;
+
+    letter-spacing:1.8px;
+
+    background:
+        rgba(0,255,145,.045);
+
+    border:
+        1px solid rgba(0,255,145,.15);
+
+    box-shadow:
+        0 0 20px rgba(0,255,145,.035);
+}
+
+.live-dot{
+    width:6px;
+    height:6px;
+
+    border-radius:50%;
+
+    background:var(--accent);
+
+    box-shadow:
+        0 0 7px var(--accent),
+        0 0 15px rgba(0,255,145,.55);
+
+    animation:livePulse 1.4s infinite;
+}
+
+@keyframes livePulse{
+
     0%,100%{
         transform:scale(1);
-        opacity:.3;
+        opacity:1;
     }
 
     50%{
-        transform:scale(1.12);
-        opacity:.8;
+        transform:scale(.55);
+        opacity:.45;
     }
 }
 
-
 /* =====================================================
-   TITLE
+   MAIN TITLE
 ===================================================== */
 
 h1{
     margin:0;
 
-    font-size:31px;
-
-    line-height:1.08;
+    font-size:34px;
+    line-height:1;
 
     font-weight:950;
 
-    letter-spacing:-1.3px;
+    letter-spacing:-1.8px;
 
-    color:#f5fffc;
+    color:#ffffff;
 
     text-shadow:
-        0 0 30px rgba(255,255,255,.07);
+        0 0 35px rgba(255,255,255,.08);
 }
 
-h1:after{
-    content:"";
+h1 span{
+    color:var(--accent);
 
-    display:block;
-
-    width:46px;
-    height:3px;
-
-    margin:12px auto 0;
-
-    border-radius:10px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            var(--green),
-            var(--cyan),
-            transparent
-        );
-
-    box-shadow:
-        0 0 14px rgba(0,255,145,.5);
+    text-shadow:
+        0 0 25px rgba(0,255,145,.25);
 }
 
 .subtitle{
-    margin:13px 0 27px;
+    margin:11px 0 25px;
 
-    color:#7f918b;
+    color:#71807b;
 
     font-size:12px;
 
+    letter-spacing:.5px;
+
     line-height:1.5;
-
-    letter-spacing:.3px;
 }
-
 
 /* =====================================================
    GENERATION CARD
@@ -526,32 +465,26 @@ h1:after{
 .card{
     position:relative;
 
-    padding:31px 22px 23px;
+    padding:30px 20px 22px;
 
     border-radius:28px;
+
+    overflow:hidden;
 
     background:
         linear-gradient(
             145deg,
-            rgba(10,25,22,.97),
-            rgba(3,10,9,.98)
+            rgba(8,25,21,.97),
+            rgba(3,11,10,.98)
         );
 
     border:
-        1px solid
-        rgba(0,255,145,.12);
+        1px solid rgba(0,255,145,.13);
 
     box-shadow:
-        0 30px 90px rgba(0,0,0,.72),
-        0 0 70px rgba(0,255,145,.045),
-        inset 0 1px rgba(255,255,255,.05);
-
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
-
-    overflow:hidden;
+        0 30px 90px rgba(0,0,0,.7),
+        inset 0 1px rgba(255,255,255,.035);
 }
-
 
 /* animated border */
 
@@ -559,7 +492,6 @@ h1:after{
     content:"";
 
     position:absolute;
-
     inset:0;
 
     border-radius:28px;
@@ -568,16 +500,14 @@ h1:after{
 
     background:
         linear-gradient(
-            120deg,
-            transparent 8%,
-            rgba(0,255,145,.8),
-            transparent 27%,
+            110deg,
+            transparent 5%,
+            rgba(0,255,145,.65),
+            transparent 30%,
             transparent 65%,
-            rgba(0,217,255,.5),
-            transparent 88%
+            rgba(0,217,255,.4),
+            transparent 92%
         );
-
-    background-size:220% 100%;
 
     mask:
         linear-gradient(#000 0 0) content-box,
@@ -599,14 +529,13 @@ h1:after{
 
 @keyframes cardBorder{
     from{
-        background-position:0% 0;
+        transform:translateX(-12%);
     }
 
     to{
-        background-position:220% 0;
+        transform:translateX(12%);
     }
 }
-
 
 /* top glow */
 
@@ -615,313 +544,205 @@ h1:after{
 
     position:absolute;
 
-    width:250px;
-    height:150px;
+    width:260px;
+    height:170px;
 
     left:50%;
-    top:-120px;
+    top:-150px;
 
     transform:translateX(-50%);
 
     border-radius:50%;
 
-    background:var(--green);
+    background:var(--accent);
 
-    filter:blur(85px);
+    filter:blur(80px);
 
     opacity:.09;
 
     pointer-events:none;
 }
 
-
 /* =====================================================
-   CARD TOP STATUS
+   CARD HEADER
 ===================================================== */
 
-.card-status{
-    display:inline-flex;
+.success-badge{
+    width:max-content;
 
-    align-items:center;
-    justify-content:center;
+    margin:0 auto 13px;
 
-    gap:8px;
+    padding:6px 10px;
 
-    padding:7px 12px;
+    border-radius:7px;
 
-    margin-bottom:17px;
-
-    border-radius:999px;
+    color:#6effbb;
 
     background:
-        rgba(0,255,145,.055);
+        rgba(0,255,145,.06);
 
     border:
-        1px solid
-        rgba(0,255,145,.16);
-
-    color:#70827c;
+        1px solid rgba(0,255,145,.15);
 
     font-size:8px;
-
     font-weight:900;
 
-    letter-spacing:1.5px;
+    letter-spacing:1.6px;
 }
-
-.status-dot{
-    width:6px;
-    height:6px;
-
-    border-radius:50%;
-
-    background:var(--green);
-
-    box-shadow:
-        0 0 7px var(--green),
-        0 0 15px rgba(0,255,145,.5);
-
-    animation:
-        statusPulse 1.4s ease-in-out infinite;
-}
-
-@keyframes statusPulse{
-    0%,100%{
-        transform:scale(1);
-        opacity:1;
-    }
-
-    50%{
-        transform:scale(.65);
-        opacity:.4;
-    }
-}
-
-
-/* =====================================================
-   SUCCESS TITLE
-===================================================== */
 
 h2{
-    position:relative;
-    z-index:2;
-
     margin:0;
+
+    color:#ffffff;
 
     font-size:23px;
 
     font-weight:950;
 
     letter-spacing:-.5px;
+}
 
-    background:
-        linear-gradient(
-            90deg,
-            #00ff91,
-            #53ffc0,
-            #00d9ff
-        );
-
-    -webkit-background-clip:text;
-    background-clip:text;
-
-    color:transparent;
+h2 strong{
+    color:var(--accent);
 
     text-shadow:
-        0 0 25px rgba(0,255,145,.12);
+        0 0 20px rgba(0,255,145,.18);
 }
 
 .card-p{
-    position:relative;
-    z-index:2;
+    max-width:355px;
 
-    max-width:360px;
+    margin:11px auto 19px;
 
-    margin:10px auto 19px;
+    color:#7f8e89;
 
-    color:#81908c;
-
-    font-size:12.5px;
+    font-size:12px;
 
     line-height:1.65;
 }
 
-
 /* =====================================================
-   IP SECURITY BADGE
+   DEVICE/IP STATUS
 ===================================================== */
 
-.ip-status{
-    position:relative;
-    z-index:3;
+.device-row{
+    display:grid;
 
-    display:inline-flex;
+    grid-template-columns:1fr 1fr;
 
-    align-items:center;
+    gap:9px;
+
+    margin-bottom:15px;
+}
+
+.info-box{
+    min-height:57px;
+
+    padding:10px 12px;
+
+    display:flex;
+    flex-direction:column;
     justify-content:center;
+    align-items:flex-start;
 
-    gap:8px;
-
-    min-height:38px;
-
-    padding:8px 15px;
-
-    margin-bottom:19px;
-
-    border-radius:999px;
+    border-radius:13px;
 
     background:
-        linear-gradient(
-            135deg,
-            rgba(0,255,145,.08),
-            rgba(0,217,255,.035)
-        );
+        rgba(0,0,0,.25);
 
     border:
-        1px solid
-        rgba(0,255,145,.20);
+        1px solid rgba(255,255,255,.055);
 
-    box-shadow:
-        inset 0 0 18px rgba(0,255,145,.025),
-        0 0 20px rgba(0,255,145,.035);
+    text-align:left;
+}
 
-    color:#71817c;
+.info-label{
+    color:#50615b;
 
-    font-size:8px;
-
+    font-size:7px;
     font-weight:900;
 
-    letter-spacing:1.2px;
+    letter-spacing:1.5px;
+
+    margin-bottom:5px;
 }
 
-.ip-dot{
-    width:6px;
-    height:6px;
+.info-value{
+    color:#d9e8e2;
 
-    flex-shrink:0;
+    font-size:10px;
+    font-weight:800;
 
-    border-radius:50%;
-
-    background:var(--green);
-
-    box-shadow:
-        0 0 8px var(--green),
-        0 0 15px rgba(0,255,145,.45);
-
-    animation:
-        ipPulse 1.4s infinite;
+    letter-spacing:.5px;
 }
 
-#userIP{
-    color:#dce9e4;
+.ip-value{
+    color:var(--accent);
 
     font-family:
         "Courier New",
         monospace;
 
-    font-size:11px;
-
-    letter-spacing:1px;
+    font-size:10px;
 }
-
-.ip-separator{
-    color:#284139;
-}
-
-@keyframes ipPulse{
-    0%,100%{
-        opacity:1;
-        transform:scale(1);
-    }
-
-    50%{
-        opacity:.35;
-        transform:scale(.7);
-    }
-}
-
 
 /* =====================================================
-   ACCESS KEY LABEL
+   KEY TERMINAL
 ===================================================== */
 
-.key-label{
-    display:flex;
-
-    align-items:center;
-    justify-content:space-between;
-
-    margin:0 4px 8px;
-
-    color:#53635e;
-
-    font-size:8px;
-
-    font-weight:900;
-
-    letter-spacing:1.6px;
-
-    text-align:left;
-}
-
-.key-label span:last-child{
-    color:#00c978;
-
-    opacity:.75;
-}
-
-
-/* =====================================================
-   KEY BOX
-===================================================== */
-
-.key-box{
+.key-area{
     position:relative;
 
-    min-height:82px;
+    margin-bottom:13px;
 
-    display:flex;
+    padding:2px;
 
-    align-items:center;
-    justify-content:center;
-
-    padding:20px 12px;
-
-    margin-bottom:15px;
-
-    border-radius:20px;
+    border-radius:18px;
 
     background:
         linear-gradient(
             135deg,
-            rgba(0,255,145,.055),
-            rgba(1,8,7,.8) 55%,
-            rgba(0,217,255,.025)
+            rgba(0,255,145,.65),
+            rgba(0,217,255,.18),
+            rgba(0,255,145,.35)
         );
-
-    border:
-        1px solid
-        rgba(0,255,145,.30);
-
-    box-shadow:
-        inset 0 0 35px rgba(0,255,145,.025),
-        0 0 25px rgba(0,255,145,.025);
 
     overflow:hidden;
 }
 
+.key-area-inner{
+    position:relative;
 
-/* scanning line */
+    min-height:91px;
 
-.key-box:before{
+    border-radius:16px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:18px 12px;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(0,255,145,.09),
+            transparent 65%
+        ),
+        #020908;
+
+    overflow:hidden;
+}
+
+.key-area-inner:before{
     content:"";
 
     position:absolute;
 
-    top:0;
-    bottom:0;
+    top:-20%;
+    bottom:-20%;
 
-    left:-55%;
+    left:-40%;
 
     width:28%;
 
@@ -929,29 +750,24 @@ h2{
         linear-gradient(
             90deg,
             transparent,
-            rgba(0,255,145,.17),
             rgba(255,255,255,.12),
-            rgba(0,255,145,.17),
             transparent
         );
 
-    transform:skewX(-18deg);
+    transform:skewX(-20deg);
 
     animation:
-        keyScan 2.8s ease-in-out infinite;
+        keySweep 3.4s ease-in-out infinite;
 }
 
-
-/* bottom animated line */
-
-.key-box:after{
+.key-area-inner:after{
     content:"";
 
     position:absolute;
 
-    left:12%;
-    right:12%;
-    bottom:0;
+    left:15%;
+    right:15%;
+    bottom:7px;
 
     height:1px;
 
@@ -959,46 +775,56 @@ h2{
         linear-gradient(
             90deg,
             transparent,
-            var(--green),
-            var(--cyan),
-            var(--green),
+            var(--accent),
             transparent
         );
 
-    box-shadow:
-        0 0 10px rgba(0,255,145,.6);
+    opacity:.45;
 
-    animation:
-        keyLine 2.2s ease-in-out infinite;
+    animation:keyLine 2s ease-in-out infinite alternate;
 }
 
-@keyframes keyScan{
+@keyframes keySweep{
     0%{
-        left:-55%;
+        left:-40%;
     }
 
     55%,100%{
-        left:135%;
+        left:130%;
     }
 }
 
 @keyframes keyLine{
-    0%,100%{
-        opacity:.25;
-        transform:scaleX(.55);
+    from{
+        transform:scaleX(.3);
+        opacity:.2;
     }
 
-    50%{
-        opacity:1;
+    to{
         transform:scaleX(1);
+        opacity:.7;
     }
+}
+
+.key-prefix{
+    position:absolute;
+
+    top:8px;
+    left:11px;
+
+    color:#39534a;
+
+    font-size:6px;
+    font-weight:900;
+
+    letter-spacing:1.5px;
 }
 
 #finalKey{
     position:relative;
-    z-index:2;
+    z-index:3;
 
-    color:#00ff91;
+    color:var(--accent);
 
     font-family:
         "Courier New",
@@ -1008,48 +834,44 @@ h2{
 
     font-weight:900;
 
-    line-height:1.5;
-
-    letter-spacing:1.2px;
+    letter-spacing:1.15px;
 
     word-break:break-word;
 
     text-shadow:
-        0 0 12px rgba(0,255,145,.22);
+        0 0 15px rgba(0,255,145,.25);
 }
 
-
 /* =====================================================
-   BUTTON BASE
+   COPY BUTTON
 ===================================================== */
 
 .btn{
-    position:relative;
-
     width:100%;
 
-    min-height:55px;
+    min-height:54px;
 
     border:0;
 
-    border-radius:17px;
+    border-radius:15px;
 
-    padding:15px 16px;
+    padding:15px;
 
-    font-size:13px;
+    font-size:12px;
 
     font-weight:950;
 
-    letter-spacing:.7px;
+    letter-spacing:1px;
 
     cursor:pointer;
+
+    position:relative;
 
     overflow:hidden;
 
     transition:
-        transform .2s ease,
-        box-shadow .25s ease,
-        filter .25s ease;
+        transform .22s ease,
+        box-shadow .22s ease;
 }
 
 .btn:before{
@@ -1060,7 +882,7 @@ h2{
     top:0;
     bottom:0;
 
-    left:-120%;
+    left:-110%;
 
     width:55%;
 
@@ -1077,7 +899,7 @@ h2{
 
 .btn:hover:before{
     animation:
-        buttonShine .7s ease forwards;
+        buttonShine .7s ease;
 }
 
 @keyframes buttonShine{
@@ -1090,24 +912,18 @@ h2{
     transform:scale(.975);
 }
 
-
-/* =====================================================
-   COPY BUTTON
-===================================================== */
-
 #copyBtn{
-    color:#00150d;
+    color:#00150c;
 
     background:
         linear-gradient(
             135deg,
-            #ffffff 0%,
-            #effaf6 45%,
-            #d8eee6 100%
+            #ffffff,
+            #dff7ed
         );
 
     box-shadow:
-        0 12px 28px rgba(0,0,0,.28);
+        0 12px 30px rgba(0,0,0,.25);
 }
 
 #copyBtn:hover{
@@ -1121,30 +937,8 @@ h2{
         );
 
     box-shadow:
-        0 15px 38px
-        rgba(0,255,145,.22);
+        0 16px 38px rgba(0,255,145,.2);
 }
-
-
-/* =====================================================
-   COPIED STATE
-===================================================== */
-
-#copyBtn.copied{
-    color:#00150d;
-
-    background:
-        linear-gradient(
-            135deg,
-            #00ff91,
-            #00d979
-        );
-
-    box-shadow:
-        0 0 28px
-        rgba(0,255,145,.3);
-}
-
 
 /* =====================================================
    TELEGRAM
@@ -1158,125 +952,79 @@ h2{
 
     gap:10px;
 
-    margin-top:11px;
+    margin-top:10px;
 
     text-decoration:none;
 
-    color:#fff;
+    color:#ffffff;
 
     background:
         linear-gradient(
             135deg,
-            #0bb6f2,
-            #087fc1
+            #12b8f2,
+            #007fc1
         );
 
     box-shadow:
-        0 12px 30px
-        rgba(0,137,204,.17);
+        0 12px 30px rgba(0,137,204,.15);
 }
 
 .telegram-btn:hover{
     transform:translateY(-2px);
 
-    background:
-        linear-gradient(
-            135deg,
-            #16c5ff,
-            #078bd2
-        );
-
     box-shadow:
-        0 17px 40px
-        rgba(0,137,204,.28);
+        0 17px 38px rgba(0,137,204,.25);
 }
 
 .telegram-icon{
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    width:24px;
-    height:24px;
-
-    font-size:18px;
-
-    filter:
-        drop-shadow(
-            0 0 5px rgba(255,255,255,.25)
-        );
+    font-size:17px;
 }
-
 
 /* =====================================================
    SECURITY FOOTER
 ===================================================== */
 
 .secure-line{
-    display:flex;
+    margin-top:14px;
 
-    align-items:center;
-    justify-content:center;
-
-    gap:6px;
-
-    margin-top:16px;
-
-    color:#43534e;
-
-    font-size:7.5px;
-
-    font-weight:900;
-
-    letter-spacing:1.5px;
-}
-
-.secure-line b{
-    color:var(--green);
-
-    font-size:6px;
-
-    animation:
-        statusPulse 1.5s infinite;
-}
-
-
-/* =====================================================
-   PAGE FOOTER
-===================================================== */
-
-.footer{
-    margin-top:20px;
-
-    color:#33413d;
+    color:#3c514a;
 
     font-size:7px;
 
     font-weight:900;
 
-    letter-spacing:1.8px;
+    letter-spacing:1.7px;
+}
+
+.footer{
+    margin-top:17px;
+
+    color:#26352f;
+
+    font-size:7px;
+
+    font-weight:900;
+
+    letter-spacing:1.7px;
 
     text-transform:uppercase;
 }
 
-
 /* =====================================================
-   BYPASS
+   BYPASS CARD
+   SAME STYLE — DO NOT CHANGE
 ===================================================== */
 
 .error-card{
-    position:relative;
-
-    padding:38px 25px 27px;
+    padding:40px 28px;
 
     border-radius:28px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(34,9,12,.97),
-            rgba(10,5,7,.98)
+            rgba(34,9,12,.95),
+            rgba(13,7,8,.95)
         );
 
     border:
@@ -1285,97 +1033,26 @@ h2{
 
     box-shadow:
         0 25px 75px rgba(0,0,0,.65),
-        0 0 50px rgba(255,40,70,.07);
-
-    overflow:hidden;
-}
-
-.error-card:before{
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background:
-        linear-gradient(
-            120deg,
-            transparent,
-            rgba(255,64,85,.18),
-            transparent
-        );
-
-    transform:translateX(-100%);
-
-    animation:
-        errorScan 4s linear infinite;
-
-    pointer-events:none;
-}
-
-@keyframes errorScan{
-    to{
-        transform:translateX(100%);
-    }
+        0 0 45px rgba(255,40,70,.06);
 }
 
 .error-icon{
-    position:relative;
-    z-index:2;
-
-    width:74px;
-    height:74px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    margin:0 auto 18px;
-
-    border-radius:22px;
-
-    background:
-        rgba(255,64,85,.08);
-
-    border:
-        1px solid
-        rgba(255,64,85,.25);
-
-    font-size:39px;
-
-    box-shadow:
-        0 0 30px rgba(255,40,70,.09);
+    font-size:50px;
+    margin-bottom:18px;
 }
 
 .error-title{
-    position:relative;
-    z-index:2;
-
     color:var(--red);
 
     font-size:24px;
 
-    font-weight:950;
+    font-weight:900;
 
-    margin-bottom:13px;
-}
-
-.error-card p{
-    position:relative;
-    z-index:2;
-
-    color:#888;
-
-    font-size:13px;
-
-    line-height:1.7;
-
-    margin:0;
+    margin-bottom:14px;
 }
 
 .btn-red{
-    margin-top:21px;
+    margin-top:20px;
 
     color:#fff;
 
@@ -1396,10 +1073,9 @@ h2{
         );
 
     box-shadow:
-        0 15px 32px
-        rgba(255,50,70,.22);
+        0 15px 30px
+        rgba(255,50,70,.2);
 }
-
 
 /* =====================================================
    MOBILE
@@ -1408,36 +1084,41 @@ h2{
 @media(max-width:480px){
 
     body{
-        padding:18px 13px 30px;
-
-        align-items:center;
+        padding:
+            13px 12px 25px;
     }
 
     .container{
         max-width:430px;
     }
 
-    .logo-wrap{
-        width:84px;
-        height:84px;
+    .logo-area{
+        width:92px;
+        height:92px;
 
-        margin-bottom:17px;
+        margin-top:7px;
+        margin-bottom:14px;
+    }
+
+    .logo-core{
+        width:75px;
+        height:75px;
     }
 
     h1{
-        font-size:29px;
+        font-size:31px;
     }
 
     .subtitle{
-        margin-bottom:23px;
-        font-size:11.5px;
+        font-size:11px;
+        margin-bottom:21px;
     }
 
     .card{
         padding:
-            27px 17px 20px;
+            25px 15px 19px;
 
-        border-radius:25px;
+        border-radius:24px;
     }
 
     h2{
@@ -1445,115 +1126,76 @@ h2{
     }
 
     .card-p{
-        font-size:12px;
-
-        margin-bottom:17px;
+        font-size:11.5px;
+        margin-bottom:16px;
     }
 
-    .ip-status{
-        margin-bottom:17px;
+    .device-row{
+        gap:7px;
     }
 
-    .key-label{
-        margin-left:2px;
-        margin-right:2px;
+    .info-box{
+        min-height:53px;
+        padding:9px;
     }
 
-    .key-box{
-        min-height:79px;
+    .info-value,
+    .ip-value{
+        font-size:9px;
+    }
 
-        padding:
-            18px 9px;
+    .key-area-inner{
+        min-height:86px;
     }
 
     #finalKey{
         font-size:15px;
-
         letter-spacing:.8px;
     }
 
     .btn{
-        min-height:53px;
-    }
-
-    .footer{
-        margin-top:17px;
+        min-height:52px;
     }
 }
-
-
-/* =====================================================
-   SMALL PHONES
-===================================================== */
 
 @media(max-width:360px){
 
     body{
         padding:
-            14px 10px 25px;
+            10px 10px 20px;
     }
 
-    .logo-wrap{
-        width:73px;
-        height:73px;
+    .logo-area{
+        width:80px;
+        height:80px;
+    }
 
-        margin-bottom:14px;
+    .logo-core{
+        width:65px;
+        height:65px;
     }
 
     h1{
-        font-size:25px;
-    }
-
-    .subtitle{
-        font-size:10.5px;
-
-        margin-top:10px;
-        margin-bottom:19px;
+        font-size:27px;
     }
 
     .card{
         padding:
-            24px 14px 18px;
-
-        border-radius:23px;
+            23px 12px 17px;
     }
 
-    h2{
-        font-size:19px;
-    }
-
-    .card-p{
-        font-size:11.5px;
-    }
-
-    .ip-status{
-        padding:7px 11px;
-    }
-
-    #userIP{
-        font-size:10px;
-    }
-
-    .key-box{
-        min-height:73px;
+    .device-row{
+        grid-template-columns:1fr;
     }
 
     #finalKey{
         font-size:13px;
-        letter-spacing:.6px;
-    }
-
-    .btn{
-        min-height:50px;
-
-        font-size:12px;
     }
 
     .secure-line{
-        font-size:6.5px;
+        letter-spacing:1.2px;
     }
 }
-
 
 /* =====================================================
    REDUCED MOTION
@@ -1566,126 +1208,127 @@ h2{
     *:after{
         animation-duration:.01ms !important;
         animation-iteration-count:1 !important;
-        scroll-behavior:auto !important;
     }
 }
-
 </style>
 </head>
 
-
 <body>
 
-
-<!-- =====================================================
-     BACKGROUND
-===================================================== -->
-
+<!-- BACKGROUND -->
 <div class="glow one"></div>
 <div class="glow two"></div>
 
-<div class="light l1"></div>
-<div class="light l2"></div>
-<div class="light l3"></div>
-<div class="light l4"></div>
+<div class="snow">
 
+    <i style="
+        --left:4%;
+        --size:3px;
+        --time:8s;
+        --delay:-2s;
+        --opacity:.72;
+        --drift2:-20px;
+        --drift4:-15px;
+    "></i>
 
-<div class="particles">
+    <i style="
+        --left:13%;
+        --size:5px;
+        --time:12s;
+        --delay:-7s;
+        --opacity:.55;
+        --drift2:35px;
+        --drift4:30px;
+    "></i>
 
-    <span style="
-        --x:5%;
-        --s:3px;
-        --t:9s;
-        --d:-2s;
-        --drift:30px;
-    "></span>
+    <i style="
+        --left:23%;
+        --size:2px;
+        --time:9s;
+        --delay:-4s;
+        --opacity:.8;
+        --drift2:-30px;
+        --drift4:-25px;
+    "></i>
 
-    <span style="
-        --x:14%;
-        --s:2px;
-        --t:12s;
-        --d:-7s;
-        --drift:-25px;
-    "></span>
+    <i style="
+        --left:34%;
+        --size:4px;
+        --time:14s;
+        --delay:-10s;
+        --opacity:.62;
+        --drift2:25px;
+        --drift4:35px;
+    "></i>
 
-    <span style="
-        --x:24%;
-        --s:4px;
-        --t:10s;
-        --d:-4s;
-        --drift:35px;
-    "></span>
+    <i style="
+        --left:46%;
+        --size:2px;
+        --time:10s;
+        --delay:-3s;
+        --opacity:.75;
+        --drift2:-20px;
+        --drift4:-20px;
+    "></i>
 
-    <span style="
-        --x:37%;
-        --s:2px;
-        --t:13s;
-        --d:-9s;
-        --drift:-30px;
-    "></span>
+    <i style="
+        --left:58%;
+        --size:5px;
+        --time:13s;
+        --delay:-8s;
+        --opacity:.5;
+        --drift2:35px;
+        --drift4:20px;
+    "></i>
 
-    <span style="
-        --x:49%;
-        --s:3px;
-        --t:8s;
-        --d:-3s;
-        --drift:25px;
-    "></span>
+    <i style="
+        --left:69%;
+        --size:3px;
+        --time:9s;
+        --delay:-5s;
+        --opacity:.72;
+        --drift2:-35px;
+        --drift4:-30px;
+    "></i>
 
-    <span style="
-        --x:61%;
-        --s:2px;
-        --t:11s;
-        --d:-6s;
-        --drift:-35px;
-    "></span>
+    <i style="
+        --left:80%;
+        --size:4px;
+        --time:15s;
+        --delay:-11s;
+        --opacity:.58;
+        --drift2:25px;
+        --drift4:35px;
+    "></i>
 
-    <span style="
-        --x:73%;
-        --s:4px;
-        --t:14s;
-        --d:-10s;
-        --drift:28px;
-    "></span>
-
-    <span style="
-        --x:84%;
-        --s:2px;
-        --t:9s;
-        --d:-5s;
-        --drift:-25px;
-    "></span>
-
-    <span style="
-        --x:94%;
-        --s:3px;
-        --t:12s;
-        --d:-8s;
-        --drift:30px;
-    "></span>
+    <i style="
+        --left:91%;
+        --size:3px;
+        --time:8s;
+        --delay:-1s;
+        --opacity:.7;
+        --drift2:-20px;
+        --drift4:-25px;
+    "></i>
 
 </div>
 
 
-<!-- =====================================================
-     CONTAINER
-===================================================== -->
-
 <div class="container">
 
-
     <!-- =================================================
-         MAIN
+         MAIN KEY PAGE
     ================================================== -->
 
     <div id="mainContainer">
 
-
         <!-- LOGO -->
 
-        <div class="logo-wrap">
+        <div class="logo-area">
 
-            <div class="logo-inner">
+            <div class="logo-ring"></div>
+
+            <div class="logo-core">
 
                 <img
                     src="./assets/logo.png"
@@ -1697,92 +1340,96 @@ h2{
         </div>
 
 
+        <!-- LIVE -->
+
+        <div class="live-status">
+
+            <span class="live-dot"></span>
+
+            SECURE SERVER • ONLINE
+
+        </div>
+
+
         <!-- TITLE -->
 
         <h1>
-            Access Unlocked
+            <span>Access</span> Unlocked
         </h1>
-
 
         <p class="subtitle">
             Your device-locked license key is ready.
         </p>
 
 
-        <!-- =================================================
-             GENERATION CARD
-        ================================================== -->
+        <!-- MAIN CARD -->
 
         <div class="card">
 
-
-            <!-- STATUS -->
-
-            <div class="card-status">
-
-                <span class="status-dot"></span>
-
-                SECURE KEY GENERATION
-
+            <div class="success-badge">
+                VERIFICATION COMPLETE
             </div>
 
-
-            <!-- SUCCESS -->
-
             <h2>
-                Generation Success!
+                Generation <strong>Success!</strong>
             </h2>
 
-
             <p class="card-p">
-                Your secure access key has been generated
+                Your unique access key has been generated
                 and locked to this device.
             </p>
 
 
-            <!-- IP -->
+            <!-- DEVICE INFORMATION -->
 
-            <div class="ip-status">
+            <div class="device-row">
 
-                <span class="ip-dot"></span>
+                <div class="info-box">
 
-                <span>
-                    YOUR IP
-                </span>
+                    <div class="info-label">
+                        CONNECTION
+                    </div>
 
-                <span class="ip-separator">
-                    •
-                </span>
+                    <div class="info-value">
+                        ● SECURE
+                    </div>
 
-                <span id="userIP">
-                    FETCHING...
-                </span>
-
-            </div>
+                </div>
 
 
-            <!-- KEY LABEL -->
+                <div class="info-box">
 
-            <div class="key-label">
+                    <div class="info-label">
+                        YOUR IP
+                    </div>
 
-                <span>
-                    YOUR ACCESS KEY
-                </span>
+                    <div
+                        class="info-value ip-value"
+                        id="userIP"
+                    >
+                        FETCHING...
+                    </div>
 
-                <span>
-                    DEVICE LOCKED
-                </span>
+                </div>
 
             </div>
 
 
             <!-- KEY -->
 
-            <div class="key-box">
+            <div class="key-area">
 
-                <span id="finalKey">
-                    SECURE FETCHING...
-                </span>
+                <div class="key-area-inner">
+
+                    <span class="key-prefix">
+                        GENERATED ACCESS KEY
+                    </span>
+
+                    <span id="finalKey">
+                        SECURE FETCHING...
+                    </span>
+
+                </div>
 
             </div>
 
@@ -1815,34 +1462,19 @@ h2{
 
             </a>
 
-
         </div>
 
-
-        <!-- SECURITY -->
 
         <div class="secure-line">
-
-            <b>●</b>
-
-            DEVICE LOCKED
-
-            <span>•</span>
-
-            SECURE KEY SYSTEM
-
-            <span>•</span>
-
-            VERIFIED
-
+            ● DEVICE LOCKED • SECURE KEY SYSTEM
         </div>
-
 
     </div>
 
 
     <!-- =================================================
          BYPASS
+         EXACT SAME STYLE
     ================================================== -->
 
     <div id="bypassContainer">
@@ -1857,7 +1489,12 @@ h2{
                 Bypass Detected!
             </div>
 
-            <p>
+            <p style="
+                color:#888;
+                font-size:14px;
+                line-height:1.6;
+                margin:0;
+            ">
                 Direct access is prohibited.
                 Please use the official link from the
                 script to generate your key.
@@ -1875,21 +1512,18 @@ h2{
     </div>
 
 
-    <!-- FOOTER -->
-
     <div class="footer">
         FARAZ PLAYZ YT SECURITY SYSTEM
     </div>
-
 
 </div>
 
 
 <script>
 
-
 /* =====================================================
    SECURITY CHECK
+   LOGIC SAME
 ===================================================== */
 
 async function checkSecurity(){
@@ -1902,12 +1536,10 @@ async function checkSecurity(){
     const source =
         urlParams.get('source');
 
-
     console.log('=== Security Check ===');
     console.log('Source:',source);
     console.log('Referrer:',document.referrer);
     console.log('==================');
-
 
     const isAllowed =
         source === "official";
@@ -1920,7 +1552,6 @@ async function checkSecurity(){
             "//" +
             window.location.host +
             window.location.pathname;
-
 
         window.history.replaceState(
             {},
@@ -1953,7 +1584,6 @@ async function checkSecurity(){
         ).style.display="block";
 
     }
-
 }
 
 
@@ -1974,10 +1604,8 @@ async function generateLockedKey(){
                 }
             );
 
-
         const data =
             await response.json();
-
 
         const ip =
             data.ip;
@@ -2014,12 +1642,10 @@ async function generateLockedKey(){
                 Math.sin(seed++) *
                 10000;
 
-
             return Math.abs(
                 x -
                 Math.floor(x)
             );
-
         }
 
 
@@ -2034,7 +1660,6 @@ async function generateLockedKey(){
 
             let s="";
 
-
             for(let j=0;j<4;j++){
 
                 let r =
@@ -2042,15 +1667,11 @@ async function generateLockedKey(){
                         rnd()*chars.length
                     );
 
-
                 s +=
                     chars.charAt(r);
-
             }
 
-
             segments.push(s);
-
         }
 
 
@@ -2075,9 +1696,7 @@ async function generateLockedKey(){
             'finalKey'
         ).innerText=
             "CONNECT TO INTERNET";
-
     }
-
 }
 
 
@@ -2097,9 +1716,7 @@ function copyKey(){
         keyText.includes("SECURE") ||
         keyText.includes("CONNECT")
     ){
-
         return;
-
     }
 
 
@@ -2114,12 +1731,11 @@ function copyKey(){
 
 
             btn.innerText =
-                "COPIED SUCCESSFULLY! ✓";
+                "COPIED SUCCESSFULLY! ✅";
 
 
-            btn.classList.add(
-                "copied"
-            );
+            btn.style.background =
+                "#00ff91";
 
 
             setTimeout(()=>{
@@ -2127,15 +1743,12 @@ function copyKey(){
                 btn.innerText =
                     "COPY TO CLIPBOARD";
 
-
-                btn.classList.remove(
-                    "copied"
-                );
+                btn.style.background =
+                    "#ffffff";
 
             },2000);
 
         });
-
 }
 
 
