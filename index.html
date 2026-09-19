@@ -8,31 +8,34 @@
 <style>
 :root{
     --bg:#010505;
-    --panel:rgba(8,17,17,.88);
+    --panel:rgba(7,15,15,.92);
     --accent:#00ff91;
     --accent2:#00d9ff;
     --white:#fff;
     --muted:#7d8c87;
     --red:#ff4055;
+    --red2:#ff7a45;
 }
 
 *{
     box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 html,body{
-    margin:0;
     min-height:100%;
 }
 
 body{
     min-height:100vh;
-    padding:22px 16px;
+    padding:18px 15px;
     display:flex;
     justify-content:center;
     align-items:center;
     overflow-x:hidden;
     color:var(--white);
+
     font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -44,32 +47,32 @@ body{
     background:
         radial-gradient(
             circle at 50% -10%,
-            rgba(0,255,145,.14),
+            rgba(0,255,145,.13),
             transparent 35%
         ),
         radial-gradient(
             circle at 0% 55%,
-            rgba(0,255,145,.06),
-            transparent 28%
+            rgba(0,255,145,.055),
+            transparent 30%
         ),
         radial-gradient(
             circle at 100% 90%,
-            rgba(0,217,255,.07),
-            transparent 30%
+            rgba(0,217,255,.06),
+            transparent 32%
         ),
         #010505;
 }
 
-/* =========================
+/* =================================
    BACKGROUND GRID
-========================= */
+================================= */
 
 body:before{
     content:"";
     position:fixed;
     inset:0;
     pointer-events:none;
-    opacity:.45;
+    opacity:.38;
 
     background:
         linear-gradient(
@@ -88,21 +91,21 @@ body:before{
         linear-gradient(
             to bottom,
             black 0%,
-            black 45%,
+            black 55%,
             transparent 100%
         );
 
     z-index:-10;
 }
 
-/* =========================
-   TOP GLOW
-========================= */
+/* =================================
+   MOVING BACKGROUND GLOW
+================================= */
 
 .glow{
     position:fixed;
-    width:340px;
-    height:340px;
+    width:330px;
+    height:330px;
     border-radius:50%;
     filter:blur(110px);
     pointer-events:none;
@@ -113,7 +116,7 @@ body:before{
 .glow.one{
     background:#00ff91;
     top:-180px;
-    left:-140px;
+    left:-150px;
     animation:glowMove 9s ease-in-out infinite alternate;
 }
 
@@ -121,21 +124,32 @@ body:before{
     background:#00d9ff;
     right:-180px;
     bottom:-180px;
-    animation:glowMove 11s ease-in-out infinite alternate-reverse;
+    animation:glowMove2 11s ease-in-out infinite alternate;
 }
 
 @keyframes glowMove{
     from{
         transform:translate(0,0) scale(1);
     }
+
     to{
-        transform:translate(70px,45px) scale(1.25);
+        transform:translate(80px,55px) scale(1.25);
     }
 }
 
-/* =========================
-   PREMIUM SNOW
-========================= */
+@keyframes glowMove2{
+    from{
+        transform:translate(0,0) scale(1);
+    }
+
+    to{
+        transform:translate(-70px,-45px) scale(1.22);
+    }
+}
+
+/* =================================
+   PREMIUM PARTICLES
+================================= */
 
 .snow{
     position:fixed;
@@ -158,25 +172,26 @@ body:before{
     background:
         radial-gradient(
             circle,
-            rgba(255,255,255,.95) 0%,
-            rgba(210,255,242,.75) 45%,
-            rgba(0,255,145,.15) 100%
+            rgba(255,255,255,.95),
+            rgba(210,255,242,.7) 45%,
+            rgba(0,255,145,.1)
         );
 
     box-shadow:
-        0 0 5px rgba(255,255,255,.55),
-        0 0 12px rgba(0,255,145,.25);
+        0 0 6px rgba(255,255,255,.5),
+        0 0 13px rgba(0,255,145,.25);
 
     opacity:0;
 
     animation:
         snowfall var(--time) linear infinite,
-        snowPulse 2.4s ease-in-out infinite alternate;
+        snowPulse 2.5s ease-in-out infinite alternate;
 
     animation-delay:var(--delay);
 }
 
 @keyframes snowfall{
+
     0%{
         transform:
             translate3d(0,-40px,0)
@@ -190,31 +205,19 @@ body:before{
 
     25%{
         transform:
-            translate3d(
-                var(--drift1),
-                25vh,
-                0
-            )
+            translate3d(var(--drift1),25vh,0)
             rotate(90deg);
     }
 
     50%{
         transform:
-            translate3d(
-                var(--drift2),
-                52vh,
-                0
-            )
+            translate3d(var(--drift2),52vh,0)
             rotate(180deg);
     }
 
     75%{
         transform:
-            translate3d(
-                var(--drift3),
-                78vh,
-                0
-            )
+            translate3d(var(--drift3),78vh,0)
             rotate(270deg);
     }
 
@@ -224,11 +227,7 @@ body:before{
 
     100%{
         transform:
-            translate3d(
-                var(--drift4),
-                112vh,
-                0
-            )
+            translate3d(var(--drift4),112vh,0)
             rotate(360deg);
         opacity:0;
     }
@@ -244,9 +243,9 @@ body:before{
     }
 }
 
-/* =========================
+/* =================================
    CONTAINER
-========================= */
+================================= */
 
 .container{
     width:100%;
@@ -256,17 +255,14 @@ body:before{
     text-align:center;
 }
 
-#mainContainer{
-    display:none;
-}
-
+#mainContainer,
 #bypassContainer{
     display:none;
 }
 
-/* =========================
-   BRAND / LOGO
-========================= */
+/* =================================
+   LOGO
+================================= */
 
 .logo-wrap{
     width:96px;
@@ -291,8 +287,7 @@ body:before{
         0 0 30px rgba(0,255,145,.15),
         0 0 70px rgba(0,255,145,.06);
 
-    animation:
-        logoSpin 8s linear infinite;
+    animation:logoSpin 8s linear infinite;
 }
 
 .logo-inner{
@@ -300,7 +295,6 @@ body:before{
     height:100%;
 
     border-radius:50%;
-
     overflow:hidden;
 
     background:#020706;
@@ -321,9 +315,9 @@ body:before{
     }
 }
 
-/* =========================
+/* =================================
    HEADING
-========================= */
+================================= */
 
 h1{
     margin:0;
@@ -332,7 +326,6 @@ h1{
     line-height:1.1;
 
     font-weight:900;
-
     letter-spacing:-1px;
 
     text-shadow:
@@ -345,13 +338,12 @@ h1{
     color:#7e8c88;
 
     font-size:13px;
-
     line-height:1.5;
 }
 
-/* =========================
+/* =================================
    MAIN CARD
-========================= */
+================================= */
 
 .card{
     position:relative;
@@ -378,8 +370,6 @@ h1{
 
     overflow:hidden;
 }
-
-/* animated card border */
 
 .card:before{
     content:"";
@@ -429,8 +419,6 @@ h1{
     }
 }
 
-/* internal glow */
-
 .card:after{
     content:"";
 
@@ -453,23 +441,15 @@ h1{
     pointer-events:none;
 }
 
-/* =========================
-   SUCCESS TITLE
-========================= */
-
 h2{
     margin:0 0 12px;
 
     color:var(--accent);
 
     font-size:22px;
-
     font-weight:850;
 
     letter-spacing:-.3px;
-
-    text-shadow:
-        0 0 22px rgba(0,255,145,.12);
 }
 
 .card-p{
@@ -480,48 +460,36 @@ h2{
     color:#8c9995;
 
     font-size:13px;
-
     line-height:1.7;
 }
 
-/* =========================
-   IP BADGE
-========================= */
+/* =================================
+   IP
+================================= */
 
 .ip-status{
     display:inline-flex;
-
     align-items:center;
     justify-content:center;
-
     gap:8px;
 
     padding:8px 13px;
-
     margin-bottom:24px;
 
     border-radius:999px;
 
-    background:
-        rgba(0,255,145,.045);
+    background:rgba(0,255,145,.045);
 
     border:
         1px solid
         rgba(0,255,145,.16);
 
-    box-shadow:
-        inset 0 0 15px rgba(0,255,145,.025);
-
     color:#75827e;
 
     font-size:9px;
-
     font-weight:800;
 
     letter-spacing:1.2px;
-
-    position:relative;
-    z-index:3;
 }
 
 .ip-dot{
@@ -542,13 +510,9 @@ h2{
 #userIP{
     color:#e4eeea;
 
-    font-family:
-        "Courier New",
-        monospace;
+    font-family:"Courier New",monospace;
 
     font-size:11px;
-
-    letter-spacing:.7px;
 }
 
 .ip-separator{
@@ -567,15 +531,14 @@ h2{
     }
 }
 
-/* =========================
+/* =================================
    KEY BOX
-========================= */
+================================= */
 
 .key-box{
     position:relative;
 
     padding:22px 14px;
-
     margin-bottom:16px;
 
     border-radius:19px;
@@ -592,9 +555,6 @@ h2{
         rgba(0,255,145,.48);
 
     overflow:hidden;
-
-    box-shadow:
-        inset 0 0 30px rgba(0,255,145,.018);
 }
 
 .key-box:before{
@@ -604,7 +564,6 @@ h2{
 
     top:0;
     bottom:0;
-
     left:-50%;
 
     width:25%;
@@ -641,8 +600,6 @@ h2{
             transparent
         );
 
-    opacity:.55;
-
     animation:keyLine 2.5s ease-in-out infinite;
 }
 
@@ -674,53 +631,43 @@ h2{
 
     color:var(--accent);
 
-    font-family:
-        "Courier New",
-        monospace;
+    font-family:"Courier New",monospace;
 
     font-size:18px;
-
     font-weight:800;
 
     letter-spacing:1.2px;
-
     word-break:break-word;
 
     text-shadow:
         0 0 15px rgba(0,255,145,.18);
 }
 
-/* =========================
-   BUTTON
-========================= */
+/* =================================
+   BUTTONS
+================================= */
 
 .btn{
     width:100%;
-
     min-height:55px;
 
     border:0;
-
     border-radius:17px;
 
     padding:16px;
 
     font-size:14px;
-
     font-weight:900;
-
     letter-spacing:.4px;
 
     cursor:pointer;
 
     position:relative;
-
     overflow:hidden;
 
     transition:
         transform .25s ease,
-        box-shadow .25s ease,
-        background .25s ease;
+        box-shadow .25s ease;
 }
 
 .btn:before{
@@ -730,7 +677,6 @@ h2{
 
     top:0;
     bottom:0;
-
     left:-110%;
 
     width:60%;
@@ -739,7 +685,7 @@ h2{
         linear-gradient(
             90deg,
             transparent,
-            rgba(255,255,255,.45),
+            rgba(255,255,255,.4),
             transparent
         );
 
@@ -755,8 +701,6 @@ h2{
 .btn:active{
     transform:scale(.98);
 }
-
-/* copy */
 
 #copyBtn{
     color:#00140b;
@@ -781,29 +725,19 @@ h2{
             #00ff91,
             #00e47e
         );
-
-    box-shadow:
-        0 15px 35px
-        rgba(0,255,145,.2);
 }
-
-/* =========================
-   TELEGRAM
-========================= */
 
 .telegram-btn{
     display:flex;
-
     align-items:center;
     justify-content:center;
-
     gap:11px;
 
     margin-top:12px;
 
     text-decoration:none;
 
-    color:white;
+    color:#fff;
 
     background:
         linear-gradient(
@@ -811,21 +745,10 @@ h2{
             #08a7e5,
             #007bb8
         );
-
-    box-shadow:
-        0 12px 30px
-        rgba(0,137,204,.16);
 }
 
 .telegram-btn:hover{
     transform:translateY(-2px);
-
-    background:
-        linear-gradient(
-            135deg,
-            #14b8f2,
-            #0088cc
-        );
 
     box-shadow:
         0 17px 38px
@@ -843,25 +766,15 @@ h2{
     font-size:18px;
 }
 
-/* =========================
-   SECURITY LINE
-========================= */
-
 .secure-line{
     margin-top:16px;
 
     color:#34423e;
 
     font-size:8px;
-
     font-weight:800;
-
     letter-spacing:1.5px;
 }
-
-/* =========================
-   FOOTER
-========================= */
 
 .footer{
     margin-top:25px;
@@ -869,56 +782,480 @@ h2{
     color:#35403d;
 
     font-size:8px;
-
     font-weight:800;
 
     letter-spacing:2px;
-
     text-transform:uppercase;
 }
 
-/* =========================
-   BYPASS CARD
-========================= */
+/* =========================================================
+   PREMIUM BYPASS SECTION
+========================================================= */
 
-.error-card{
-    padding:40px 28px;
+.bypass-box{
+    position:relative;
 
-    border-radius:28px;
+    padding:30px 23px 25px;
+
+    border-radius:30px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(34,9,12,.95),
-            rgba(13,7,8,.95)
+            rgba(24,8,11,.97),
+            rgba(7,8,9,.97)
         );
+
+    border:1px solid rgba(255,64,85,.23);
+
+    box-shadow:
+        0 30px 90px rgba(0,0,0,.75),
+        0 0 55px rgba(255,40,70,.07),
+        inset 0 1px rgba(255,255,255,.04);
+
+    overflow:hidden;
+
+    animation:bypassAppear .7s ease both;
+}
+
+@keyframes bypassAppear{
+    from{
+        opacity:0;
+        transform:translateY(18px) scale(.97);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+/* moving red border */
+
+.bypass-box:before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    padding:1px;
+
+    border-radius:30px;
+
+    background:
+        conic-gradient(
+            from 0deg,
+            transparent 0deg,
+            rgba(255,64,85,.05) 45deg,
+            rgba(255,64,85,.8) 90deg,
+            transparent 145deg,
+            transparent 220deg,
+            rgba(255,122,69,.45) 275deg,
+            transparent 330deg
+        );
+
+    mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+
+    mask-composite:exclude;
+
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+
+    -webkit-mask-composite:xor;
+
+    animation:bypassBorder 4s linear infinite;
+
+    pointer-events:none;
+}
+
+@keyframes bypassBorder{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* inner red glow */
+
+.bypass-box:after{
+    content:"";
+
+    position:absolute;
+
+    width:260px;
+    height:180px;
+
+    top:-120px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    border-radius:50%;
+
+    background:#ff4055;
+
+    filter:blur(80px);
+
+    opacity:.08;
+
+    pointer-events:none;
+}
+
+/* =================================
+   WARNING ICON
+================================= */
+
+.bypass-icon-wrap{
+    position:relative;
+
+    width:104px;
+    height:104px;
+
+    margin:0 auto 22px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+/* outer ring */
+
+.bypass-icon-wrap:before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    border-radius:50%;
 
     border:
         1px solid
-        rgba(255,64,85,.25);
+        rgba(255,64,85,.35);
 
     box-shadow:
-        0 25px 75px rgba(0,0,0,.65),
-        0 0 45px rgba(255,40,70,.06);
+        0 0 20px rgba(255,64,85,.1),
+        inset 0 0 20px rgba(255,64,85,.05);
+
+    animation:ringPulse 2s ease-in-out infinite;
 }
 
-.error-icon{
-    font-size:50px;
-    margin-bottom:18px;
+/* rotating ring */
+
+.bypass-icon-wrap:after{
+    content:"";
+
+    position:absolute;
+    inset:-6px;
+
+    border-radius:50%;
+
+    border:
+        2px solid transparent;
+
+    border-top-color:#ff4055;
+    border-right-color:#ff7a45;
+
+    filter:
+        drop-shadow(0 0 8px rgba(255,64,85,.5));
+
+    animation:warningSpin 3s linear infinite;
 }
 
-.error-title{
-    color:var(--red);
+@keyframes warningSpin{
+    to{
+        transform:rotate(360deg);
+    }
+}
 
-    font-size:24px;
+@keyframes ringPulse{
 
+    0%,100%{
+        transform:scale(.95);
+        opacity:.55;
+    }
+
+    50%{
+        transform:scale(1.06);
+        opacity:1;
+    }
+}
+
+/* warning triangle */
+
+.bypass-icon{
+    position:relative;
+    z-index:2;
+
+    width:68px;
+    height:60px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:#151010;
+
+    font-size:38px;
     font-weight:900;
 
-    margin-bottom:14px;
+    clip-path:
+        polygon(
+            50% 0%,
+            100% 100%,
+            0% 100%
+        );
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffdd45,
+            #ff9f27
+        );
+
+    filter:
+        drop-shadow(
+            0 0 13px
+            rgba(255,174,0,.32)
+        );
+
+    animation:warningFloat 2.8s ease-in-out infinite;
 }
 
+.bypass-icon span{
+    position:absolute;
+
+    top:20px;
+
+    font-size:27px;
+
+    font-weight:1000;
+
+    color:#27160b;
+}
+
+@keyframes warningFloat{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-5px);
+    }
+}
+
+/* =================================
+   BYPASS TEXT
+================================= */
+
+.bypass-status{
+    display:inline-flex;
+
+    align-items:center;
+    gap:8px;
+
+    padding:7px 13px;
+
+    margin-bottom:14px;
+
+    border-radius:999px;
+
+    color:#ff7685;
+
+    background:
+        rgba(255,64,85,.07);
+
+    border:
+        1px solid
+        rgba(255,64,85,.18);
+
+    font-size:9px;
+    font-weight:900;
+
+    letter-spacing:1.5px;
+}
+
+.bypass-status-dot{
+    width:6px;
+    height:6px;
+
+    border-radius:50%;
+
+    background:#ff4055;
+
+    box-shadow:
+        0 0 8px #ff4055;
+
+    animation:redPulse 1.2s infinite;
+}
+
+@keyframes redPulse{
+
+    0%,100%{
+        opacity:1;
+        transform:scale(1);
+    }
+
+    50%{
+        opacity:.35;
+        transform:scale(.7);
+    }
+}
+
+.bypass-title{
+    position:relative;
+    z-index:2;
+
+    margin-bottom:12px;
+
+    color:#fff;
+
+    font-size:28px;
+    font-weight:950;
+
+    letter-spacing:-.6px;
+
+    text-shadow:
+        0 0 20px rgba(255,64,85,.12);
+}
+
+.bypass-title span{
+    color:#ff5265;
+}
+
+.bypass-text{
+    position:relative;
+    z-index:2;
+
+    max-width:340px;
+
+    margin:0 auto;
+
+    color:#858c8b;
+
+    font-size:13px;
+    line-height:1.7;
+}
+
+/* =================================
+   SECURITY STEPS
+================================= */
+
+.security-info{
+    position:relative;
+    z-index:2;
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+
+    gap:9px;
+
+    margin-top:23px;
+}
+
+.security-item{
+    padding:12px 9px;
+
+    border-radius:14px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    border:
+        1px solid
+        rgba(255,255,255,.055);
+
+    color:#66716e;
+
+    font-size:8px;
+    font-weight:800;
+
+    letter-spacing:.8px;
+
+    text-transform:uppercase;
+}
+
+.security-item strong{
+    display:block;
+
+    margin-bottom:5px;
+
+    color:#aeb7b4;
+
+    font-size:10px;
+}
+
+.security-item:first-child strong{
+    color:#ff6676;
+}
+
+.security-item:last-child strong{
+    color:#00ff91;
+}
+
+/* =================================
+   SCAN LINE
+================================= */
+
+.scan-line{
+    position:absolute;
+
+    left:0;
+    right:0;
+
+    top:-10px;
+
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,64,85,.65),
+            transparent
+        );
+
+    box-shadow:
+        0 0 10px rgba(255,64,85,.35);
+
+    opacity:.45;
+
+    animation:scanDown 4s linear infinite;
+
+    pointer-events:none;
+}
+
+@keyframes scanDown{
+    0%{
+        top:0;
+        opacity:0;
+    }
+
+    10%{
+        opacity:.55;
+    }
+
+    90%{
+        opacity:.45;
+    }
+
+    100%{
+        top:100%;
+        opacity:0;
+    }
+}
+
+/* =================================
+   RETURN BUTTON
+================================= */
+
 .btn-red{
-    margin-top:20px;
+    position:relative;
+    z-index:2;
+
+    margin-top:22px;
 
     color:#fff;
 
@@ -926,37 +1263,45 @@ h2{
         linear-gradient(
             135deg,
             #ff4055,
-            #d9273d
+            #d92842
         );
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    box-shadow:
+        0 12px 32px
+        rgba(255,40,65,.13);
 }
 
 .btn-red:hover{
+    transform:translateY(-2px);
+
     background:
         linear-gradient(
             135deg,
-            #ff5265,
-            #ed3047
+            #ff5366,
+            #e52e47
         );
 
     box-shadow:
-        0 15px 30px
-        rgba(255,50,70,.2);
+        0 18px 40px
+        rgba(255,40,65,.25);
 }
 
-/* =========================
+/* =================================
    MOBILE
-========================= */
+================================= */
 
 @media(max-width:480px){
 
     body{
-        padding:
-            22px 14px;
+        padding:18px 13px;
     }
 
     .container{
         max-width:430px;
-        margin-top:8px;
     }
 
     .logo-wrap{
@@ -974,38 +1319,60 @@ h2{
     }
 
     .card{
-        padding:
-            31px 20px 23px;
-
+        padding:31px 20px 23px;
         border-radius:25px;
-    }
-
-    h2{
-        font-size:20px;
-    }
-
-    .card-p{
-        font-size:12.5px;
     }
 
     #finalKey{
         font-size:16px;
-        letter-spacing:.9px;
     }
 
-    .ip-status{
-        margin-bottom:21px;
+    .bypass-box{
+        padding:27px 18px 21px;
+        border-radius:25px;
     }
 
-    .btn{
-        min-height:53px;
+    .bypass-icon-wrap{
+        width:94px;
+        height:94px;
+    }
+
+    .bypass-icon{
+        width:62px;
+        height:55px;
+    }
+
+    .bypass-icon span{
+        top:18px;
+        font-size:25px;
+    }
+
+    .bypass-title{
+        font-size:25px;
+    }
+
+    .bypass-text{
+        font-size:12.5px;
+    }
+
+    .security-info{
+        gap:7px;
+    }
+
+    .security-item{
+        padding:11px 7px;
+        font-size:7px;
+    }
+
+    .security-item strong{
+        font-size:9px;
     }
 }
 
 @media(max-width:360px){
 
     body{
-        padding:16px 11px;
+        padding:14px 10px;
     }
 
     .logo-wrap{
@@ -1018,23 +1385,36 @@ h2{
         font-size:25px;
     }
 
-    .card{
-        padding:
-            28px 16px 20px;
+    .bypass-box{
+        padding:24px 14px 19px;
     }
 
-    #finalKey{
-        font-size:14px;
+    .bypass-icon-wrap{
+        width:86px;
+        height:86px;
     }
 
-    .footer{
-        letter-spacing:1.4px;
+    .bypass-icon{
+        width:57px;
+        height:50px;
+    }
+
+    .bypass-title{
+        font-size:22px;
+    }
+
+    .bypass-text{
+        font-size:12px;
+    }
+
+    .security-item{
+        font-size:6.5px;
     }
 }
 
-/* =========================
+/* =================================
    REDUCED MOTION
-========================= */
+================================= */
 
 @media(prefers-reduced-motion:reduce){
 
@@ -1043,7 +1423,6 @@ h2{
     *:after{
         animation-duration:.01ms !important;
         animation-iteration-count:1 !important;
-        scroll-behavior:auto !important;
     }
 }
 </style>
@@ -1055,149 +1434,40 @@ h2{
 <div class="glow one"></div>
 <div class="glow two"></div>
 
-<!-- PREMIUM SNOW -->
+
+<!-- PREMIUM PARTICLES -->
 <div class="snow">
 
-    <i style="
-        --left:4%;
-        --size:3px;
-        --time:8s;
-        --delay:-2s;
-        --opacity:.72;
-        --drift1:35px;
-        --drift2:-20px;
-        --drift3:30px;
-        --drift4:-15px;
-    "></i>
+    <i style="--left:4%;--size:3px;--time:8s;--delay:-2s;--opacity:.72;--drift1:35px;--drift2:-20px;--drift3:30px;--drift4:-15px;"></i>
 
-    <i style="
-        --left:11%;
-        --size:5px;
-        --time:12s;
-        --delay:-7s;
-        --opacity:.55;
-        --drift1:-30px;
-        --drift2:35px;
-        --drift3:-20px;
-        --drift4:30px;
-    "></i>
+    <i style="--left:11%;--size:5px;--time:12s;--delay:-7s;--opacity:.55;--drift1:-30px;--drift2:35px;--drift3:-20px;--drift4:30px;"></i>
 
-    <i style="
-        --left:19%;
-        --size:2px;
-        --time:9s;
-        --delay:-4s;
-        --opacity:.8;
-        --drift1:25px;
-        --drift2:-30px;
-        --drift3:20px;
-        --drift4:-25px;
-    "></i>
+    <i style="--left:19%;--size:2px;--time:9s;--delay:-4s;--opacity:.8;--drift1:25px;--drift2:-30px;--drift3:20px;--drift4:-25px;"></i>
 
-    <i style="
-        --left:29%;
-        --size:4px;
-        --time:14s;
-        --delay:-10s;
-        --opacity:.62;
-        --drift1:-35px;
-        --drift2:25px;
-        --drift3:-25px;
-        --drift4:35px;
-    "></i>
+    <i style="--left:29%;--size:4px;--time:14s;--delay:-10s;--opacity:.62;--drift1:-35px;--drift2:25px;--drift3:-25px;--drift4:35px;"></i>
 
-    <i style="
-        --left:39%;
-        --size:2px;
-        --time:10s;
-        --delay:-3s;
-        --opacity:.75;
-        --drift1:30px;
-        --drift2:-20px;
-        --drift3:35px;
-        --drift4:-20px;
-    "></i>
+    <i style="--left:39%;--size:2px;--time:10s;--delay:-3s;--opacity:.75;--drift1:30px;--drift2:-20px;--drift3:35px;--drift4:-20px;"></i>
 
-    <i style="
-        --left:48%;
-        --size:5px;
-        --time:13s;
-        --delay:-8s;
-        --opacity:.5;
-        --drift1:-25px;
-        --drift2:35px;
-        --drift3:-35px;
-        --drift4:20px;
-    "></i>
+    <i style="--left:48%;--size:5px;--time:13s;--delay:-8s;--opacity:.5;--drift1:-25px;--drift2:35px;--drift3:-35px;--drift4:20px;"></i>
 
-    <i style="
-        --left:58%;
-        --size:3px;
-        --time:9s;
-        --delay:-5s;
-        --opacity:.72;
-        --drift1:20px;
-        --drift2:-35px;
-        --drift3:25px;
-        --drift4:-30px;
-    "></i>
+    <i style="--left:58%;--size:3px;--time:9s;--delay:-5s;--opacity:.72;--drift1:20px;--drift2:-35px;--drift3:25px;--drift4:-30px;"></i>
 
-    <i style="
-        --left:67%;
-        --size:4px;
-        --time:15s;
-        --delay:-11s;
-        --opacity:.58;
-        --drift1:-30px;
-        --drift2:25px;
-        --drift3:-20px;
-        --drift4:35px;
-    "></i>
+    <i style="--left:67%;--size:4px;--time:15s;--delay:-11s;--opacity:.58;--drift1:-30px;--drift2:25px;--drift3:-20px;--drift4:35px;"></i>
 
-    <i style="
-        --left:76%;
-        --size:2px;
-        --time:11s;
-        --delay:-6s;
-        --opacity:.8;
-        --drift1:30px;
-        --drift2:-25px;
-        --drift3:30px;
-        --drift4:-15px;
-    "></i>
+    <i style="--left:76%;--size:2px;--time:11s;--delay:-6s;--opacity:.8;--drift1:30px;--drift2:-25px;--drift3:30px;--drift4:-15px;"></i>
 
-    <i style="
-        --left:85%;
-        --size:5px;
-        --time:13s;
-        --delay:-9s;
-        --opacity:.48;
-        --drift1:-25px;
-        --drift2:30px;
-        --drift3:-30px;
-        --drift4:25px;
-    "></i>
+    <i style="--left:85%;--size:5px;--time:13s;--delay:-9s;--opacity:.48;--drift1:-25px;--drift2:30px;--drift3:-30px;--drift4:25px;"></i>
 
-    <i style="
-        --left:94%;
-        --size:3px;
-        --time:8s;
-        --delay:-1s;
-        --opacity:.7;
-        --drift1:25px;
-        --drift2:-20px;
-        --drift3:30px;
-        --drift4:-25px;
-    "></i>
+    <i style="--left:94%;--size:3px;--time:8s;--delay:-1s;--opacity:.7;--drift1:25px;--drift2:-20px;--drift3:30px;--drift4:-25px;"></i>
 
 </div>
 
 
 <div class="container">
 
-    <!-- =========================
-         MAIN
-    ========================== -->
+    <!-- =================================
+         MAIN CONTAINER
+    ================================= -->
 
     <div id="mainContainer">
 
@@ -1210,7 +1480,9 @@ h2{
             </div>
         </div>
 
-        <h1>Access Unlocked</h1>
+        <h1>
+            Access Unlocked
+        </h1>
 
         <p class="subtitle">
             Your device-locked license key is ready.
@@ -1229,7 +1501,6 @@ h2{
             </p>
 
 
-            <!-- IP -->
             <div class="ip-status">
 
                 <span class="ip-dot"></span>
@@ -1249,7 +1520,6 @@ h2{
             </div>
 
 
-            <!-- KEY -->
             <div class="key-box">
 
                 <span id="finalKey">
@@ -1259,7 +1529,6 @@ h2{
             </div>
 
 
-            <!-- COPY -->
             <button
                 class="btn"
                 id="copyBtn"
@@ -1269,7 +1538,6 @@ h2{
             </button>
 
 
-            <!-- TELEGRAM -->
             <a
                 class="btn telegram-btn"
                 href="https://t.me/farazplayzzyt"
@@ -1295,33 +1563,83 @@ h2{
     </div>
 
 
-    <!-- =========================
-         BYPASS
-    ========================== -->
+    <!-- =================================
+         PREMIUM BYPASS
+    ================================= -->
 
     <div id="bypassContainer">
 
-        <div class="error-card">
+        <div class="bypass-box">
 
-            <div class="error-icon">
-                🚫
+            <div class="scan-line"></div>
+
+
+            <!-- WARNING ICON -->
+            <div class="bypass-icon-wrap">
+
+                <div class="bypass-icon">
+                    <span>!</span>
+                </div>
+
             </div>
 
-            <div class="error-title">
-                Bypass Detected!
+
+            <!-- STATUS -->
+            <div class="bypass-status">
+
+                <span class="bypass-status-dot"></span>
+
+                SECURITY ALERT
+
             </div>
 
-            <p style="
-                color:#888;
-                font-size:14px;
-                line-height:1.6;
-                margin:0;
-            ">
-                Direct access is prohibited.
-                Please use the official link from the
-                script to generate your key.
+
+            <!-- TITLE -->
+            <div class="bypass-title">
+
+                ACCESS <span>DENIED</span>
+
+            </div>
+
+
+            <!-- DESCRIPTION -->
+            <p class="bypass-text">
+
+                Direct access to the key generation
+                system is restricted. Please complete
+                the required steps using the official
+                access route.
+
             </p>
 
+
+            <!-- SECURITY INFO -->
+            <div class="security-info">
+
+                <div class="security-item">
+
+                    <strong>
+                        🔒 PROTECTED
+                    </strong>
+
+                    DEVICE VERIFICATION
+
+                </div>
+
+                <div class="security-item">
+
+                    <strong>
+                        ✓ REQUIRED
+                    </strong>
+
+                    OFFICIAL ACCESS
+
+                </div>
+
+            </div>
+
+
+            <!-- RETURN -->
             <button
                 class="btn btn-red"
                 onclick="location.href='steps.html'"
@@ -1343,9 +1661,9 @@ h2{
 
 <script>
 
-/* =========================
+/* =================================
    SECURITY CHECK
-========================= */
+================================= */
 
 async function checkSecurity(){
 
@@ -1408,10 +1726,10 @@ async function checkSecurity(){
 }
 
 
-/* =========================
+/* =================================
    KEY GENERATION
    ORIGINAL LOGIC
-========================= */
+================================= */
 
 async function generateLockedKey(){
 
@@ -1437,7 +1755,6 @@ async function generateLockedKey(){
         ).innerText=ip;
 
 
-        // Aaj ki Date
         const day =
             Math.floor(
                 Date.now()/86400000
@@ -1452,7 +1769,6 @@ async function generateLockedKey(){
             );
 
 
-        // Seed: IP + Date + Year
         let seed =
             ipSeed +
             day +
@@ -1523,9 +1839,9 @@ async function generateLockedKey(){
 }
 
 
-/* =========================
+/* =================================
    COPY KEY
-========================= */
+================================= */
 
 function copyKey(){
 
@@ -1575,9 +1891,9 @@ function copyKey(){
 }
 
 
-/* =========================
+/* =================================
    START
-========================= */
+================================= */
 
 window.onload =
     checkSecurity;
