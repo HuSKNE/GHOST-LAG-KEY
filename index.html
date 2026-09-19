@@ -6,33 +6,42 @@
 <title>Key Generated | GHOST LAG</title>
 
 <style>
+
 :root{
     --bg:#010505;
-    --panel:#061311;
-    --panel2:#081b17;
+    --panel:rgba(7,15,15,.92);
+
     --accent:#00ff91;
     --accent2:#00d9ff;
-    --white:#ffffff;
-    --muted:#81908b;
+
+    --white:#fff;
+    --muted:#7d8c87;
+
     --red:#ff4055;
+    --red2:#ff7a45;
 }
 
 *{
     box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 html,body{
-    margin:0;
     min-height:100%;
 }
 
 body{
     min-height:100vh;
-    padding:18px 14px 30px;
+
+    padding:18px 15px;
+
     display:flex;
     justify-content:center;
-    align-items:flex-start;
+    align-items:center;
+
     overflow-x:hidden;
+
     color:var(--white);
 
     font-family:
@@ -45,136 +54,162 @@ body{
 
     background:
         radial-gradient(
-            circle at 50% 5%,
-            rgba(0,255,145,.16),
+            circle at 50% -10%,
+            rgba(0,255,145,.13),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 0% 55%,
+            rgba(0,255,145,.055),
             transparent 30%
         ),
         radial-gradient(
-            circle at 0% 45%,
-            rgba(0,217,255,.08),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 100% 75%,
-            rgba(0,255,145,.07),
+            circle at 100% 90%,
+            rgba(0,217,255,.06),
             transparent 32%
         ),
         #010505;
 }
 
-/* =====================================================
+
+/* =================================
    BACKGROUND GRID
-===================================================== */
+================================= */
 
 body:before{
     content:"";
+
     position:fixed;
     inset:0;
+
     pointer-events:none;
+
+    opacity:.38;
 
     background:
         linear-gradient(
-            rgba(0,255,145,.035) 1px,
+            rgba(255,255,255,.018) 1px,
             transparent 1px
         ),
         linear-gradient(
             90deg,
-            rgba(0,255,145,.035) 1px,
+            rgba(255,255,255,.018) 1px,
             transparent 1px
         );
 
-    background-size:42px 42px;
+    background-size:46px 46px;
 
     mask-image:
         linear-gradient(
             to bottom,
-            black,
+            black 0%,
             black 55%,
-            transparent
+            transparent 100%
         );
 
-    z-index:-20;
-
-    animation:gridMove 18s linear infinite;
+    z-index:-10;
 }
 
-@keyframes gridMove{
-    from{
-        transform:translateY(0);
-    }
 
-    to{
-        transform:translateY(42px);
-    }
-}
-
-/* =====================================================
-   MOVING GLOW
-===================================================== */
+/* =================================
+   MOVING BACKGROUND GLOW
+================================= */
 
 .glow{
     position:fixed;
-    width:280px;
-    height:280px;
+
+    width:330px;
+    height:330px;
 
     border-radius:50%;
+
     filter:blur(110px);
 
     pointer-events:none;
-    z-index:-10;
+
+    z-index:-8;
+
+    opacity:.13;
 }
 
 .glow.one{
     background:#00ff91;
-    top:-160px;
-    left:-130px;
-    opacity:.13;
+
+    top:-180px;
+    left:-150px;
 
     animation:
-        glowOne 9s ease-in-out infinite alternate;
+        glowMove
+        9s
+        ease-in-out
+        infinite
+        alternate;
 }
 
 .glow.two{
     background:#00d9ff;
-    right:-160px;
-    bottom:-150px;
-    opacity:.10;
+
+    right:-180px;
+    bottom:-180px;
 
     animation:
-        glowTwo 11s ease-in-out infinite alternate;
+        glowMove2
+        11s
+        ease-in-out
+        infinite
+        alternate;
 }
 
-@keyframes glowOne{
-    to{
+@keyframes glowMove{
+
+    from{
         transform:
-            translate(90px,100px)
-            scale(1.3);
+            translate(0,0)
+            scale(1);
     }
-}
 
-@keyframes glowTwo{
     to{
         transform:
-            translate(-80px,-70px)
+            translate(80px,55px)
             scale(1.25);
     }
 }
 
-/* =====================================================
-   PARTICLES
-===================================================== */
+@keyframes glowMove2{
+
+    from{
+        transform:
+            translate(0,0)
+            scale(1);
+    }
+
+    to{
+        transform:
+            translate(-70px,-45px)
+            scale(1.22);
+    }
+}
+
+
+/* =================================
+   PREMIUM PARTICLES
+================================= */
 
 .snow{
     position:fixed;
     inset:0;
+
     overflow:hidden;
+
     pointer-events:none;
+
     z-index:-5;
 }
 
 .snow i{
     position:absolute;
-    top:-20px;
+
+    top:-30px;
     left:var(--left);
 
     width:var(--size);
@@ -185,20 +220,28 @@ body:before{
     background:
         radial-gradient(
             circle,
-            #ffffff,
-            rgba(200,255,238,.55),
-            transparent
+            rgba(255,255,255,.95),
+            rgba(210,255,242,.7) 45%,
+            rgba(0,255,145,.1)
         );
 
     box-shadow:
-        0 0 7px rgba(255,255,255,.55),
-        0 0 15px rgba(0,255,145,.35);
+        0 0 6px rgba(255,255,255,.5),
+        0 0 13px rgba(0,255,145,.25);
 
     opacity:0;
 
     animation:
-        snowfall var(--time) linear infinite,
-        particlePulse 2s ease-in-out infinite alternate;
+        snowfall
+        var(--time)
+        linear
+        infinite,
+
+        snowPulse
+        2.5s
+        ease-in-out
+        infinite
+        alternate;
 
     animation-delay:var(--delay);
 }
@@ -207,53 +250,72 @@ body:before{
 
     0%{
         transform:
-            translate3d(0,-30px,0);
+            translate3d(0,-40px,0)
+            rotate(0deg);
+
         opacity:0;
     }
 
-    10%{
+    8%{
         opacity:var(--opacity);
+    }
+
+    25%{
+        transform:
+            translate3d(var(--drift1),25vh,0)
+            rotate(90deg);
     }
 
     50%{
         transform:
-            translate3d(
-                var(--drift2),
-                55vh,
-                0
-            );
+            translate3d(var(--drift2),52vh,0)
+            rotate(180deg);
+    }
+
+    75%{
+        transform:
+            translate3d(var(--drift3),78vh,0)
+            rotate(270deg);
+    }
+
+    92%{
+        opacity:var(--opacity);
     }
 
     100%{
         transform:
-            translate3d(
-                var(--drift4),
-                110vh,
-                0
-            );
+            translate3d(var(--drift4),112vh,0)
+            rotate(360deg);
+
         opacity:0;
     }
 }
 
-@keyframes particlePulse{
+@keyframes snowPulse{
+
     from{
         filter:blur(0);
     }
 
     to{
-        filter:blur(1px);
+        filter:blur(.8px);
     }
 }
 
-/* =====================================================
+
+/* =================================
    CONTAINER
-===================================================== */
+================================= */
 
 .container{
     width:100%;
-    max-width:450px;
+
+    max-width:440px;
+
     position:relative;
+
     z-index:2;
+
     text-align:center;
 }
 
@@ -262,251 +324,334 @@ body:before{
     display:none;
 }
 
-/* =====================================================
-   MAIN BRAND ICON
-===================================================== */
 
-.logo-area{
+/* =========================================================
+   PREMIUM ACCESS UNLOCKED
+   ONLY MAIN SECTION
+========================================================= */
+
+
+/* =================================
+   SUCCESS LOGO
+================================= */
+
+.unlock-icon-wrap{
+
     position:relative;
 
     width:108px;
     height:108px;
 
-    margin:10px auto 17px;
+    margin:0 auto 20px;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 }
 
-/* rotating outer ring */
 
-.logo-ring{
+/* outer rotating ring */
+
+.unlock-icon-wrap:before{
+
+    content:"";
+
     position:absolute;
+
     inset:0;
 
     border-radius:50%;
 
-    background:
-        conic-gradient(
-            from 0deg,
-            transparent 0deg,
-            var(--accent) 80deg,
-            transparent 145deg,
-            var(--accent2) 220deg,
-            transparent 300deg,
-            var(--accent) 360deg
-        );
-
-    animation:
-        ringRotate 7s linear infinite;
+    border:
+        1px solid
+        rgba(0,255,145,.32);
 
     box-shadow:
-        0 0 25px rgba(0,255,145,.22),
-        0 0 60px rgba(0,255,145,.08);
+        0 0 25px rgba(0,255,145,.12),
+        inset 0 0 25px rgba(0,255,145,.06);
+
+    animation:
+        unlockPulse
+        2.2s
+        ease-in-out
+        infinite;
 }
 
-.logo-ring:after{
+
+/* animated ring */
+
+.unlock-icon-wrap:after{
+
     content:"";
 
     position:absolute;
-    inset:4px;
+
+    inset:-7px;
 
     border-radius:50%;
 
-    background:#010706;
-}
+    border:2px solid transparent;
 
-.logo-core{
-    position:relative;
+    border-top-color:#00ff91;
 
-    width:88px;
-    height:88px;
-
-    border-radius:50%;
-
-    overflow:hidden;
-
-    border:1px solid rgba(0,255,145,.45);
-
-    background:#020606;
-
-    box-shadow:
-        inset 0 0 25px rgba(0,255,145,.12),
-        0 0 30px rgba(0,255,145,.16);
-
-    z-index:2;
-}
-
-.logo-core img{
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    display:block;
+    border-right-color:#00d9ff;
 
     filter:
-        brightness(1.3)
-        contrast(1.15);
+        drop-shadow(
+            0 0 9px
+            rgba(0,255,145,.55)
+        );
+
+    animation:
+        unlockSpin
+        3s
+        linear
+        infinite;
 }
 
-@keyframes ringRotate{
+@keyframes unlockSpin{
+
     to{
         transform:rotate(360deg);
     }
 }
 
-/* =====================================================
-   STATUS
-===================================================== */
-
-.live-status{
-    width:max-content;
-
-    margin:0 auto 13px;
-
-    padding:6px 12px;
-
-    display:flex;
-    align-items:center;
-    gap:7px;
-
-    border-radius:999px;
-
-    color:#76a99a;
-
-    font-size:8px;
-    font-weight:900;
-
-    letter-spacing:1.8px;
-
-    background:
-        rgba(0,255,145,.045);
-
-    border:
-        1px solid rgba(0,255,145,.15);
-
-    box-shadow:
-        0 0 20px rgba(0,255,145,.035);
-}
-
-.live-dot{
-    width:6px;
-    height:6px;
-
-    border-radius:50%;
-
-    background:var(--accent);
-
-    box-shadow:
-        0 0 7px var(--accent),
-        0 0 15px rgba(0,255,145,.55);
-
-    animation:livePulse 1.4s infinite;
-}
-
-@keyframes livePulse{
+@keyframes unlockPulse{
 
     0%,100%{
-        transform:scale(1);
-        opacity:1;
+        transform:scale(.94);
+        opacity:.55;
     }
 
     50%{
-        transform:scale(.55);
-        opacity:.45;
+        transform:scale(1.05);
+        opacity:1;
     }
 }
 
-/* =====================================================
-   MAIN TITLE
-===================================================== */
 
-h1{
-    margin:0;
+/* logo */
 
-    font-size:34px;
-    line-height:1;
+.unlock-logo{
 
-    font-weight:950;
-
-    letter-spacing:-1.8px;
-
-    color:#ffffff;
-
-    text-shadow:
-        0 0 35px rgba(255,255,255,.08);
-}
-
-h1 span{
-    color:var(--accent);
-
-    text-shadow:
-        0 0 25px rgba(0,255,145,.25);
-}
-
-.subtitle{
-    margin:11px 0 25px;
-
-    color:#71807b;
-
-    font-size:12px;
-
-    letter-spacing:.5px;
-
-    line-height:1.5;
-}
-
-/* =====================================================
-   GENERATION CARD
-===================================================== */
-
-.card{
     position:relative;
 
-    padding:30px 20px 22px;
+    z-index:2;
 
-    border-radius:28px;
+    width:78px;
+    height:78px;
 
-    overflow:hidden;
+    border-radius:50%;
+
+    padding:3px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(8,25,21,.97),
-            rgba(3,11,10,.98)
+            #00ff91,
+            #00d9ff
+        );
+
+    box-shadow:
+        0 0 25px rgba(0,255,145,.22),
+        0 0 55px rgba(0,217,255,.08);
+}
+
+.unlock-logo-inner{
+
+    width:100%;
+    height:100%;
+
+    overflow:hidden;
+
+    border-radius:50%;
+
+    background:#020706;
+
+    border:
+        3px solid
+        #020706;
+}
+
+.unlock-logo-inner img{
+
+    width:100%;
+    height:100%;
+
+    display:block;
+
+    object-fit:cover;
+
+    filter:
+        brightness(1.35)
+        contrast(1.1);
+}
+
+
+/* =================================
+   MAIN HEADING
+================================= */
+
+.unlock-heading{
+
+    margin:0;
+
+    font-size:32px;
+
+    line-height:1.08;
+
+    font-weight:950;
+
+    letter-spacing:-1.2px;
+
+    text-shadow:
+        0 0 25px
+        rgba(255,255,255,.08);
+
+    animation:
+        titleAppear
+        .7s
+        ease
+        both;
+}
+
+.unlock-heading span{
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #bfffe9,
+            #00ff91
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+}
+
+@keyframes titleAppear{
+
+    from{
+        opacity:0;
+        transform:
+            translateY(12px);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            translateY(0);
+    }
+}
+
+.subtitle{
+
+    margin:10px 0 25px;
+
+    color:#7e8c88;
+
+    font-size:13px;
+
+    line-height:1.5;
+}
+
+
+/* =================================
+   MAIN SUCCESS CARD
+================================= */
+
+.card{
+
+    position:relative;
+
+    padding:30px 24px 25px;
+
+    border-radius:30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(9,24,22,.97),
+            rgba(3,10,10,.98)
         );
 
     border:
-        1px solid rgba(0,255,145,.13);
+        1px solid
+        rgba(0,255,145,.18);
 
     box-shadow:
-        0 30px 90px rgba(0,0,0,.7),
-        inset 0 1px rgba(255,255,255,.035);
+        0 30px 90px rgba(0,0,0,.75),
+        0 0 50px rgba(0,255,145,.055),
+        inset 0 1px
+        rgba(255,255,255,.045);
+
+    backdrop-filter:blur(18px);
+
+    -webkit-backdrop-filter:blur(18px);
+
+    overflow:hidden;
+
+    animation:
+        cardAppear
+        .65s
+        ease
+        both;
 }
+
+@keyframes cardAppear{
+
+    from{
+        opacity:0;
+
+        transform:
+            translateY(20px)
+            scale(.97);
+    }
+
+    to{
+        opacity:1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
 
 /* animated border */
 
 .card:before{
+
     content:"";
 
     position:absolute;
-    inset:0;
 
-    border-radius:28px;
+    inset:0;
 
     padding:1px;
 
+    border-radius:30px;
+
     background:
-        linear-gradient(
-            110deg,
-            transparent 5%,
-            rgba(0,255,145,.65),
-            transparent 30%,
-            transparent 65%,
-            rgba(0,217,255,.4),
-            transparent 92%
+        conic-gradient(
+            from 0deg,
+
+            transparent 0deg,
+
+            rgba(0,255,145,.05) 40deg,
+
+            rgba(0,255,145,.9) 90deg,
+
+            transparent 145deg,
+
+            transparent 210deg,
+
+            rgba(0,217,255,.55) 270deg,
+
+            transparent 330deg
         );
 
     mask:
@@ -522,252 +667,512 @@ h1 span{
     -webkit-mask-composite:xor;
 
     animation:
-        cardBorder 5s linear infinite;
+        successBorder
+        5s
+        linear
+        infinite;
 
     pointer-events:none;
 }
 
-@keyframes cardBorder{
-    from{
-        transform:translateX(-12%);
-    }
+@keyframes successBorder{
 
     to{
-        transform:translateX(12%);
+        transform:rotate(360deg);
     }
 }
+
 
 /* top glow */
 
 .card:after{
+
     content:"";
 
     position:absolute;
 
-    width:260px;
-    height:170px;
+    width:280px;
+    height:190px;
 
+    top:-130px;
     left:50%;
-    top:-150px;
 
     transform:translateX(-50%);
 
     border-radius:50%;
 
-    background:var(--accent);
+    background:#00ff91;
 
-    filter:blur(80px);
+    filter:blur(90px);
 
-    opacity:.09;
+    opacity:.08;
 
     pointer-events:none;
 }
 
-/* =====================================================
-   CARD HEADER
-===================================================== */
 
-.success-badge{
-    width:max-content;
+/* =================================
+   SCAN LINE
+================================= */
 
-    margin:0 auto 13px;
+.success-scan{
 
-    padding:6px 10px;
+    position:absolute;
 
-    border-radius:7px;
+    left:0;
+    right:0;
 
-    color:#6effbb;
+    top:-10px;
+
+    height:1px;
 
     background:
-        rgba(0,255,145,.06);
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(0,255,145,.75),
+            transparent
+        );
 
-    border:
-        1px solid rgba(0,255,145,.15);
+    box-shadow:
+        0 0 12px
+        rgba(0,255,145,.4);
 
-    font-size:8px;
-    font-weight:900;
+    opacity:.45;
 
-    letter-spacing:1.6px;
+    animation:
+        successScan
+        4s
+        linear
+        infinite;
+
+    pointer-events:none;
 }
 
-h2{
-    margin:0;
+@keyframes successScan{
 
-    color:#ffffff;
+    0%{
+        top:0;
+        opacity:0;
+    }
+
+    10%{
+        opacity:.6;
+    }
+
+    90%{
+        opacity:.4;
+    }
+
+    100%{
+        top:100%;
+        opacity:0;
+    }
+}
+
+
+/* =================================
+   STATUS BADGE
+================================= */
+
+.success-status{
+
+    position:relative;
+
+    z-index:2;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:7px 13px;
+
+    margin-bottom:14px;
+
+    border-radius:999px;
+
+    color:#00ff91;
+
+    background:
+        rgba(0,255,145,.065);
+
+    border:
+        1px solid
+        rgba(0,255,145,.18);
+
+    font-size:9px;
+
+    font-weight:900;
+
+    letter-spacing:1.5px;
+}
+
+.success-status-dot{
+
+    width:6px;
+    height:6px;
+
+    border-radius:50%;
+
+    background:#00ff91;
+
+    box-shadow:
+        0 0 8px #00ff91,
+        0 0 16px
+        rgba(0,255,145,.4);
+
+    animation:
+        successDot
+        1.2s
+        infinite;
+}
+
+@keyframes successDot{
+
+    0%,100%{
+        opacity:1;
+        transform:scale(1);
+    }
+
+    50%{
+        opacity:.35;
+        transform:scale(.7);
+    }
+}
+
+
+/* =================================
+   CARD TITLE
+================================= */
+
+h2{
+
+    position:relative;
+
+    z-index:2;
+
+    margin:0 0 10px;
+
+    color:#00ff91;
 
     font-size:23px;
 
     font-weight:950;
 
-    letter-spacing:-.5px;
-}
-
-h2 strong{
-    color:var(--accent);
+    letter-spacing:-.4px;
 
     text-shadow:
-        0 0 20px rgba(0,255,145,.18);
+        0 0 20px
+        rgba(0,255,145,.12);
 }
 
 .card-p{
-    max-width:355px;
 
-    margin:11px auto 19px;
+    position:relative;
 
-    color:#7f8e89;
+    z-index:2;
 
-    font-size:12px;
+    margin:0 auto 18px;
 
-    line-height:1.65;
+    max-width:350px;
+
+    color:#879590;
+
+    font-size:13px;
+
+    line-height:1.7;
 }
 
-/* =====================================================
-   DEVICE/IP STATUS
-===================================================== */
 
-.device-row{
+/* =================================
+   DEVICE/IP INFORMATION
+================================= */
+
+.device-info{
+
+    position:relative;
+
+    z-index:2;
+
     display:grid;
 
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:
+        1fr 1fr;
 
     gap:9px;
 
-    margin-bottom:15px;
+    margin-bottom:17px;
 }
 
 .info-box{
-    min-height:57px;
 
-    padding:10px 12px;
+    padding:12px 10px;
 
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:flex-start;
-
-    border-radius:13px;
+    border-radius:15px;
 
     background:
-        rgba(0,0,0,.25);
+        rgba(255,255,255,.025);
 
     border:
-        1px solid rgba(255,255,255,.055);
+        1px solid
+        rgba(255,255,255,.055);
 
     text-align:left;
 }
 
 .info-label{
-    color:#50615b;
 
-    font-size:7px;
-    font-weight:900;
-
-    letter-spacing:1.5px;
+    display:block;
 
     margin-bottom:5px;
+
+    color:#53615d;
+
+    font-size:8px;
+
+    font-weight:900;
+
+    letter-spacing:1.1px;
 }
 
 .info-value{
-    color:#d9e8e2;
 
-    font-size:10px;
-    font-weight:800;
-
-    letter-spacing:.5px;
-}
-
-.ip-value{
-    color:var(--accent);
+    color:#d9e7e2;
 
     font-family:
         "Courier New",
         monospace;
 
     font-size:10px;
+
+    font-weight:800;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
 }
 
-/* =====================================================
-   KEY TERMINAL
-===================================================== */
+.info-box:first-child{
 
-.key-area{
+    border-color:
+        rgba(0,255,145,.12);
+}
+
+.info-box:first-child
+.info-value{
+
+    color:#00ff91;
+}
+
+
+/* =================================
+   IP PILL
+================================= */
+
+.ip-status{
+
     position:relative;
 
-    margin-bottom:13px;
+    z-index:2;
 
-    padding:2px;
+    display:inline-flex;
 
-    border-radius:18px;
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    padding:8px 14px;
+
+    margin-bottom:18px;
+
+    border-radius:999px;
+
+    background:
+        rgba(0,255,145,.045);
+
+    border:
+        1px solid
+        rgba(0,255,145,.16);
+
+    color:#75827e;
+
+    font-size:9px;
+
+    font-weight:800;
+
+    letter-spacing:1.2px;
+}
+
+.ip-dot{
+
+    width:6px;
+    height:6px;
+
+    border-radius:50%;
+
+    background:var(--accent);
+
+    box-shadow:
+        0 0 8px var(--accent),
+        0 0 16px
+        rgba(0,255,145,.45);
+
+    animation:
+        ipPulse
+        1.5s
+        infinite;
+}
+
+#userIP{
+
+    color:#e4eeea;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size:11px;
+}
+
+.ip-separator{
+    color:#30443d;
+}
+
+@keyframes ipPulse{
+
+    0%,100%{
+        opacity:1;
+        transform:scale(1);
+    }
+
+    50%{
+        opacity:.35;
+        transform:scale(.7);
+    }
+}
+
+
+/* =================================
+   KEY BOX
+================================= */
+
+.key-label{
+
+    position:relative;
+
+    z-index:2;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin:0 4px 7px;
+
+    color:#50615b;
+
+    font-size:8px;
+
+    font-weight:900;
+
+    letter-spacing:1.4px;
+}
+
+.key-label span:last-child{
+
+    color:#00ff91;
+
+    opacity:.75;
+}
+
+.key-box{
+
+    position:relative;
+
+    z-index:2;
+
+    min-height:78px;
+
+    padding:20px 13px;
+
+    margin-bottom:16px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:19px;
 
     background:
         linear-gradient(
             135deg,
-            rgba(0,255,145,.65),
-            rgba(0,217,255,.18),
-            rgba(0,255,145,.35)
+            rgba(0,255,145,.055),
+            rgba(0,0,0,.52)
         );
 
-    overflow:hidden;
-}
-
-.key-area-inner{
-    position:relative;
-
-    min-height:91px;
-
-    border-radius:16px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    padding:18px 12px;
-
-    background:
-        radial-gradient(
-            circle at 50% 0%,
-            rgba(0,255,145,.09),
-            transparent 65%
-        ),
-        #020908;
+    border:
+        1px dashed
+        rgba(0,255,145,.5);
 
     overflow:hidden;
+
+    box-shadow:
+        inset 0 0 25px
+        rgba(0,255,145,.025);
 }
 
-.key-area-inner:before{
+
+/* key scanning light */
+
+.key-box:before{
+
     content:"";
 
     position:absolute;
 
-    top:-20%;
-    bottom:-20%;
+    top:0;
+    bottom:0;
 
-    left:-40%;
+    left:-50%;
 
-    width:28%;
+    width:25%;
 
     background:
         linear-gradient(
             90deg,
             transparent,
-            rgba(255,255,255,.12),
+            rgba(255,255,255,.1),
             transparent
         );
 
     transform:skewX(-20deg);
 
     animation:
-        keySweep 3.4s ease-in-out infinite;
+        keyScan
+        3.2s
+        ease-in-out
+        infinite;
 }
 
-.key-area-inner:after{
+.key-box:after{
+
     content:"";
 
     position:absolute;
 
-    left:15%;
-    right:15%;
-    bottom:7px;
+    left:0;
+    right:0;
+
+    bottom:0;
 
     height:1px;
 
@@ -779,14 +1184,17 @@ h2 strong{
             transparent
         );
 
-    opacity:.45;
-
-    animation:keyLine 2s ease-in-out infinite alternate;
+    animation:
+        keyLine
+        2.5s
+        ease-in-out
+        infinite;
 }
 
-@keyframes keySweep{
+@keyframes keyScan{
+
     0%{
-        left:-40%;
+        left:-50%;
     }
 
     55%,100%{
@@ -795,73 +1203,65 @@ h2 strong{
 }
 
 @keyframes keyLine{
-    from{
-        transform:scaleX(.3);
+
+    0%,100%{
         opacity:.2;
+        transform:scaleX(.3);
     }
 
-    to{
+    50%{
+        opacity:.8;
         transform:scaleX(1);
-        opacity:.7;
     }
-}
-
-.key-prefix{
-    position:absolute;
-
-    top:8px;
-    left:11px;
-
-    color:#39534a;
-
-    font-size:6px;
-    font-weight:900;
-
-    letter-spacing:1.5px;
 }
 
 #finalKey{
-    position:relative;
-    z-index:3;
 
-    color:var(--accent);
+    position:relative;
+
+    z-index:2;
+
+    color:#00ff91;
 
     font-family:
         "Courier New",
         monospace;
 
-    font-size:17px;
+    font-size:18px;
 
     font-weight:900;
 
-    letter-spacing:1.15px;
+    letter-spacing:1.4px;
 
     word-break:break-word;
 
     text-shadow:
-        0 0 15px rgba(0,255,145,.25);
+        0 0 15px
+        rgba(0,255,145,.22);
 }
 
-/* =====================================================
-   COPY BUTTON
-===================================================== */
+
+/* =================================
+   BUTTON BASE
+================================= */
 
 .btn{
+
     width:100%;
 
-    min-height:54px;
+    min-height:55px;
 
     border:0;
 
-    border-radius:15px;
+    border-radius:17px;
 
-    padding:15px;
+    padding:16px;
 
-    font-size:12px;
+    font-size:13px;
 
     font-weight:950;
 
-    letter-spacing:1px;
+    letter-spacing:.7px;
 
     cursor:pointer;
 
@@ -870,11 +1270,12 @@ h2 strong{
     overflow:hidden;
 
     transition:
-        transform .22s ease,
-        box-shadow .22s ease;
+        transform .25s ease,
+        box-shadow .25s ease;
 }
 
 .btn:before{
+
     content:"";
 
     position:absolute;
@@ -884,50 +1285,39 @@ h2 strong{
 
     left:-110%;
 
-    width:55%;
+    width:60%;
 
     background:
         linear-gradient(
             90deg,
             transparent,
-            rgba(255,255,255,.5),
+            rgba(255,255,255,.42),
             transparent
         );
 
     transform:skewX(-22deg);
+
+    transition:.6s;
 }
 
 .btn:hover:before{
-    animation:
-        buttonShine .7s ease;
-}
-
-@keyframes buttonShine{
-    to{
-        left:150%;
-    }
+    left:150%;
 }
 
 .btn:active{
-    transform:scale(.975);
+    transform:scale(.98);
 }
+
+
+/* =================================
+   COPY BUTTON
+================================= */
 
 #copyBtn{
-    color:#00150c;
 
-    background:
-        linear-gradient(
-            135deg,
-            #ffffff,
-            #dff7ed
-        );
+    position:relative;
 
-    box-shadow:
-        0 12px 30px rgba(0,0,0,.25);
-}
-
-#copyBtn:hover{
-    transform:translateY(-2px);
+    color:#00140b;
 
     background:
         linear-gradient(
@@ -937,122 +1327,566 @@ h2 strong{
         );
 
     box-shadow:
-        0 16px 38px rgba(0,255,145,.2);
+        0 12px 32px
+        rgba(0,255,145,.15);
+
+    border:
+        1px solid
+        rgba(255,255,255,.12);
 }
 
-/* =====================================================
-   TELEGRAM
-===================================================== */
+#copyBtn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 18px 40px
+        rgba(0,255,145,.25);
+
+    background:
+        linear-gradient(
+            135deg,
+            #35ffad,
+            #00e985
+        );
+}
+
+
+/* =================================
+   TELEGRAM BUTTON
+================================= */
 
 .telegram-btn{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:11px;
+
+    margin-top:11px;
+
+    text-decoration:none;
+
+    color:#fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #08a7e5,
+            #007bb8
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    box-shadow:
+        0 12px 30px
+        rgba(0,137,204,.13);
+}
+
+.telegram-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 18px 40px
+        rgba(0,137,204,.27);
+}
+
+.telegram-icon{
+
+    width:23px;
+    height:23px;
+
     display:flex;
 
     align-items:center;
     justify-content:center;
 
-    gap:10px;
-
-    margin-top:10px;
-
-    text-decoration:none;
-
-    color:#ffffff;
-
-    background:
-        linear-gradient(
-            135deg,
-            #12b8f2,
-            #007fc1
-        );
-
-    box-shadow:
-        0 12px 30px rgba(0,137,204,.15);
+    font-size:18px;
 }
 
-.telegram-btn:hover{
-    transform:translateY(-2px);
 
-    box-shadow:
-        0 17px 38px rgba(0,137,204,.25);
-}
-
-.telegram-icon{
-    font-size:17px;
-}
-
-/* =====================================================
+/* =================================
    SECURITY FOOTER
-===================================================== */
+================================= */
 
 .secure-line{
-    margin-top:14px;
 
-    color:#3c514a;
+    position:relative;
 
-    font-size:7px;
+    z-index:2;
 
-    font-weight:900;
+    margin-top:17px;
 
-    letter-spacing:1.7px;
+    color:#34423e;
+
+    font-size:8px;
+
+    font-weight:800;
+
+    letter-spacing:1.5px;
 }
 
 .footer{
-    margin-top:17px;
 
-    color:#26352f;
+    margin-top:25px;
 
-    font-size:7px;
+    color:#35403d;
 
-    font-weight:900;
+    font-size:8px;
 
-    letter-spacing:1.7px;
+    font-weight:800;
+
+    letter-spacing:2px;
 
     text-transform:uppercase;
 }
 
-/* =====================================================
-   BYPASS CARD
-   SAME STYLE — DO NOT CHANGE
-===================================================== */
 
-.error-card{
-    padding:40px 28px;
+/* =========================================================
+   PREMIUM BYPASS SECTION
+   DO NOT CHANGE
+========================================================= */
 
-    border-radius:28px;
+.bypass-box{
+    position:relative;
+
+    padding:30px 23px 25px;
+
+    border-radius:30px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(34,9,12,.95),
-            rgba(13,7,8,.95)
+            rgba(24,8,11,.97),
+            rgba(7,8,9,.97)
         );
+
+    border:1px solid rgba(255,64,85,.23);
+
+    box-shadow:
+        0 30px 90px rgba(0,0,0,.75),
+        0 0 55px rgba(255,40,70,.07),
+        inset 0 1px rgba(255,255,255,.04);
+
+    overflow:hidden;
+
+    animation:bypassAppear .7s ease both;
+}
+
+@keyframes bypassAppear{
+    from{
+        opacity:0;
+        transform:translateY(18px) scale(.97);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+.bypass-box:before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    padding:1px;
+
+    border-radius:30px;
+
+    background:
+        conic-gradient(
+            from 0deg,
+            transparent 0deg,
+            rgba(255,64,85,.05) 45deg,
+            rgba(255,64,85,.8) 90deg,
+            transparent 145deg,
+            transparent 220deg,
+            rgba(255,122,69,.45) 275deg,
+            transparent 330deg
+        );
+
+    mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+
+    mask-composite:exclude;
+
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+
+    -webkit-mask-composite:xor;
+
+    animation:bypassBorder 4s linear infinite;
+
+    pointer-events:none;
+}
+
+@keyframes bypassBorder{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+.bypass-box:after{
+    content:"";
+
+    position:absolute;
+
+    width:260px;
+    height:180px;
+
+    top:-120px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    border-radius:50%;
+
+    background:#ff4055;
+
+    filter:blur(80px);
+
+    opacity:.08;
+
+    pointer-events:none;
+}
+
+.bypass-icon-wrap{
+    position:relative;
+
+    width:104px;
+    height:104px;
+
+    margin:0 auto 22px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.bypass-icon-wrap:before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    border-radius:50%;
 
     border:
         1px solid
-        rgba(255,64,85,.25);
+        rgba(255,64,85,.35);
 
     box-shadow:
-        0 25px 75px rgba(0,0,0,.65),
-        0 0 45px rgba(255,40,70,.06);
+        0 0 20px rgba(255,64,85,.1),
+        inset 0 0 20px rgba(255,64,85,.05);
+
+    animation:ringPulse 2s ease-in-out infinite;
 }
 
-.error-icon{
-    font-size:50px;
-    margin-bottom:18px;
+.bypass-icon-wrap:after{
+    content:"";
+
+    position:absolute;
+    inset:-6px;
+
+    border-radius:50%;
+
+    border:
+        2px solid transparent;
+
+    border-top-color:#ff4055;
+    border-right-color:#ff7a45;
+
+    filter:
+        drop-shadow(0 0 8px rgba(255,64,85,.5));
+
+    animation:warningSpin 3s linear infinite;
 }
 
-.error-title{
-    color:var(--red);
+@keyframes warningSpin{
+    to{
+        transform:rotate(360deg);
+    }
+}
 
-    font-size:24px;
+@keyframes ringPulse{
 
+    0%,100%{
+        transform:scale(.95);
+        opacity:.55;
+    }
+
+    50%{
+        transform:scale(1.06);
+        opacity:1;
+    }
+}
+
+.bypass-icon{
+    position:relative;
+    z-index:2;
+
+    width:68px;
+    height:60px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:#151010;
+
+    font-size:38px;
     font-weight:900;
 
+    clip-path:
+        polygon(
+            50% 0%,
+            100% 100%,
+            0% 100%
+        );
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffdd45,
+            #ff9f27
+        );
+
+    filter:
+        drop-shadow(
+            0 0 13px
+            rgba(255,174,0,.32)
+        );
+
+    animation:warningFloat 2.8s ease-in-out infinite;
+}
+
+.bypass-icon span{
+    position:absolute;
+
+    top:20px;
+
+    font-size:27px;
+
+    font-weight:1000;
+
+    color:#27160b;
+}
+
+@keyframes warningFloat{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-5px);
+    }
+}
+
+.bypass-status{
+    display:inline-flex;
+
+    align-items:center;
+    gap:8px;
+
+    padding:7px 13px;
+
     margin-bottom:14px;
+
+    border-radius:999px;
+
+    color:#ff7685;
+
+    background:
+        rgba(255,64,85,.07);
+
+    border:
+        1px solid
+        rgba(255,64,85,.18);
+
+    font-size:9px;
+    font-weight:900;
+
+    letter-spacing:1.5px;
+}
+
+.bypass-status-dot{
+    width:6px;
+    height:6px;
+
+    border-radius:50%;
+
+    background:#ff4055;
+
+    box-shadow:
+        0 0 8px #ff4055;
+
+    animation:redPulse 1.2s infinite;
+}
+
+@keyframes redPulse{
+
+    0%,100%{
+        opacity:1;
+        transform:scale(1);
+    }
+
+    50%{
+        opacity:.35;
+        transform:scale(.7);
+    }
+}
+
+.bypass-title{
+    position:relative;
+    z-index:2;
+
+    margin-bottom:12px;
+
+    color:#fff;
+
+    font-size:28px;
+    font-weight:950;
+
+    letter-spacing:-.6px;
+
+    text-shadow:
+        0 0 20px rgba(255,64,85,.12);
+}
+
+.bypass-title span{
+    color:#ff5265;
+}
+
+.bypass-text{
+    position:relative;
+    z-index:2;
+
+    max-width:340px;
+
+    margin:0 auto;
+
+    color:#858c8b;
+
+    font-size:13px;
+    line-height:1.7;
+}
+
+.security-info{
+    position:relative;
+    z-index:2;
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+
+    gap:9px;
+
+    margin-top:23px;
+}
+
+.security-item{
+    padding:12px 9px;
+
+    border-radius:14px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    border:
+        1px solid
+        rgba(255,255,255,.055);
+
+    color:#66716e;
+
+    font-size:8px;
+    font-weight:800;
+
+    letter-spacing:.8px;
+
+    text-transform:uppercase;
+}
+
+.security-item strong{
+    display:block;
+
+    margin-bottom:5px;
+
+    color:#aeb7b4;
+
+    font-size:10px;
+}
+
+.security-item:first-child strong{
+    color:#ff6676;
+}
+
+.security-item:last-child strong{
+    color:#00ff91;
+}
+
+.scan-line{
+    position:absolute;
+
+    left:0;
+    right:0;
+
+    top:-10px;
+
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,64,85,.65),
+            transparent
+        );
+
+    box-shadow:
+        0 0 10px rgba(255,64,85,.35);
+
+    opacity:.45;
+
+    animation:scanDown 4s linear infinite;
+
+    pointer-events:none;
+}
+
+@keyframes scanDown{
+    0%{
+        top:0;
+        opacity:0;
+    }
+
+    10%{
+        opacity:.55;
+    }
+
+    90%{
+        opacity:.45;
+    }
+
+    100%{
+        top:100%;
+        opacity:0;
+    }
 }
 
 .btn-red{
-    margin-top:20px;
+    position:relative;
+    z-index:2;
+
+    margin-top:22px;
 
     color:#fff;
 
@@ -1060,131 +1894,171 @@ h2 strong{
         linear-gradient(
             135deg,
             #ff4055,
-            #d9273d
+            #d92842
         );
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    box-shadow:
+        0 12px 32px
+        rgba(255,40,65,.13);
 }
 
 .btn-red:hover{
+    transform:translateY(-2px);
+
     background:
         linear-gradient(
             135deg,
-            #ff5265,
-            #ed3047
+            #ff5366,
+            #e52e47
         );
 
     box-shadow:
-        0 15px 30px
-        rgba(255,50,70,.2);
+        0 18px 40px
+        rgba(255,40,65,.25);
 }
 
-/* =====================================================
+
+/* =================================
    MOBILE
-===================================================== */
+================================= */
 
 @media(max-width:480px){
 
     body{
-        padding:
-            13px 12px 25px;
+        padding:18px 13px;
     }
 
     .container{
         max-width:430px;
     }
 
-    .logo-area{
-        width:92px;
-        height:92px;
-
-        margin-top:7px;
-        margin-bottom:14px;
+    .unlock-icon-wrap{
+        width:94px;
+        height:94px;
     }
 
-    .logo-core{
-        width:75px;
-        height:75px;
+    .unlock-logo{
+        width:68px;
+        height:68px;
     }
 
-    h1{
-        font-size:31px;
+    .unlock-heading{
+        font-size:28px;
     }
 
     .subtitle{
-        font-size:11px;
-        margin-bottom:21px;
+        font-size:12px;
+        margin-bottom:23px;
     }
 
     .card{
-        padding:
-            25px 15px 19px;
-
-        border-radius:24px;
+        padding:28px 18px 22px;
+        border-radius:25px;
     }
 
     h2{
         font-size:21px;
     }
 
-    .card-p{
-        font-size:11.5px;
-        margin-bottom:16px;
-    }
-
-    .device-row{
+    .device-info{
         gap:7px;
     }
 
     .info-box{
-        min-height:53px;
-        padding:9px;
+        padding:11px 8px;
     }
 
-    .info-value,
-    .ip-value{
+    .info-label{
+        font-size:7px;
+    }
+
+    .info-value{
         font-size:9px;
-    }
-
-    .key-area-inner{
-        min-height:86px;
     }
 
     #finalKey{
         font-size:15px;
-        letter-spacing:.8px;
+        letter-spacing:1px;
     }
 
-    .btn{
-        min-height:52px;
+    .key-box{
+        min-height:74px;
+    }
+
+    .bypass-box{
+        padding:27px 18px 21px;
+        border-radius:25px;
+    }
+
+    .bypass-icon-wrap{
+        width:94px;
+        height:94px;
+    }
+
+    .bypass-icon{
+        width:62px;
+        height:55px;
+    }
+
+    .bypass-icon span{
+        top:18px;
+        font-size:25px;
+    }
+
+    .bypass-title{
+        font-size:25px;
+    }
+
+    .bypass-text{
+        font-size:12.5px;
+    }
+
+    .security-info{
+        gap:7px;
+    }
+
+    .security-item{
+        padding:11px 7px;
+        font-size:7px;
+    }
+
+    .security-item strong{
+        font-size:9px;
     }
 }
+
 
 @media(max-width:360px){
 
     body{
-        padding:
-            10px 10px 20px;
+        padding:14px 10px;
     }
 
-    .logo-area{
-        width:80px;
-        height:80px;
+    .unlock-icon-wrap{
+        width:84px;
+        height:84px;
+
+        margin-bottom:16px;
     }
 
-    .logo-core{
-        width:65px;
-        height:65px;
+    .unlock-logo{
+        width:61px;
+        height:61px;
     }
 
-    h1{
-        font-size:27px;
+    .unlock-heading{
+        font-size:25px;
     }
 
     .card{
-        padding:
-            23px 12px 17px;
+        padding:24px 14px 19px;
     }
 
-    .device-row{
+    .device-info{
         grid-template-columns:1fr;
     }
 
@@ -1192,339 +2066,414 @@ h2 strong{
         font-size:13px;
     }
 
-    .secure-line{
-        letter-spacing:1.2px;
+    .bypass-box{
+        padding:24px 14px 19px;
+    }
+
+    .bypass-icon-wrap{
+        width:86px;
+        height:86px;
+    }
+
+    .bypass-icon{
+        width:57px;
+        height:50px;
+    }
+
+    .bypass-title{
+        font-size:22px;
+    }
+
+    .bypass-text{
+        font-size:12px;
+    }
+
+    .security-item{
+        font-size:6.5px;
     }
 }
 
-/* =====================================================
+
+/* =================================
    REDUCED MOTION
-===================================================== */
+================================= */
 
 @media(prefers-reduced-motion:reduce){
 
     *,
     *:before,
     *:after{
+
         animation-duration:.01ms !important;
+
         animation-iteration-count:1 !important;
     }
 }
+
 </style>
 </head>
 
+
 <body>
 
-<!-- BACKGROUND -->
+
+<!-- BACKGROUND GLOW -->
+
 <div class="glow one"></div>
 <div class="glow two"></div>
 
+
+<!-- PREMIUM PARTICLES -->
+
 <div class="snow">
 
-    <i style="
-        --left:4%;
-        --size:3px;
-        --time:8s;
-        --delay:-2s;
-        --opacity:.72;
-        --drift2:-20px;
-        --drift4:-15px;
-    "></i>
+    <i style="--left:4%;--size:3px;--time:8s;--delay:-2s;--opacity:.72;--drift1:35px;--drift2:-20px;--drift3:30px;--drift4:-15px;"></i>
 
-    <i style="
-        --left:13%;
-        --size:5px;
-        --time:12s;
-        --delay:-7s;
-        --opacity:.55;
-        --drift2:35px;
-        --drift4:30px;
-    "></i>
+    <i style="--left:11%;--size:5px;--time:12s;--delay:-7s;--opacity:.55;--drift1:-30px;--drift2:35px;--drift3:-20px;--drift4:30px;"></i>
 
-    <i style="
-        --left:23%;
-        --size:2px;
-        --time:9s;
-        --delay:-4s;
-        --opacity:.8;
-        --drift2:-30px;
-        --drift4:-25px;
-    "></i>
+    <i style="--left:19%;--size:2px;--time:9s;--delay:-4s;--opacity:.8;--drift1:25px;--drift2:-30px;--drift3:20px;--drift4:-25px;"></i>
 
-    <i style="
-        --left:34%;
-        --size:4px;
-        --time:14s;
-        --delay:-10s;
-        --opacity:.62;
-        --drift2:25px;
-        --drift4:35px;
-    "></i>
+    <i style="--left:29%;--size:4px;--time:14s;--delay:-10s;--opacity:.62;--drift1:-35px;--drift2:25px;--drift3:-25px;--drift4:35px;"></i>
 
-    <i style="
-        --left:46%;
-        --size:2px;
-        --time:10s;
-        --delay:-3s;
-        --opacity:.75;
-        --drift2:-20px;
-        --drift4:-20px;
-    "></i>
+    <i style="--left:39%;--size:2px;--time:10s;--delay:-3s;--opacity:.75;--drift1:30px;--drift2:-20px;--drift3:35px;--drift4:-20px;"></i>
 
-    <i style="
-        --left:58%;
-        --size:5px;
-        --time:13s;
-        --delay:-8s;
-        --opacity:.5;
-        --drift2:35px;
-        --drift4:20px;
-    "></i>
+    <i style="--left:48%;--size:5px;--time:13s;--delay:-8s;--opacity:.5;--drift1:-25px;--drift2:35px;--drift3:-35px;--drift4:20px;"></i>
 
-    <i style="
-        --left:69%;
-        --size:3px;
-        --time:9s;
-        --delay:-5s;
-        --opacity:.72;
-        --drift2:-35px;
-        --drift4:-30px;
-    "></i>
+    <i style="--left:58%;--size:3px;--time:9s;--delay:-5s;--opacity:.72;--drift1:20px;--drift2:-35px;--drift3:25px;--drift4:-30px;"></i>
 
-    <i style="
-        --left:80%;
-        --size:4px;
-        --time:15s;
-        --delay:-11s;
-        --opacity:.58;
-        --drift2:25px;
-        --drift4:35px;
-    "></i>
+    <i style="--left:67%;--size:4px;--time:15s;--delay:-11s;--opacity:.58;--drift1:-30px;--drift2:25px;--drift3:-20px;--drift4:35px;"></i>
 
-    <i style="
-        --left:91%;
-        --size:3px;
-        --time:8s;
-        --delay:-1s;
-        --opacity:.7;
-        --drift2:-20px;
-        --drift4:-25px;
-    "></i>
+    <i style="--left:76%;--size:2px;--time:11s;--delay:-6s;--opacity:.8;--drift1:30px;--drift2:-25px;--drift3:30px;--drift4:-15px;"></i>
+
+    <i style="--left:85%;--size:5px;--time:13s;--delay:-9s;--opacity:.48;--drift1:-25px;--drift2:30px;--drift3:-30px;--drift4:25px;"></i>
+
+    <i style="--left:94%;--size:3px;--time:8s;--delay:-1s;--opacity:.7;--drift1:25px;--drift2:-20px;--drift3:30px;--drift4:-25px;"></i>
 
 </div>
 
 
 <div class="container">
 
-    <!-- =================================================
-         MAIN KEY PAGE
-    ================================================== -->
 
-    <div id="mainContainer">
+<!-- =====================================================
+     MAIN CONTAINER
+===================================================== -->
 
-        <!-- LOGO -->
+<div id="mainContainer">
 
-        <div class="logo-area">
 
-            <div class="logo-ring"></div>
+    <!-- PREMIUM SUCCESS ICON -->
 
-            <div class="logo-core">
+    <div class="unlock-icon-wrap">
+
+        <div class="unlock-logo">
+
+            <div class="unlock-logo-inner">
 
                 <img
                     src="./assets/logo.png"
-                    alt="GHOST LAG"
+                    alt="FARAZ"
                 >
 
             </div>
 
         </div>
 
+    </div>
 
-        <!-- LIVE -->
 
-        <div class="live-status">
+    <!-- TITLE -->
 
-            <span class="live-dot"></span>
+    <h1 class="unlock-heading">
 
-            SECURE SERVER • ONLINE
+        Access <span>Unlocked</span>
+
+    </h1>
+
+
+    <p class="subtitle">
+
+        Your device-locked license key is ready.
+
+    </p>
+
+
+    <!-- MAIN CARD -->
+
+    <div class="card">
+
+
+        <div class="success-scan"></div>
+
+
+        <!-- STATUS -->
+
+        <div class="success-status">
+
+            <span class="success-status-dot"></span>
+
+            GENERATION SUCCESS
 
         </div>
 
 
         <!-- TITLE -->
 
-        <h1>
-            <span>Access</span> Unlocked
-        </h1>
+        <h2>
 
-        <p class="subtitle">
-            Your device-locked license key is ready.
+            Generation Success!
+
+        </h2>
+
+
+        <p class="card-p">
+
+            Your secure access key has been generated
+            and locked to this device.
+
         </p>
 
 
-        <!-- MAIN CARD -->
+        <!-- IP -->
 
-        <div class="card">
+        <div class="ip-status">
 
-            <div class="success-badge">
-                VERIFICATION COMPLETE
-            </div>
+            <span class="ip-dot"></span>
 
-            <h2>
-                Generation <strong>Success!</strong>
-            </h2>
+            <span>
+                YOUR IP
+            </span>
 
-            <p class="card-p">
-                Your unique access key has been generated
-                and locked to this device.
-            </p>
+            <span class="ip-separator">
+                •
+            </span>
 
-
-            <!-- DEVICE INFORMATION -->
-
-            <div class="device-row">
-
-                <div class="info-box">
-
-                    <div class="info-label">
-                        CONNECTION
-                    </div>
-
-                    <div class="info-value">
-                        ● SECURE
-                    </div>
-
-                </div>
-
-
-                <div class="info-box">
-
-                    <div class="info-label">
-                        YOUR IP
-                    </div>
-
-                    <div
-                        class="info-value ip-value"
-                        id="userIP"
-                    >
-                        FETCHING...
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- KEY -->
-
-            <div class="key-area">
-
-                <div class="key-area-inner">
-
-                    <span class="key-prefix">
-                        GENERATED ACCESS KEY
-                    </span>
-
-                    <span id="finalKey">
-                        SECURE FETCHING...
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <!-- COPY -->
-
-            <button
-                class="btn"
-                id="copyBtn"
-                onclick="copyKey()"
-            >
-                COPY TO CLIPBOARD
-            </button>
-
-
-            <!-- TELEGRAM -->
-
-            <a
-                class="btn telegram-btn"
-                href="https://t.me/farazplayzzyt"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-
-                <span class="telegram-icon">
-                    ✈
-                </span>
-
-                JOIN TELEGRAM
-
-            </a>
+            <span id="userIP">
+                FETCHING...
+            </span>
 
         </div>
+
+
+        <!-- INFORMATION -->
+
+        <div class="device-info">
+
+            <div class="info-box">
+
+                <span class="info-label">
+                    SECURITY
+                </span>
+
+                <span class="info-value">
+                    DEVICE LOCKED
+                </span>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <span class="info-label">
+                    VALIDITY
+                </span>
+
+                <span class="info-value">
+                    24 HOURS
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- KEY LABEL -->
+
+        <div class="key-label">
+
+            <span>
+                YOUR ACCESS KEY
+            </span>
+
+            <span>
+                SECURE
+            </span>
+
+        </div>
+
+
+        <!-- KEY -->
+
+        <div class="key-box">
+
+            <span id="finalKey">
+                SECURE FETCHING...
+            </span>
+
+        </div>
+
+
+        <!-- COPY -->
+
+        <button
+            class="btn"
+            id="copyBtn"
+            onclick="copyKey()"
+        >
+
+            COPY ACCESS KEY
+
+        </button>
+
+
+        <!-- TELEGRAM -->
+
+        <a
+            class="btn telegram-btn"
+            href="https://t.me/farazplayzzyt"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+
+            <span class="telegram-icon">
+                ✈
+            </span>
+
+            JOIN TELEGRAM
+
+        </a>
 
 
         <div class="secure-line">
+
             ● DEVICE LOCKED • SECURE KEY SYSTEM
-        </div>
-
-    </div>
-
-
-    <!-- =================================================
-         BYPASS
-         EXACT SAME STYLE
-    ================================================== -->
-
-    <div id="bypassContainer">
-
-        <div class="error-card">
-
-            <div class="error-icon">
-                🚫
-            </div>
-
-            <div class="error-title">
-                Bypass Detected!
-            </div>
-
-            <p style="
-                color:#888;
-                font-size:14px;
-                line-height:1.6;
-                margin:0;
-            ">
-                Direct access is prohibited.
-                Please use the official link from the
-                script to generate your key.
-            </p>
-
-            <button
-                class="btn btn-red"
-                onclick="location.href='steps.html'"
-            >
-                RETURN TO STEPS
-            </button>
 
         </div>
 
     </div>
 
 
-    <div class="footer">
-        FARAZ PLAYZ YT SECURITY SYSTEM
+</div>
+
+
+<!-- =====================================================
+     PREMIUM BYPASS
+     EXACT SAME SECTION
+===================================================== -->
+
+<div id="bypassContainer">
+
+
+    <div class="bypass-box">
+
+        <div class="scan-line"></div>
+
+
+        <!-- WARNING ICON -->
+
+        <div class="bypass-icon-wrap">
+
+            <div class="bypass-icon">
+
+                <span>!</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- STATUS -->
+
+        <div class="bypass-status">
+
+            <span class="bypass-status-dot"></span>
+
+            SECURITY ALERT
+
+        </div>
+
+
+        <!-- TITLE -->
+
+        <div class="bypass-title">
+
+            ACCESS <span>DENIED</span>
+
+        </div>
+
+
+        <!-- DESCRIPTION -->
+
+        <p class="bypass-text">
+
+            Direct access to the key generation
+            system is restricted. Please complete
+            the required steps using the official
+            access route.
+
+        </p>
+
+
+        <!-- SECURITY INFO -->
+
+        <div class="security-info">
+
+            <div class="security-item">
+
+                <strong>
+                    🔒 PROTECTED
+                </strong>
+
+                DEVICE VERIFICATION
+
+            </div>
+
+
+            <div class="security-item">
+
+                <strong>
+                    ✓ REQUIRED
+                </strong>
+
+                OFFICIAL ACCESS
+
+            </div>
+
+        </div>
+
+
+        <!-- RETURN -->
+
+        <button
+            class="btn btn-red"
+            onclick="location.href='steps.html'"
+        >
+
+            RETURN TO STEPS
+
+        </button>
+
     </div>
+
+</div>
+
+
+<div class="footer">
+
+    FARAZ PLAYZ YT SECURITY SYSTEM
+
+</div>
+
 
 </div>
 
 
 <script>
 
-/* =====================================================
+
+/* =================================
    SECURITY CHECK
-   LOGIC SAME
-===================================================== */
+================================= */
 
 async function checkSecurity(){
 
@@ -1533,13 +2482,25 @@ async function checkSecurity(){
             window.location.search
         );
 
+
     const source =
         urlParams.get('source');
 
+
     console.log('=== Security Check ===');
-    console.log('Source:',source);
-    console.log('Referrer:',document.referrer);
+
+    console.log(
+        'Source:',
+        source
+    );
+
+    console.log(
+        'Referrer:',
+        document.referrer
+    );
+
     console.log('==================');
+
 
     const isAllowed =
         source === "official";
@@ -1552,6 +2513,7 @@ async function checkSecurity(){
             "//" +
             window.location.host +
             window.location.pathname;
+
 
         window.history.replaceState(
             {},
@@ -1572,6 +2534,7 @@ async function checkSecurity(){
 
         generateLockedKey();
 
+
     }else{
 
         document.getElementById(
@@ -1584,13 +2547,14 @@ async function checkSecurity(){
         ).style.display="block";
 
     }
+
 }
 
 
-/* =====================================================
+/* =================================
    KEY GENERATION
    ORIGINAL LOGIC
-===================================================== */
+================================= */
 
 async function generateLockedKey(){
 
@@ -1604,8 +2568,10 @@ async function generateLockedKey(){
                 }
             );
 
+
         const data =
             await response.json();
+
 
         const ip =
             data.ip;
@@ -1642,10 +2608,12 @@ async function generateLockedKey(){
                 Math.sin(seed++) *
                 10000;
 
+
             return Math.abs(
                 x -
                 Math.floor(x)
             );
+
         }
 
 
@@ -1660,6 +2628,7 @@ async function generateLockedKey(){
 
             let s="";
 
+
             for(let j=0;j<4;j++){
 
                 let r =
@@ -1667,11 +2636,15 @@ async function generateLockedKey(){
                         rnd()*chars.length
                     );
 
+
                 s +=
                     chars.charAt(r);
+
             }
 
+
             segments.push(s);
+
         }
 
 
@@ -1696,13 +2669,15 @@ async function generateLockedKey(){
             'finalKey'
         ).innerText=
             "CONNECT TO INTERNET";
+
     }
+
 }
 
 
-/* =====================================================
+/* =================================
    COPY KEY
-===================================================== */
+================================= */
 
 function copyKey(){
 
@@ -1716,7 +2691,9 @@ function copyKey(){
         keyText.includes("SECURE") ||
         keyText.includes("CONNECT")
     ){
+
         return;
+
     }
 
 
@@ -1741,20 +2718,22 @@ function copyKey(){
             setTimeout(()=>{
 
                 btn.innerText =
-                    "COPY TO CLIPBOARD";
+                    "COPY ACCESS KEY";
+
 
                 btn.style.background =
-                    "#ffffff";
+                    "#00ff91";
 
             },2000);
 
         });
+
 }
 
 
-/* =====================================================
+/* =================================
    START
-===================================================== */
+================================= */
 
 window.onload =
     checkSecurity;
