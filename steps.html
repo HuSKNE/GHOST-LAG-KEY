@@ -995,7 +995,7 @@ body::before{
     transform:translateY(0) scale(.985);
 }
 
-/* ================= COMMUNITY BUTTONS ================= */
+/* ================= COMMUNITY ================= */
 
 .community{
     margin-top:20px;
@@ -1033,137 +1033,63 @@ body::before{
     );
 }
 
-.community-button{
-    position:relative;
+.socials{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.social{
     display:flex;
     align-items:center;
-    justify-content:center;
     gap:10px;
-    width:100%;
-    min-height:50px;
-    margin-top:9px;
-    padding:11px 15px;
-    overflow:hidden;
+    min-height:52px;
+    padding:10px 13px;
     text-decoration:none;
     color:#cce1d8;
-    border:1px solid rgba(0,255,145,.10);
+    border:1px solid rgba(255,255,255,.06);
     border-radius:14px;
-    background:
-        linear-gradient(
-            100deg,
-            rgba(0,255,145,.045),
-            rgba(0,217,255,.025),
-            rgba(0,255,145,.045)
-        );
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.035),
-        0 8px 25px rgba(0,0,0,.14);
+    background:rgba(5,13,10,.72);
     transition:
         transform .3s ease,
         border-color .3s ease,
-        background .3s ease,
-        box-shadow .3s ease;
+        background .3s ease;
 }
 
-.community-button::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:-45%;
-    width:30%;
-    height:100%;
-    transform:skewX(-20deg);
-    background:linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,.07),
-        transparent
-    );
-    animation:communityShine 4s ease-in-out infinite;
-}
-
-.community-button:nth-child(3)::before{
-    animation-delay:1.8s;
-}
-
-@keyframes communityShine{
-    0%,55%{left:-45%}
-    75%,100%{left:125%}
-}
-
-.community-button:hover{
+.social:hover{
     transform:translateY(-3px);
-    border-color:rgba(0,255,145,.28);
-    background:
-        linear-gradient(
-            100deg,
-            rgba(0,255,145,.075),
-            rgba(0,217,255,.045),
-            rgba(0,255,145,.075)
-        );
-    box-shadow:
-        0 12px 30px rgba(0,0,0,.24),
-        0 0 25px rgba(0,255,145,.07);
+    border-color:rgba(0,255,145,.2);
+    background:rgba(0,255,145,.045);
 }
 
-.community-button:active{
-    transform:translateY(0) scale(.985);
-}
-
-.community-button-icon{
-    position:relative;
-    z-index:2;
-    width:30px;
-    height:30px;
+.social-icon{
+    width:31px;
+    height:31px;
     display:grid;
     place-items:center;
-    flex:0 0 30px;
-    border-radius:9px;
+    flex:0 0 31px;
+    border-radius:10px;
     background:rgba(255,255,255,.045);
-    border:1px solid rgba(255,255,255,.06);
 }
 
-.community-button-icon svg{
-    width:16px;
-    height:16px;
+.social-icon svg{
+    width:17px;
+    height:17px;
 }
 
-.community-button-text{
-    position:relative;
-    z-index:2;
-    flex:1;
-    text-align:left;
-}
-
-.community-button-text strong{
+.social-info strong{
     display:block;
     font-size:9px;
-    font-weight:950;
-    letter-spacing:1px;
+    font-weight:900;
+    letter-spacing:.6px;
 }
 
-.community-button-text span{
+.social-info span{
     display:block;
     margin-top:3px;
     color:#53635d;
-    font-size:6.5px;
-    font-weight:750;
-    letter-spacing:1.2px;
-}
-
-.community-arrow{
-    position:relative;
-    z-index:2;
-    color:#61716b;
-    font-size:15px;
-    transition:
-        transform .3s ease,
-        color .3s ease;
-}
-
-.community-button:hover .community-arrow{
-    transform:translateX(4px);
-    color:var(--green);
+    font-size:7px;
+    font-weight:700;
 }
 
 /* ================= FOOTER ================= */
@@ -1305,11 +1231,12 @@ footer{
         font-size:7.5px;
     }
 
-    .community-button{
-        min-height:48px;
+    .social{
+        min-height:49px;
+        padding:9px 10px;
     }
 
-    .community-button-text strong{
+    .social-info strong{
         font-size:8px;
     }
 }
@@ -1343,6 +1270,10 @@ footer{
 
     .detail strong{
         font-size:12px;
+    }
+
+    .socials{
+        grid-template-columns:1fr;
     }
 }
 
@@ -1634,47 +1565,82 @@ footer{
             OFFICIAL COMMUNITY
         </div>
 
+        <div class="socials">
 
-        <!-- OPEN COMMUNITY PAGE -->
+            <!-- YOUTUBE -->
 
-        <a
-            class="community-button"
-            href="community.html">
+            <a
+                class="social"
+                href="https://www.youtube.com/@FaraZPlayz-Z"
+                target="_blank"
+                rel="noopener noreferrer">
 
-            <div class="community-button-icon">
+                <div class="social-icon">
 
-                <svg viewBox="0 0 24 24">
-                    <path
-                        d="M7 4h10a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3Z"
-                        fill="none"
-                        stroke="#00ff91"
-                        stroke-width="1.6">
-                    </path>
+                    <svg viewBox="0 0 24 24">
 
-                    <path
-                        d="M8 12h8M12 8v8"
-                        fill="none"
-                        stroke="#00d9ff"
-                        stroke-width="1.6"
-                        stroke-linecap="round">
-                    </path>
-                </svg>
+                        <rect
+                            x="3"
+                            y="6"
+                            width="18"
+                            height="12"
+                            rx="4"
+                            fill="#ff0000">
+                        </rect>
 
-            </div>
+                        <path
+                            d="M10 9.2 16 12l-6 2.8z"
+                            fill="#fff">
+                        </path>
 
-            <div class="community-button-text">
+                    </svg>
 
-                <strong>YOUTUBE & TELEGRAM</strong>
+                </div>
 
-                <span>OPEN OFFICIAL COMMUNITY PAGE</span>
+                <div class="social-info">
+                    <strong>YouTube</strong>
+                    <span>OFFICIAL CHANNEL</span>
+                </div>
 
-            </div>
+            </a>
 
-            <div class="community-arrow">
-                →
-            </div>
 
-        </a>
+            <!-- TELEGRAM -->
+
+            <a
+                class="social"
+                href="https://t.me/farazplayzzyt"
+                target="_blank"
+                rel="noopener noreferrer">
+
+                <div class="social-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <circle
+                            cx="12"
+                            cy="12"
+                            r="9"
+                            fill="#229ED9">
+                        </circle>
+
+                        <path
+                            d="m6.7 11.8 10.5-4.05c.48-.17.9.12.74.85l-1.8 8.5c-.13.6-.48.74-.97.46l-2.72-2-1.31 1.27c-.14.14-.26.26-.53.26l.19-2.77 5.04-4.55c.22-.19-.05-.3-.34-.11l-6.23 3.92-2.68-.84c-.58-.18-.59-.58.11-.84Z"
+                            fill="#fff">
+                        </path>
+
+                    </svg>
+
+                </div>
+
+                <div class="social-info">
+                    <strong>Telegram</strong>
+                    <span>OFFICIAL CHANNEL</span>
+                </div>
+
+            </a>
+
+        </div>
 
     </section>
 
